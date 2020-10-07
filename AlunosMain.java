@@ -49,8 +49,8 @@ public class AlunosMain {
 
 	static void lerArquivos(){
 		//EDITION IGOR OFRANTE DUTRA
-		//edit2
-		String linha; //linha de comentário
+		//edit23
+		String linha; //linha de 3comentário
 		String narq [] = {"1","2","3","4","6","7","9","10","11"};
 		int i=0;
 
