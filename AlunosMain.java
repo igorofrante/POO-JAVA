@@ -48,7 +48,7 @@ public class AlunosMain {
 
 
 	static void lerArquivos(){
-		String linha;
+		String linha; //linha de comentário
 		String narq [] = {"1","2","3","4","6","7","9","10","11"};
 		int i=0;
 
