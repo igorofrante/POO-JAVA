@@ -15,8 +15,8 @@ public class AlunosMain {
 			System.out.println("----MENU----\n"
 					+ "1- Ler arquivos \n"
 					+ "2- Consultar todos os dados \n"
-					+ "3- Calcular mÈdia das idades \n"
-				    + "4- Calcular mÈdia dos IMC \n"
+					+ "3- Calcular m√©dia das idades \n"
+				    + "4- Calcular m√©dia dos IMC \n"
 					+ "0- sair \n\n");
 			menu = entrada.nextInt();
 
@@ -38,7 +38,7 @@ public class AlunosMain {
 				System.out.println("Programa Encerrado." +"\n" +"Algoritmo desenvolvido por Aryadne Bastos e Igor Ofrante.");
 				break;
 			default :
-				JOptionPane.showMessageDialog(null, "OpÁ„o Inv·lida, tente novamente!",null, JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(null, "Op√ß√£o Inv√°lida, tente novamente!",null, JOptionPane.ERROR_MESSAGE);
 				break;
 			}
 
@@ -50,7 +50,8 @@ public class AlunosMain {
 	static void lerArquivos(){
 		//EDITION IGOR OFRANTE DUTRA
 		//edit23
-		String linha; //linha de 3coment·rio
+		//edit 34
+		String linha; //linha de 3coment√°rio
 		String narq [] = {"1","2","3","4","6","7","9","10","11"};
 		int i=0;
 
@@ -101,7 +102,7 @@ public class AlunosMain {
 		}
 
 		catch(FileNotFoundException erro1){
-			JOptionPane.showMessageDialog(null, "O arquivo " +(narq[i])+".txt" +" n„o foi encontrado!" ,null, JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null, "O arquivo " +(narq[i])+".txt" +" n√£o foi encontrado!" ,null, JOptionPane.ERROR_MESSAGE);
 		}
 		catch(Exception erro2){
 			JOptionPane.showMessageDialog(null, "Erro de leitura!",null, JOptionPane.ERROR_MESSAGE);
@@ -124,7 +125,7 @@ public class AlunosMain {
 							primeiro = ultimo + 1;
 						}
 
-						if(i!=0 && i!=9){//restante atÈ a penultima variavel
+						if(i!=0 && i!=9){//restante at√© a penultima variavel
 							ultimo = memoria.indexOf("\t",primeiro);
 							var[i] = memoria.substring(primeiro, ultimo);
 							primeiro = ultimo + 1;
@@ -146,8 +147,8 @@ public class AlunosMain {
 							reg.setMediaSalario(Double.parseDouble(var[9]));
 							dados+="Matricula: "+reg.getMatricula()+"\n"+"Idade: "+reg.getIdade()+"\n"+"Coeficiente: "+reg.getCoeficiente()+"\n";
 							dados+="Periodo: "+reg.getPeriodo()+"\n"+"Altura: "+reg.getAltura()+"\n"+"Quantidade de Filhos: "+reg.getqFilhos()+"\n";
-							dados+="Peso: "+reg.getPeso()+"\n"+"Tempo de programaÁ„o: "+reg.gettProgramacao()+"\n"+"N de disciplinas: "+reg.getnDisciplinas()+"\n";
-							dados+="MÈdia Salario: "+reg.getMediaSalario()+"\n\n";		
+							dados+="Peso: "+reg.getPeso()+"\n"+"Tempo de programa√ß√£o: "+reg.gettProgramacao()+"\n"+"N de disciplinas: "+reg.getnDisciplinas()+"\n";
+							dados+="M√©dia Salario: "+reg.getMediaSalario()+"\n\n";		
 						}
 
 
@@ -158,7 +159,7 @@ public class AlunosMain {
 				//imprimir na tela
 				System.out.println(dados);
 			}else{
-				JOptionPane.showMessageDialog(null, "Os arquivos n„o foram lidos!",null, JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(null, "Os arquivos n√£o foram lidos!",null, JOptionPane.ERROR_MESSAGE);
 			}
 		}catch(Exception erro2){
 			JOptionPane.showMessageDialog(null, "Erro na consulta!",null, JOptionPane.ERROR_MESSAGE);
@@ -185,10 +186,10 @@ public class AlunosMain {
 				cont++;
 			}
 			media=soma/cont;
-			System.out.println("A mÈdia das idades dos alunos È " +media +"\n");
+			System.out.println("A m√©dia das idades dos alunos √© " +media +"\n");
 		}
 		else{
-			JOptionPane.showMessageDialog(null, "Os arquivos n„o foram lidos!",null, JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null, "Os arquivos n√£o foram lidos!",null, JOptionPane.ERROR_MESSAGE);
 		}
 
 	}
@@ -242,12 +243,12 @@ public class AlunosMain {
 			}
 			media=soma/k;
 			System.out.println("IMC = peso/(altura^2)");
-			System.out.println("A mÈdia dos IMC dos alunos È " +media);
+			System.out.println("A m√©dia dos IMC dos alunos √© " +media);
 			System.out.println("Entre 18,5 e 24,9 - Peso normal"+"\n");
 			
 			
 		} else {
-			JOptionPane.showMessageDialog(null, "Os arquivos n„o foram lidos!",null, JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null, "Os arquivos n√£o foram lidos!",null, JOptionPane.ERROR_MESSAGE);
 		}
 	}
 	
