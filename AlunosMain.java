@@ -12,7 +12,7 @@ public class AlunosMain {
 		int menu;
 
 		do {
-			System.out.println("----MENU TESTE----\n"
+			System.out.println("----MENU TESTE2----\n"
 					+ "1- Ler arquivos \n"
 					+ "2- Consultar todos os dados \n"
 					+ "3- Calcular média das idades \n"
