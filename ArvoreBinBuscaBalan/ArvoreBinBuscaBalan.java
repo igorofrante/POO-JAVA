@@ -8,7 +8,7 @@ public class ArvoreBinBuscaBalan {
 		this.raiz = null;
 	}
 
-	
+	// o que achei no pdf
 
 	//métodos (inclusive os de inserção, remoção e pesquisa)
 }

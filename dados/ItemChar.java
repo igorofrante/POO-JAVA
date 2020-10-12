@@ -1,6 +1,6 @@
 package dados;
 
-public class ItemChar {
+public class ItemChar { // deixa aqui de bobeira
 	private char chave;
 	
 	public ItemChar (char chave){

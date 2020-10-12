@@ -2,7 +2,7 @@ package AVL;
 
 import dados.Item;
 
-public class ArvoreAVL {
+public class ArvoreAVL {//o que achei no pdf
 	private No raiz;
 	private boolean h;
 
