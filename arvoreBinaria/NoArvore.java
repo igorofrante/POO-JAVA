@@ -1,4 +1,4 @@
-package ArvoreBinBuscaBalan;
+package arvoreBinaria;
 
 import dados.Item;
 

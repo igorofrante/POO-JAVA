@@ -1,4 +1,4 @@
-package algoritmos;
+package quickSort;
 
 public class QuickSortPesqBin {
 

@@ -1,4 +1,4 @@
-package algoritmos;
+package heapSort;
 
 public class HeapSortPesqBin {
 

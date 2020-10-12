@@ -1,4 +1,4 @@
-package algoritmos;
+package hashing;
 
 public class HashingVetEnc {
 

@@ -1,5 +1,4 @@
-package ArvoreBinBuscaBalan;
-
+package arvoreBinaria;
 
 public class ArvoreBinBuscaBalan {
 	private NoArvore raiz;

@@ -1,4 +1,4 @@
-package AVL;
+package arvoreAVL;
 
 import dados.Item;
 
@@ -6,7 +6,7 @@ public class No {
 	private Item info;
 	private No esq, dir;
 	private byte fatorBalanceamento;
-	No (Item i){//construtor
+	public No (Item i){//construtor
 		this.info = i;
 		this.fatorBalanceamento = 0;
 	}

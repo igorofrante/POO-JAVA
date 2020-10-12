@@ -1,4 +1,4 @@
-package AVL;
+package arvoreAVL;
 
 import dados.Item;
 
