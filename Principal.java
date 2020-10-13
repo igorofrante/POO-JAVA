@@ -22,7 +22,7 @@ public class Principal {
 			System.out.println("----MENU TESTE----\n"
 					+ "1 - Etapa HeapSort + Pesquisa Binária \n"
 					+ "2 - Etapa QuickSort + Pesquisa Binária \n"
-					+ "3 - Etapa Árvores"					
+					+ "3 - Etapa Árvores\n"					
 					+ "0 - Sair \n\n");
 			menu = scan.next().charAt(0);
 
@@ -90,6 +90,7 @@ public class Principal {
 	}
 
 	static void primeiraEtapa () {
+		long startTime = System.currentTimeMillis();// método de tempo
 		//2) Carregue o vetor com o arquivo de 500 elementos aleatórios.
 		//lerArquivo("1");
 		Item[] vetor = new Item[5];
@@ -100,15 +101,19 @@ public class Principal {
 		vetor[4]=new Item(75);
 		HeapSort heap = new HeapSort();
 		heap.metodo(vetor);
-		
+
 		for (int i = 0; i < vetor.length; i++) {
 			System.out.println(vetor[i].getChave());
 		}
+
 		//3) Use o método HeapSort para ordenar os registros pelo CPF, se tiver mais de um CPF 	igual, ordenar pela agência e número da conta. 
-		
+
 		//4) Gravar
 		gravarDados("HeapAlea500");
 
+
+		//Método Imprimir tempo em segundo
+		System.out.println((System.currentTimeMillis()-startTime)/1000.0 + " segundos");
 	}
 
 	static void segundaEtapa () {

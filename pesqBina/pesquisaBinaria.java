@@ -4,7 +4,6 @@ import dados.Item;
 
 public class pesquisaBinaria {
 
-
 	public int metodo(Item[] vetor,int chave){
 		int nElem = vetor.length;
 		int meio, esq, dir;
