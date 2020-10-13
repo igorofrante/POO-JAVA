@@ -1,4 +1,6 @@
-package arvoreBinaria;
+package algoritmos;
+
+import dados.NoArvore;
 
 public class ArvoreBinBuscaBalan {
 	private NoArvore raiz;

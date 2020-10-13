@@ -1,6 +1,4 @@
-package arvoreBinaria;
-
-import dados.Item;
+package dados;
 
 public class NoArvore {
 	private Item info;

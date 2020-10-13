@@ -1,6 +1,7 @@
-package arvoreAVL;
+package algoritmos;
 
 import dados.Item;
+import dados.No;
 
 public class ArvoreAVL {//o que achei no pdf
 	private No raiz;

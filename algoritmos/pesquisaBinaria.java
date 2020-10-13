@@ -1,4 +1,4 @@
-package pesqBina;
+package algoritmos;
 
 import dados.Item;
 

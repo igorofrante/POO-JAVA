@@ -1,4 +1,4 @@
-package heapSort;
+package algoritmos;
 
 import dados.Item;
 

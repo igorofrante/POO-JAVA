@@ -1,6 +1,4 @@
-package arvoreAVL;
-
-import dados.Item;
+package dados;
 
 public class No {
 	private Item info;

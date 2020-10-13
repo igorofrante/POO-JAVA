@@ -1,4 +1,4 @@
-package quickSort;
+package algoritmos;
 
 import dados.Item;
 

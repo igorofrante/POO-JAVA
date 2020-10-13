@@ -7,8 +7,8 @@ import java.util.Scanner;
 
 import javax.swing.JOptionPane;
 
+import algoritmos.HeapSort;
 import dados.Item;
-import heapSort.HeapSort;
 
 public class Principal {
 	static Scanner scan = new Scanner(System.in);
