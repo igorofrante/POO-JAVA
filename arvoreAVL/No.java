@@ -6,6 +6,7 @@ public class No {
 	private Item info;
 	private No esq, dir;
 	private byte fatorBalanceamento;
+
 	public No (Item i){//construtor
 		this.info = i;
 		this.fatorBalanceamento = 0;

@@ -1,9 +1,14 @@
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.util.Scanner;
 
 import javax.swing.JOptionPane;
+
+import dados.Item;
+import heapSort.HeapSort;
 
 public class Principal {
 	static Scanner scan = new Scanner(System.in);
@@ -12,26 +17,26 @@ public class Principal {
 	public static void main(String[] args) {
 
 		char menu;
-
+		//1) Comece a contar o tempo.
 		do {
-			System.out.println("----MENU TESTE2----\n"
-					+ "1 - Ler arquivos \n"
-					+ "2 - Consultar todos os dados \n"
-					+ "3 - Calcular mÃ©dia das idades \n"
-					+ "4 - Calcular mÃ©dia dos IMC \n"
-					+ "0 - sair \n\n");
+			System.out.println("----MENU TESTE----\n"
+					+ "1 - Etapa HeapSort + Pesquisa Binária \n"
+					+ "2 - Etapa QuickSort + Pesquisa Binária \n"
+					+ "3 - Etapa Árvores"					
+					+ "0 - Sair \n\n");
 			menu = scan.next().charAt(0);
 
 			switch (menu) {
 
 			case '1':
-				lerArquivos();
+				primeiraEtapa();
+				lerArquivo("1");
 				break;
 			case '2':
-				//ConsultarDados();
+				segundaEtapa();
 				break;
 			case '3':
-				//calcularMedia();
+				terceiraEtapa();
 				break;
 			case '4':
 				//calcularMediaIMC();
@@ -50,35 +55,18 @@ public class Principal {
 
 	}
 
-	static void lerArquivos() {
+	static void lerArquivo(String narq) {
 		memoria.delete(0,memoria.length());
-		System.out.println("[Atenção] A memória foi limpa!");
-		System.out.println("Digite o número do arquivo a ser lido"
-				+ "1 - 500 linhas\n"
-				+ "2 - 1000 linhas\n");
-
-		char narq=scan.next().charAt(0);
 
 		try{
-
 			BufferedReader arqEntrada;
-
-			System.out.println("Digite o número do arquivo a ser lido\n");
 			arqEntrada = new BufferedReader (new FileReader(narq+".txt"));
 			String linha = "";
-
 			while( (linha=arqEntrada.readLine()) != null){
 				memoria.append(linha+"\n");
 			}
 			arqEntrada.close();
 			System.out.println("O arquivo " +(narq)+".txt" +" foi lido.");
-
-
-
-
-			System.out.println("Leitura encerrada!" +"\n");
-
-
 		}
 		catch(FileNotFoundException erro1){
 			JOptionPane.showMessageDialog(null, "O arquivo " +(narq)+".txt" +" nao foi encontrado!" ,null, JOptionPane.ERROR_MESSAGE);
@@ -86,6 +74,47 @@ public class Principal {
 		catch(Exception erro2){
 			JOptionPane.showMessageDialog(null, "Erro de leitura!",null, JOptionPane.ERROR_MESSAGE);
 		}
+
+	}
+
+	static void gravarDados(String nome){
+		try{
+			BufferedWriter arqSaida;
+			arqSaida = new BufferedWriter(new FileWriter (nome+".txt"));
+			arqSaida.write(memoria.toString());
+			arqSaida.flush();  //salva no dispositivo
+			arqSaida.close();
+		}catch(Exception erro3){
+			JOptionPane.showMessageDialog(null, "Erro de gravação!",null, JOptionPane.ERROR_MESSAGE);
+		}
+	}
+
+	static void primeiraEtapa () {
+		//2) Carregue o vetor com o arquivo de 500 elementos aleatórios.
+		//lerArquivo("1");
+		Item[] vetor = new Item[5];
+		vetor[0]=new Item(50);
+		vetor[1]=new Item(10);
+		vetor[2]=new Item(70);
+		vetor[3]=new Item(100);
+		vetor[4]=new Item(75);
+		HeapSort heap = new HeapSort();
+		heap.metodo(vetor);
+		
+		for (int i = 0; i < vetor.length; i++) {
+			System.out.println(vetor[i].getChave());
+		}
+		//3) Use o método HeapSort para ordenar os registros pelo CPF, se tiver mais de um CPF 	igual, ordenar pela agência e número da conta. 
+		
+		//4) Gravar
+		gravarDados("HeapAlea500");
+
+	}
+
+	static void segundaEtapa () {
+
+	}
+	static void terceiraEtapa () {
 
 	}
 }

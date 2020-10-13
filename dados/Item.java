@@ -19,5 +19,12 @@ public class Item {
 		return this.chave;
 	}
 	
+	public boolean compara (Item It) {
+		if(this.chave < It.getChave()) {
+			return false;
+		}else {
+			return true;
+		}
+	}
 
 }
