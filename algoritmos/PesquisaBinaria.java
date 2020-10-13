@@ -2,7 +2,7 @@ package algoritmos;
 
 import dados.Item;
 
-public class pesquisaBinaria {
+public class PesquisaBinaria {
 
 	public int metodo(Item[] vetor,int chave){
 		int nElem = vetor.length;
