@@ -30,7 +30,6 @@ public class Principal {
 
 			case '1':
 				primeiraEtapa();
-				lerArquivo("1");
 				break;
 			case '2':
 				segundaEtapa();
