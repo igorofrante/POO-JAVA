@@ -8,7 +8,7 @@ public class ArvoreBinBuscaBalan {
 	}
 
 	// o que achei no pdf
-
+    // teste
 	//métodos (inclusive os de inserção, remoção e pesquisa)
 }
 
