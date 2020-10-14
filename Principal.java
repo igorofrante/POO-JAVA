@@ -19,7 +19,7 @@ public class Principal {
 		char menu;
 		//1) Comece a contar o tempo.
 		do {
-			System.out.println("----MENU TESTE 2----\n"
+			System.out.println("----MENU TESTE 3----\n"
 					+ "1 - Etapa HeapSort + Pesquisa Binária \n"
 					+ "2 - Etapa QuickSort + Pesquisa Binária \n"
 					+ "3 - Etapa Árvores\n"					
