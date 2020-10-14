@@ -98,7 +98,7 @@ public class Principal {
 		//lerArquivo("1");
 		CadBanco contas = new CadBanco(500);
 		LeArquivo arquivo = new LeArquivo("conta500alea.txt");
-		arquivo.leArquivoBanco(contas.vetBanco);
+		arquivo.leArquivoBanco(contas.getBancoLista());
 		
 		System.out.println(contas.toString());
 		
