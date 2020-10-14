@@ -2,7 +2,7 @@ package vetor;
 
 import java.util.ArrayList;
 
-import item.Banco;
+import dados.Banco;
 
 public class CadBanco {
 	private ArrayList<Banco> vetBanco;

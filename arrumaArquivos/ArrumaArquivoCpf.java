@@ -3,8 +3,8 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Random;
 
+import dados.Banco;
 import io.*;
-import item.Banco;
 
 public class ArrumaArquivoCpf {
 	static int ind;

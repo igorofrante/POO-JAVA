@@ -3,8 +3,8 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
+import dados.Banco;
 import io.*;
-import item.Banco;
 import vetor.CadBanco;
 public class Teste {
 	public static void main (String[] args){

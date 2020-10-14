@@ -1,7 +1,8 @@
 package io;
 import java.io.*;
 import java.util.*;
-import item.Banco;
+
+import dados.Banco;
 
 public class LeArquivo {
 	private Scanner entrada;

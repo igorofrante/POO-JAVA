@@ -1,8 +1,9 @@
 package arrumaArquivos;
 import java.io.*;
 import java.util.ArrayList;
+
+import dados.Banco;
 import io.*;
-import item.Banco;
 import vetor.CadBanco;
 public class Pesquisa {
 	@SuppressWarnings("null")

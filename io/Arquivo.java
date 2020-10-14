@@ -1,10 +1,10 @@
 package io;
-import item.Banco;
-
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
+
+import dados.Banco;
 
 public class Arquivo {
 	public static boolean leArquivoEmprego (ArrayList<Banco>  pessoa, String nome){

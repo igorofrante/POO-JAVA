@@ -1,4 +1,4 @@
-package item;
+package dados;
 
 public class Banco {
 	private int agencia;
