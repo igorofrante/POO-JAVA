@@ -8,13 +8,17 @@ import java.util.Scanner;
 import javax.swing.JOptionPane;
 
 import algoritmos.HeapSort;
+import dados.Banco;
 import dados.Item;
+import io.LeArquivo;
+import io.LeArquivoCpf;
+import vetor.CadBanco;
 
 public class Principal {
 	static Scanner scan = new Scanner(System.in);
 	static Scanner input = new Scanner(System.in);
 	static StringBuffer memoria = new StringBuffer();
-	public static void main(String[] args) {
+	public static void main(String[] args) throws FileNotFoundException {
 
 		char menu;
 		//1) Comece a contar o tempo.
@@ -88,27 +92,21 @@ public class Principal {
 		}
 	}
 
-	static void primeiraEtapa () {
+	static void primeiraEtapa () throws FileNotFoundException {
 		long startTime = System.currentTimeMillis();// método de tempo
 		//2) Carregue o vetor com o arquivo de 500 elementos aleatórios.
 		//lerArquivo("1");
-		Item[] vetor = new Item[5];
-		vetor[0]=new Item(50);
-		vetor[1]=new Item(10);
-		vetor[2]=new Item(70);
-		vetor[3]=new Item(100);
-		vetor[4]=new Item(75);
-		HeapSort heap = new HeapSort();
-		heap.metodo(vetor);
-
-		for (int i = 0; i < vetor.length; i++) {
-			System.out.println(vetor[i].getChave());
-		}
+		CadBanco contas = new CadBanco(500);
+		LeArquivo arquivo = new LeArquivo("conta500alea.txt");
+		arquivo.leArquivoBanco(contas.vetBanco);
+		
+		System.out.println(contas.toString());
+		
 
 		//3) Use o método HeapSort para ordenar os registros pelo CPF, se tiver mais de um CPF 	igual, ordenar pela agência e número da conta. 
 
 		//4) Gravar
-		gravarDados("HeapAlea500");
+		//gravarDados("HeapAlea500");
 
 
 		//Método Imprimir tempo em segundo
