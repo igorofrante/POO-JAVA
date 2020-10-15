@@ -1,49 +1,50 @@
 package algoritmos;
 
-import dados.Item;
+import java.util.ArrayList;
+import dados.Banco;
 
 
 public class HeapSort {
 	
 
-	public void metodo(Item[] vetor){
-		int nElem = vetor.length;
+	public void metodo(ArrayList<Banco> vetor){
+		int nElem = vetor.size();
 		int dir = nElem-1;
 		int esq = (dir-1)/2;
-		Item temp;
+		Banco temp;
 
 		while (esq >= 0){
 			refazHeap (esq, nElem-1,vetor);
 			esq--;
 		}
 		while (dir > 0){
-			temp = vetor[0];
-			vetor [0] = vetor [dir];
-			vetor [dir] = temp;
+			temp = vetor.get(0);
+			vetor.set(0, vetor.get(dir));
+			vetor.set(dir, temp);
 			dir--;
 			refazHeap(0, dir,vetor);
 		}
 	}
 
-	private void refazHeap (int esq, int dir,Item[] vetor){
+	private void refazHeap (int esq, int dir,ArrayList<Banco> vetor){
 		int i = esq;
 		int mF = 2*i+1; // maior filho
-		Item raiz = vetor[i];
+		Banco raiz = vetor.get(i);
 		boolean heap = false;
 
 		while ((mF <= dir) && (!heap)){
 			if ( mF < dir)
-				if (vetor[mF].getChave() < vetor[mF+1].getChave())
+				if (vetor.get(mF).compareTo(vetor.get(mF+1))==-1)
 					mF ++;
-			if (raiz.getChave() < vetor[mF].getChave()) {
-				vetor[i] = vetor[mF];
+			if (raiz.compareTo(vetor.get(mF))==-1) {
+				vetor.set(i, vetor.get(mF));
 				i = mF;
 				mF = 2*i+1;
 			}
 			else
 				heap = true;
 		}
-		vetor[i] = raiz;
+		vetor.set(i, raiz);
 	}
 
 

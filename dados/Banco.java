@@ -68,10 +68,13 @@ public class Banco {
 		else if (cpf1>cpf2)
 			return 1;
 		else {
-			int c1 = Integer.parseInt(this.conta);
-			int c2 = Integer.parseInt(b.getConta());
+			int c1 = this.agencia;
+			int c2 = b.getAgencia();
 			return (c1-c2);
 		}
 	}
+	
+	
+	
 
 }
