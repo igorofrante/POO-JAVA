@@ -1,17 +1,8 @@
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
+
 import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.util.Scanner;
-
 import javax.swing.JOptionPane;
-
-import algoritmos.HeapSort;
-import dados.Banco;
-import dados.Item;
 import io.LeArquivo;
-import io.LeArquivoCpf;
 import vetor.CadBanco;
 
 public class Principal {
@@ -56,40 +47,6 @@ public class Principal {
 
 
 
-	}
-
-	static void lerArquivo(String narq) {
-		memoria.delete(0,memoria.length());
-
-		try{
-			BufferedReader arqEntrada;
-			arqEntrada = new BufferedReader (new FileReader(narq+".txt"));
-			String linha = "";
-			while( (linha=arqEntrada.readLine()) != null){
-				memoria.append(linha+"\n");
-			}
-			arqEntrada.close();
-			System.out.println("O arquivo " +(narq)+".txt" +" foi lido.");
-		}
-		catch(FileNotFoundException erro1){
-			JOptionPane.showMessageDialog(null, "O arquivo " +(narq)+".txt" +" nao foi encontrado!" ,null, JOptionPane.ERROR_MESSAGE);
-		}
-		catch(Exception erro2){
-			JOptionPane.showMessageDialog(null, "Erro de leitura!",null, JOptionPane.ERROR_MESSAGE);
-		}
-
-	}
-
-	static void gravarDados(String nome){
-		try{
-			BufferedWriter arqSaida;
-			arqSaida = new BufferedWriter(new FileWriter (nome+".txt"));
-			arqSaida.write(memoria.toString());
-			arqSaida.flush();  //salva no dispositivo
-			arqSaida.close();
-		}catch(Exception erro3){
-			JOptionPane.showMessageDialog(null, "Erro de gravação!",null, JOptionPane.ERROR_MESSAGE);
-		}
 	}
 
 	static void primeiraEtapa () throws FileNotFoundException {
