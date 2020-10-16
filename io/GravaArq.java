@@ -6,6 +6,7 @@ import java.io.*;
 public class GravaArq {
 	private FileWriter writer; 
 	private	PrintWriter saida;
+	private File file;
 
 	/**
 	 * Construtor da classe
@@ -15,6 +16,8 @@ public class GravaArq {
 	 */
 	public GravaArq (String nome, boolean append) throws IOException{
 		try{
+			this.file = new File(nome); 
+			this.file.delete(); //deletar arquivo se já existir
 			this.writer = new FileWriter(new File(nome),append);
 			saida = new PrintWriter (writer);
 		}
