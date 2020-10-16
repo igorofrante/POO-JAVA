@@ -1,12 +1,17 @@
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.Scanner;
 import javax.swing.JOptionPane;
 
 import algoritmos.HeapSort;
+import algoritmos.PesquisaBinaria;
+import dados.Banco;
 import io.GravaArq;
 import io.LeArquivo;
+import io.LeArquivoCpf;
 import vetor.CadBanco;
 
 public class Principal {
@@ -60,21 +65,54 @@ public class Principal {
 		CadBanco contas = new CadBanco(500);
 		LeArquivo arquivo = new LeArquivo("conta500alea.txt");
 		arquivo.leArquivoBanco(contas.getBancoLista());
-		
-		
+
+
 
 		//3) Use o método HeapSort para ordenar os registros pelo CPF, se tiver mais de um CPF 	igual, ordenar pela agência e número da conta. 
-        HeapSort heap = new HeapSort();
-        heap.metodo(contas.getBancoLista());
-        
+		HeapSort heap = new HeapSort();
+		heap.metodo(contas.getBancoLista());
+
 		//4) Gravar
 		//gravarDados("HeapAlea500");
-        GravaArq grava = new GravaArq("HeapAlea500.txt",true);
-        grava.gravaArquivo(contas.toString());
-        grava.fechaArquivo();
-		//Método Imprimir tempo em segundo
-		System.out.println((System.currentTimeMillis()-startTime)/1000.0 + " segundos");
+		//GravaArq grava = new GravaArq("HeapAlea500.txt",true);
+		//grava.gravaArquivo(contas.toString());
+		//grava.fechaArquivo();
+
+		LeArquivoCpf cpfs = new LeArquivoCpf("Conta.txt");
+		String[] buscar = cpfs.leArquivo(400);
+		CadBanco encontrados = new CadBanco(50);
+
+		for (int i = 0; i < buscar.length; i++) {
+			System.out.println(i);
+		}
+
+		ArrayList<Banco> contas2 = new ArrayList<Banco>();
+		for(int i = 0 ; i<buscar.length;i++) {
+			contas2 = contas.pesqBin(buscar[i]);
+			if(contas2!=null) {
+				encontrados.insereLista(contas2);
+			}
+			System.out.println(i);
+		}
+		
+		encontrados.removerRepetidos();
+
+		GravaArq grava2 = new GravaArq("achados.txt",true);
+		grava2.gravaArquivo(encontrados.toString());
+		grava2.fechaArquivo();
+
+
 	}
+
+	//GravaArq grava2 = new GravaArq("achados.txt",true);
+	// grava2.gravaArquivo(encontrados.toString());
+	//grava2.fechaArquivo();
+
+
+
+	//Método Imprimir tempo em segundo
+	//System.out.println((System.currentTimeMillis()-startTime)/1000.0 + " segundos");
+
 
 	static void segundaEtapa () {
 
@@ -82,4 +120,6 @@ public class Principal {
 	static void terceiraEtapa () {
 
 	}
+	
+	
 }

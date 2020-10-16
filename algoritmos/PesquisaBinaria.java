@@ -1,25 +1,28 @@
 package algoritmos;
 
-import dados.Item;
+import java.util.ArrayList;
+
+import dados.Banco;
+
 
 public class PesquisaBinaria {
 
-	public int metodo(Item[] vetor,int chave){
-		int nElem = vetor.length;
+	public boolean metodo(ArrayList<Banco> vetor,Long chave){
+		int nElem = vetor.size();
 		int meio, esq, dir;
 		esq = 0;
 		dir = nElem-1;
 		while (esq <= dir){
 			meio = (esq + dir)/2;
-			if (chave == vetor[meio].getChave())
-				return meio;
+			if (chave == Long.parseLong(vetor.get(meio).getCpf()))
+				return true;
 			else{
-				if (chave < vetor[meio].getChave())
+				if (chave < Long.parseLong(vetor.get(meio).getCpf()))
 					dir = meio - 1;
 				else
 					esq = meio + 1;
 			}
 		}
-		return -1;
+		return false;
 	}
 }

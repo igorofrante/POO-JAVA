@@ -1,6 +1,7 @@
 package vetor;
 
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 
 import dados.Banco;
 
@@ -32,6 +33,11 @@ public class CadBanco {
 	public ArrayList<Banco> getBancoLista (){
 		return this.vetBanco;
 	}
+	
+	public void setBancoLista (ArrayList<Banco> novoVet){
+		this.vetBanco=novoVet;
+	}
+	
 	public int getTam(){
 		return this.vetBanco.size();
 	}
@@ -68,25 +74,22 @@ public class CadBanco {
 	}	
 
 	public ArrayList<Banco> pesqBin (String chave) {
-		int meio, esq, dir, i;
+		int nElem = vetBanco.size();
+		int meio, esq, dir;
 		esq = 0;
-		dir = this.vetBanco.size()-1;
+		dir = nElem-1;
 		ArrayList<Banco> lista = new ArrayList<Banco>();
 		while (esq <= dir){
 			meio = (esq + dir)/2;
 			if (chave.equals(this.vetBanco.get(meio).getCpf())) {
-				i=meio-1;
-				while (chave.equals(this.vetBanco.get(i).getCpf()))
-					i--;
-				i++;
-				while (chave.equals(this.vetBanco.get(i).getCpf())) {
-					lista.add(this.vetBanco.get(i));
-					i++;
+				while (chave.equals(this.vetBanco.get(meio).getCpf())) {
+					lista.add(this.vetBanco.get(meio));
+					meio++;
 				}
 				return lista;
 			}
 			else{
-				if (chave.compareToIgnoreCase(this.vetBanco.get(meio).getCpf())<0)
+				if (chave.compareTo(this.vetBanco.get(meio).getCpf())<0)
 					dir = meio - 1;
 				else
 					esq = meio + 1;
@@ -95,9 +98,17 @@ public class CadBanco {
 		return null;
 
 	}
+
+
+
 	public void insere (Banco dupl){
 		this.vetBanco.add(dupl);
 	}	
+
+	public void insereLista (ArrayList<Banco> lista){
+		this.vetBanco.addAll(lista);
+	}
+
 	public void quicksort (){
 		ordena (0, this.vetBanco.size()-1);
 	}
@@ -151,5 +162,9 @@ public class CadBanco {
 		if (esq < j) ordenaInv (esq, j);
 		if (dir > i) ordenaInv (i, dir);
 	}
+
+	public void removerRepetidos (){
+		this.vetBanco = new ArrayList<Banco>(new LinkedHashSet<Banco>(this.vetBanco));
+		}
 
 }
