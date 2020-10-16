@@ -33,11 +33,11 @@ public class CadBanco {
 	public ArrayList<Banco> getBancoLista (){
 		return this.vetBanco;
 	}
-	
+
 	public void setBancoLista (ArrayList<Banco> novoVet){
 		this.vetBanco=novoVet;
 	}
-	
+
 	public int getTam(){
 		return this.vetBanco.size();
 	}
@@ -82,6 +82,11 @@ public class CadBanco {
 		while (esq <= dir){
 			meio = (esq + dir)/2;
 			if (chave.equals(this.vetBanco.get(meio).getCpf())) {
+
+				while((meio-1)>=0 && chave.equals(this.vetBanco.get(meio-1).getCpf())){
+					meio--;
+				}
+
 				while (chave.equals(this.vetBanco.get(meio).getCpf())) {
 					lista.add(this.vetBanco.get(meio));
 					meio++;
@@ -162,9 +167,49 @@ public class CadBanco {
 		if (esq < j) ordenaInv (esq, j);
 		if (dir > i) ordenaInv (i, dir);
 	}
+	
+	public void HeapSort(){
+		int nElem = this.vetBanco.size();
+		int dir = nElem-1;
+		int esq = (dir-1)/2;
+		Banco temp;
+
+		while (esq >= 0){
+			refazHeap (esq, nElem-1);
+			esq--;
+		}
+		while (dir > 0){
+			temp = this.vetBanco.get(0);
+			this.vetBanco.set(0, vetBanco.get(dir));
+			this.vetBanco.set(dir, temp);
+			dir--;
+			refazHeap(0, dir);
+		}
+	}
+
+	private void refazHeap (int esq, int dir){
+		int i = esq;
+		int mF = 2*i+1; // maior filho
+		Banco raiz = this.vetBanco.get(i);
+		boolean heap = false;
+
+		while ((mF <= dir) && (!heap)){
+			if ( mF < dir)
+				if (this.vetBanco.get(mF).compareTo(this.vetBanco.get(mF+1))==-1)
+					mF ++;
+			if (raiz.compareTo(this.vetBanco.get(mF))==-1) {
+				this.vetBanco.set(i, this.vetBanco.get(mF));
+				i = mF;
+				mF = 2*i+1;
+			}
+			else
+				heap = true;
+		}
+		this.vetBanco.set(i, raiz);
+	}
 
 	public void removerRepetidos (){
 		this.vetBanco = new ArrayList<Banco>(new LinkedHashSet<Banco>(this.vetBanco));
-		}
+	}
 
 }

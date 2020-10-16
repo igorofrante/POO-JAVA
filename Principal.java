@@ -69,22 +69,17 @@ public class Principal {
 
 
 		//3) Use o método HeapSort para ordenar os registros pelo CPF, se tiver mais de um CPF 	igual, ordenar pela agência e número da conta. 
-		HeapSort heap = new HeapSort();
-		heap.metodo(contas.getBancoLista());
+		
+		contas.HeapSort();
 
 		//4) Gravar
-		//gravarDados("HeapAlea500");
-		//GravaArq grava = new GravaArq("HeapAlea500.txt",true);
-		//grava.gravaArquivo(contas.toString());
-		//grava.fechaArquivo();
+		GravaArq grava = new GravaArq("HeapAlea500.txt",true);
+		grava.gravaArquivo(contas.toString());
+		grava.fechaArquivo();
 
 		LeArquivoCpf cpfs = new LeArquivoCpf("Conta.txt");
 		String[] buscar = cpfs.leArquivo(400);
 		CadBanco encontrados = new CadBanco(50);
-
-		for (int i = 0; i < buscar.length; i++) {
-			System.out.println(i);
-		}
 
 		ArrayList<Banco> contas2 = new ArrayList<Banco>();
 		for(int i = 0 ; i<buscar.length;i++) {
