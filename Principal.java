@@ -52,8 +52,10 @@ public class Principal {
 
 	static void primeiraEtapa() throws IOException {
 		long startTime = System.currentTimeMillis();// método de tempo
+		long startArq = 0;
 		String[] narq = { "500", "1000", "5000", "10000", "50000" };
 		for (int k = 0; k < narq.length; k++) {
+			startArq = System.currentTimeMillis();
 			// 2) Carregue o vetor com o arquivo de 500 elementos aleatórios.
 			// lerArquivo("1");
 			CadBanco contas = new CadBanco(Integer.parseInt(narq[k]));
@@ -127,14 +129,21 @@ public class Principal {
 				}
 			}
 
-			System.out.println(narq[k]);
+			
 			
 			GravaArq grava2 = new GravaArq("extrato"+narq[k]+".txt",true);
 			grava2.gravaArquivo(stringao.toString());
 			grava2.fechaArquivo();
 			
 			//Método Imprimir tempo em segundo
-			System.out.println((System.currentTimeMillis()-startTime)/1000.0 + " segundos");
+			System.out.println(narq[k]);
+			if(narq[k]=="500") {
+				System.out.println("Parcial: " +(System.currentTimeMillis()-startArq)/1000.0 + " segundos");
+			}else {
+				System.out.println("Parcial: " +(System.currentTimeMillis()-startArq)/1000.0 + " segundos");
+				System.out.println("Total: " +(System.currentTimeMillis()-startTime)/1000.0 + " segundos");
+			}
+			
 		}
 		
 
