@@ -1,4 +1,5 @@
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -54,108 +55,162 @@ public class Principal {
 		long startTime = System.currentTimeMillis();// método de tempo
 		long startArq = 0;
 		String[] narq = { "500", "1000", "5000", "10000", "50000" };
-		for (int k = 0; k < narq.length; k++) {
-			startArq = System.currentTimeMillis();
-			// 2) Carregue o vetor com o arquivo de 500 elementos aleatórios.
-			// lerArquivo("1");
-			CadBanco contas = new CadBanco(Integer.parseInt(narq[k]));
-			LeArquivo arquivo = new LeArquivo("conta"+narq[k]+"alea.txt");
-			arquivo.leArquivoBanco(contas.getBancoLista());
+		String[] ord = { "alea", "ord", "inv" };
+		for (int o = 0; o < ord.length; o++) {
+			System.out.println(ord[o].toUpperCase() + "\n");
+			for (int k = 0; k < narq.length; k++) {
+				startArq = System.currentTimeMillis();
+				// 2) Carregue o vetor com o arquivo de 500 elementos aleatórios.
+				// lerArquivo("1");
+				CadBanco contas = new CadBanco(Integer.parseInt(narq[k]));
+				LeArquivo arquivo = new LeArquivo("conta" + narq[k] + ord[o] + ".txt");
+				arquivo.leArquivoBanco(contas.getBancoLista());
 
-			// 3) Use o método HeapSort para ordenar os registros pelo CPF, se tiver mais de
-			// um CPF igual, ordenar pela agência e número da conta.
+				// 3) Use o método HeapSort para ordenar os registros pelo CPF, se tiver mais de
+				// um CPF igual, ordenar pela agência e número da conta.
 
-			contas.HeapSort();
+				contas.HeapSort();
 
-			// 4) Gravar
-			GravaArq grava = new GravaArq("HeapAlea"+narq[k]+".txt", true);
-			grava.gravaArquivo(contas.toString());
-			grava.fechaArquivo();
+				// 4) Gravar
+				GravaArq grava = new GravaArq("Heap" + ord[o].toUpperCase() + narq[k] + ".txt", true);
+				grava.gravaArquivo(contas.toString());
+				grava.fechaArquivo();
 
-			LeArquivoCpf cpfs = new LeArquivoCpf("Conta.txt");
-			ArrayList<String> buscar = cpfs.leArquivo(400);
-			cpfs.fechaArquivo();
-			CadBanco encontrados = new CadBanco(50);
+				LeArquivoCpf cpfs = new LeArquivoCpf("Conta.txt");
+				ArrayList<String> buscar = cpfs.leArquivo(400);
+				cpfs.fechaArquivo();
 
-			ArrayList<Banco> contas2 = new ArrayList<Banco>();
-			for (int i = 0; i < buscar.size(); i++) {
-				contas2 = contas.pesqBin(buscar.get(i));
-				if (contas2 != null) {
-					encontrados.insereLista(contas2);
-				}
-			}
-
-			encontrados.removerRepetidos();
-
-			String stringao = "";
-			int a = 0;
-			double total = 0;
-			double saldo = 0;
-			boolean cont = true;
-
-			for (int i = 0; i < buscar.size(); i++) {
-				a = encontrados.pesquisaSeqCpf(buscar.get(i));
-				if (a != -1) {
-					cont=true;
-					total = 0;
-					stringao += "CPF " + buscar.get(i) + " NOME: " + encontrados.getBanco(a).getNome() + "\n";
-					while (cont && buscar.get(i).equals(encontrados.getBanco(a).getCpf())) {
-						stringao += "Ag: " + encontrados.getBanco(a).getAgencia();
-						if (encontrados.getBanco(a).getConta().substring(0, 3).equals("001")) {
-							stringao += " Conta Comum: " + encontrados.getBanco(a).getConta();
-						} else if (encontrados.getBanco(a).getConta().substring(0, 3).equals("002")) {
-							stringao += " Conta Especial: " + encontrados.getBanco(a).getConta();
-						} else {
-							stringao += " Conta Poupança: " + encontrados.getBanco(a).getConta();
-						}
-						saldo = encontrados.getBanco(a).getSaldo();
-						stringao += " Saldo: " + saldo + "\n";
-						total += encontrados.getBanco(a).getSaldo();
-						a++;
-
-						if (a >= encontrados.getTam()) {
-							cont = false;
-						}
-					}
-					if (total != saldo) {
-						stringao += "Saldo Total: " + total + "\n\n";
+				ArrayList<Banco> lista = new ArrayList<Banco>();
+				String stringao = "";
+				double saldoTotal = 0.0;
+				int j = 0;
+				for (int i = 0; i < buscar.size(); i++) {
+					lista = contas.pesqBin(buscar.get(i));
+					if (lista == null) {
+						stringao += "CPF " + buscar.get(i) + ": \n" + "NÃO HÁ NENHUM REGISTRO COM O CPF "
+								+ buscar.get(i) + "\n\n";
 					} else {
-						stringao += "\n";
+						stringao += "CPF " + lista.get(j).getCpf() + " NOME " + lista.get(j).getNome() + "\n";
+						while (j != lista.size()) {
+							if (lista.get(j).getConta().substring(0, 3).equals("001")) {
+								stringao += "Ag " + lista.get(j).getAgencia() + " Conta Comum "
+										+ lista.get(j).getConta() + " Saldo " + lista.get(j).getSaldo() + "\n";
+							} else if (lista.get(j).getConta().substring(0, 3).equals("002")) {
+								stringao += "Ag " + lista.get(j).getAgencia() + " Conta Especial "
+										+ lista.get(j).getConta() + " Saldo " + lista.get(j).getSaldo() + "\n";
+							} else{
+								stringao += "Ag " + lista.get(j).getAgencia() + " Conta Poupança "
+										+ lista.get(j).getConta() + " Saldo " + lista.get(j).getSaldo() + "\n";
+							}
+							saldoTotal += lista.get(j).getSaldo();
+							j++;
+						}
+						if (lista.size() != 1) {
+							stringao += "Saldo Total: " + saldoTotal + "\n\n";
+						} else {
+							stringao += "\n";
+						}
+
+						j = 0;
+						saldoTotal = 0;
 					}
 
-				} else {
-					stringao += "CPF " + buscar.get(i) + ":\n" + "NÃO HÁ NENHUM REGISTRO COM O CPF " + buscar.get(i)
-							+ "\n\n";
 				}
-			}
 
-			
-			
-			GravaArq grava2 = new GravaArq("extrato"+narq[k]+".txt",true);
-			grava2.gravaArquivo(stringao.toString());
-			grava2.fechaArquivo();
-			
-			//Método Imprimir tempo em segundo
-			System.out.println(narq[k]);
-			if(narq[k]=="500") {
-				System.out.println("Parcial: " +(System.currentTimeMillis()-startArq)/1000.0 + " segundos");
-			}else {
-				System.out.println("Parcial: " +(System.currentTimeMillis()-startArq)/1000.0 + " segundos");
-				System.out.println("Total: " +(System.currentTimeMillis()-startTime)/1000.0 + " segundos");
+				GravaArq grava2 = new GravaArq("extratoHeap" + ord[o].toUpperCase() + narq[k] + ".txt", true);
+				grava2.gravaArquivo(stringao.toString());
+				grava2.fechaArquivo();
+
+				// Método Imprimir tempo em segundo
+				System.out.println(narq[k]);
+
+				System.out.println("Parcial: " + (System.currentTimeMillis() - startArq) / 1000.0 + " segundos");
+				System.out.println("Total: " + (System.currentTimeMillis() - startTime) / 1000.0 + " segundos" + "\n");
+
 			}
-			
+			System.out.println("\n");
 		}
-		
-
-		// GravaArq grava2 = new GravaArq("achados.txt",true);
-		// grava2.gravaArquivo(encontrados.toString());
-		// grava2.fechaArquivo();
-
-		
-
 	}
 
-	static void segundaEtapa() {
+	static void segundaEtapa() throws IOException {
+		long startTime = System.currentTimeMillis();// método de tempo
+		long startArq = 0;
+		String[] narq = { "500", "1000", "5000", "10000", "50000" };
+		String[] ord = { "alea", "ord", "inv" };
+		for (int o = 0; o < ord.length; o++) {
+			System.out.println(ord[o].toUpperCase() + "\n");
+			for (int k = 0; k < narq.length; k++) {
+				startArq = System.currentTimeMillis();
+				// 2) Carregue o vetor com o arquivo de 500 elementos aleatórios.
+				// lerArquivo("1");
+				CadBanco contas = new CadBanco(Integer.parseInt(narq[k]));
+				LeArquivo arquivo = new LeArquivo("conta" + narq[k] + ord[o] + ".txt");
+				arquivo.leArquivoBanco(contas.getBancoLista());
+
+				// 3) Use o método HeapSort para ordenar os registros pelo CPF, se tiver mais de
+				// um CPF igual, ordenar pela agência e número da conta.
+
+				contas.quicksort();
+
+				// 4) Gravar
+				GravaArq grava = new GravaArq("Quick" + ord[o].toUpperCase() + narq[k] + ".txt", true);
+				grava.gravaArquivo(contas.toString());
+				grava.fechaArquivo();
+
+				LeArquivoCpf cpfs = new LeArquivoCpf("Conta.txt");
+				ArrayList<String> buscar = cpfs.leArquivo(400);
+				cpfs.fechaArquivo();
+
+				ArrayList<Banco> lista = new ArrayList<Banco>();
+				String stringao = "";
+				double saldoTotal = 0.0;
+				int j = 0;
+				for (int i = 0; i < buscar.size(); i++) {
+					lista = contas.pesqBin(buscar.get(i));
+					if (lista == null) {
+						stringao += "CPF " + buscar.get(i) + ": \n" + "NÃO HÁ NENHUM REGISTRO COM O CPF "
+								+ buscar.get(i) + "\n\n";
+					} else {
+						stringao += "CPF " + lista.get(j).getCpf() + " NOME " + lista.get(j).getNome() + "\n";
+						while (j != lista.size()) {
+							if (lista.get(j).getConta().substring(0, 3).equals("001")) {
+								stringao += "Ag " + lista.get(j).getAgencia() + " Conta Comum "
+										+ lista.get(j).getConta() + " Saldo " + lista.get(j).getSaldo() + "\n";
+							} else if (lista.get(j).getConta().substring(0, 3).equals("002")) {
+								stringao += "Ag " + lista.get(j).getAgencia() + " Conta Especial "
+										+ lista.get(j).getConta() + " Saldo " + lista.get(j).getSaldo() + "\n";
+							} else{
+								stringao += "Ag " + lista.get(j).getAgencia() + " Conta Poupança "
+										+ lista.get(j).getConta() + " Saldo " + lista.get(j).getSaldo() + "\n";
+							}
+							saldoTotal += lista.get(j).getSaldo();
+							j++;
+						}
+						if (lista.size() != 1) {
+							stringao += "Saldo Total: " + saldoTotal + "\n\n";
+						} else {
+							stringao += "\n";
+						}
+
+						j = 0;
+						saldoTotal = 0;
+					}
+
+				}
+
+				GravaArq grava2 = new GravaArq("extratoQuick" + ord[o].toUpperCase() + narq[k] + ".txt", true);
+				grava2.gravaArquivo(stringao.toString());
+				grava2.fechaArquivo();
+
+				// Método Imprimir tempo em segundo
+				System.out.println(narq[k]);
+
+				System.out.println("Parcial: " + (System.currentTimeMillis() - startArq) / 1000.0 + " segundos");
+				System.out.println("Total: " + (System.currentTimeMillis() - startTime) / 1000.0 + " segundos" + "\n");
+
+			}
+			System.out.println("\n");
+		}
 
 	}
 
