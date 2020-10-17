@@ -19,6 +19,16 @@ public class Banco {
 		this.saldo = saldo;
 		this.nome = nome;
 	}
+	
+	public Banco() {
+		super();
+		this.agencia = 0;
+		this.conta = "";
+		this.cpf = "";
+		this.saldo = 0.0;
+		this.nome = "";
+	}
+	
 	public String getNome() {
 		return nome;
 	}

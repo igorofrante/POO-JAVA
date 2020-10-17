@@ -7,6 +7,8 @@ package io;
 import java.io.*;
 import java.util.*;
 
+import dados.Banco;
+
 
 public class LeArquivoCpf {
 	private Scanner entrada;
@@ -29,12 +31,12 @@ public class LeArquivoCpf {
 	 * 						leitura do arquivo
 	 * @throws IllegalStateException => Excecao se houver erro ao ler o arquivo 
 	 */
-	public String[] leArquivo (int tam)throws NoSuchElementException, ArrayIndexOutOfBoundsException{
-		String[] cadastro = new String[tam];
+	public ArrayList<String> leArquivo (int tam)throws NoSuchElementException, ArrayIndexOutOfBoundsException{
+		ArrayList<String> cadastro =  new ArrayList<String>(tam);
 		int i;
 		try{
 			for (i=0; i<tam; i++){
-				cadastro[i] = this.entrada.nextLine();
+				cadastro.add(this.entrada.nextLine());
 			}
 			return cadastro;
 		}
