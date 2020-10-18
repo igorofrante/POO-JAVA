@@ -98,7 +98,7 @@ public class Principal {
 							} else if (lista.get(j).getConta().substring(0, 3).equals("002")) {
 								stringao += "Ag " + lista.get(j).getAgencia() + " Conta Especial "
 										+ lista.get(j).getConta() + " Saldo " + lista.get(j).getSaldo() + "\n";
-							} else{
+							} else {
 								stringao += "Ag " + lista.get(j).getAgencia() + " Conta Poupança "
 										+ lista.get(j).getConta() + " Saldo " + lista.get(j).getSaldo() + "\n";
 							}
@@ -141,14 +141,9 @@ public class Principal {
 			System.out.println(ord[o].toUpperCase() + "\n");
 			for (int k = 0; k < narq.length; k++) {
 				startArq = System.currentTimeMillis();
-				// 2) Carregue o vetor com o arquivo de 500 elementos aleatórios.
-				// lerArquivo("1");
 				CadBanco contas = new CadBanco(Integer.parseInt(narq[k]));
 				LeArquivo arquivo = new LeArquivo("conta" + narq[k] + ord[o] + ".txt");
 				arquivo.leArquivoBanco(contas.getBancoLista());
-
-				// 3) Use o método HeapSort para ordenar os registros pelo CPF, se tiver mais de
-				// um CPF igual, ordenar pela agência e número da conta.
 
 				contas.quicksort();
 
@@ -179,7 +174,7 @@ public class Principal {
 							} else if (lista.get(j).getConta().substring(0, 3).equals("002")) {
 								stringao += "Ag " + lista.get(j).getAgencia() + " Conta Especial "
 										+ lista.get(j).getConta() + " Saldo " + lista.get(j).getSaldo() + "\n";
-							} else{
+							} else {
 								stringao += "Ag " + lista.get(j).getAgencia() + " Conta Poupança "
 										+ lista.get(j).getConta() + " Saldo " + lista.get(j).getSaldo() + "\n";
 							}
