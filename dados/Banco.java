@@ -85,8 +85,10 @@ public class Banco {
 			}else {
 				if(Integer.parseInt(this.conta)<Integer.parseInt(b.getConta())) {
 					return -1;
-				}else {
+				}else if(Integer.parseInt(this.conta)>Integer.parseInt(b.getConta())) {
 					return 1;
+				}else {
+					return 0;
 				}
 			}
 			
