@@ -78,22 +78,18 @@ public class Banco {
 		else if (cpf1>cpf2)
 			return 1;
 		else {
-			if(this.agencia<b.getAgencia()) {
+			if (this.agencia<b.getAgencia())
 				return -1;
-			}else if (this.agencia>b.getAgencia()) {
+			else if (this.agencia>b.getAgencia())
 				return 1;
-			}else {
-				if(Integer.parseInt(this.conta)<Integer.parseInt(b.getConta())) {
-					return -1;
-				}else if(Integer.parseInt(this.conta)>Integer.parseInt(b.getConta())) {
-					return 1;
-				}else {
-					return 0;
-				}
+			else {
+				int c1 = Integer.parseInt(this.conta);
+				int c2 = Integer.parseInt(b.getConta());
+				return (c1-c2);
 			}
-			
 		}
 	}
+	
 	
 	
 	

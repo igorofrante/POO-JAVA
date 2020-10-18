@@ -8,82 +8,83 @@ import dados.Banco;
 public class CadBanco {
 	private ArrayList<Banco> vetBanco;
 
-	public CadBanco (int tam){
-		this.vetBanco = new ArrayList<Banco>(tam); 
+	public CadBanco(int tam) {
+		this.vetBanco = new ArrayList<Banco>(tam);
 	}
 
-	public CadBanco (ArrayList<Banco> lista){
-		this.vetBanco = lista; 
+	public CadBanco(ArrayList<Banco> lista) {
+		this.vetBanco = lista;
 	}
-	public String toString (){
+
+	public String toString() {
 		String temp = "";
 		int i;
 
-		for (i=0; i<this.vetBanco.size(); i++)
-			temp += this.vetBanco.get(i).toString()+"\n";
+		for (i = 0; i < this.vetBanco.size(); i++)
+			temp += this.vetBanco.get(i).toString() + "\n";
 		return temp;
 	}
 
-	public String toString (int pos){
+	public String toString(int pos) {
 		return this.vetBanco.get(pos).toString();
 	}
-	public Banco getBanco (int pos){
+
+	public Banco getBanco(int pos) {
 		return this.vetBanco.get(pos);
 	}
-	public ArrayList<Banco> getBancoLista (){
+
+	public ArrayList<Banco> getBancoLista() {
 		return this.vetBanco;
 	}
 
-	public void setBancoLista (ArrayList<Banco> novoVet){
-		this.vetBanco=novoVet;
+	public void setBancoLista(ArrayList<Banco> novoVet) {
+		this.vetBanco = novoVet;
 	}
 
-	public int getTam(){
+	public int getTam() {
 		return this.vetBanco.size();
 	}
-	public int pesquisaSeqCpf (String cpf){
-		int i=0;
 
-		while (i<this.vetBanco.size())
+	public int pesquisaSeqCpf(String cpf) {
+		int i = 0;
+
+		while (i < this.vetBanco.size())
 			if (cpf.equalsIgnoreCase(this.vetBanco.get(i).getCpf()))
 				return i;
 			else
 				i++;
 		return -1;
-	}	
-	/*	public int pesqSeqNome (String nome){
-		int i=0;
+	}
 
-		while (i<this.vetBanco.size())
-			if (nome.equalsIgnoreCase(this.vetBanco.get(i).getEmpresa()))
+	/*
+	 * public int pesqSeqNome (String nome){ int i=0;
+	 * 
+	 * while (i<this.vetBanco.size()) if
+	 * (nome.equalsIgnoreCase(this.vetBanco.get(i).getEmpresa())) return i; else
+	 * i++; return -1; }
+	 */
+	public int pesquisaSeq(String ag, String conta) {
+		int i = 0;
+		String chave = ag + " " + conta;
+		while (i < this.vetBanco.size())
+			if (chave.equalsIgnoreCase(this.vetBanco.get(i).getAgencia() + this.vetBanco.get(i).getConta()))
 				return i;
 			else
 				i++;
 		return -1;
 	}
-	 */
-	public int pesquisaSeq (String ag, String conta){
-		int i=0;
-		String chave = ag+" "+conta;
-		while (i<this.vetBanco.size())
-			if (chave.equalsIgnoreCase(this.vetBanco.get(i).getAgencia()+ this.vetBanco.get(i).getConta()))
-				return i;
-			else
-				i++;
-		return -1;
-	}	
 
-	public ArrayList<Banco> pesqBin (String chave) {
+	public ArrayList<Banco> pesqBin(String chave) {
 		int nElem = vetBanco.size();
 		int meio, esq, dir;
 		esq = 0;
-		dir = nElem-1;
+		dir = nElem - 1;
 		ArrayList<Banco> lista = new ArrayList<Banco>();
-		while (esq <= dir){
-			meio = (esq + dir)/2;
+		while (esq <= dir) {
+			meio = (esq + dir) / 2;
 			if (chave.equals(this.vetBanco.get(meio).getCpf())) {
 
-				while((meio-1)>=0 && chave.equals(this.vetBanco.get(meio-1).getCpf())){
+				while ((meio - 1) >= 0 && chave.equals(this.vetBanco.get(meio - 1).getCpf())) {
 					meio--;
 				}
 
@@ -92,9 +93,8 @@ public class CadBanco {
 					meio++;
 				}
 				return lista;
-			}
-			else{
-				if (chave.compareTo(this.vetBanco.get(meio).getCpf())<0)
+			} else {
+				if (chave.compareTo(this.vetBanco.get(meio).getCpf()) < 0)
 					dir = meio - 1;
 				else
 					esq = meio + 1;
@@ -104,81 +104,83 @@ public class CadBanco {
 
 	}
 
-
-
-	public void insere (Banco dupl){
+	public void insere(Banco dupl) {
 		this.vetBanco.add(dupl);
-	}	
+	}
 
-	public void insereLista (ArrayList<Banco> lista){
+	public void insereLista(ArrayList<Banco> lista) {
 		this.vetBanco.addAll(lista);
 	}
 
-	public void quicksort (){
-		ordena (0, this.vetBanco.size()-1);
+	public void quicksort() {
+		ordena(0, this.vetBanco.size() - 1);
 	}
 
-	private void ordena (int esq, int dir){
+	private void ordena(int esq, int dir) {
 		Banco pivo;
 		int i = esq, j = dir;
 		Banco temp;
 
-		pivo = this.vetBanco.get((i+j)/2);
+		pivo = this.vetBanco.get((i + j) / 2);
 		do {
-			while (this.vetBanco.get(i).compareTo(pivo)<0)
+			while (this.vetBanco.get(i).compareTo(pivo) < 0)
 				i++;
-			while (this.vetBanco.get(j).compareTo(pivo)>0) 
+			while (this.vetBanco.get(j).compareTo(pivo) > 0)
 				j--;
 			if (i <= j) {
 				temp = this.vetBanco.get(i);
 				this.vetBanco.set(i, this.vetBanco.get(j));
 				this.vetBanco.set(j, temp);
-				i++;		
+				i++;
 				j--;
 			}
 		} while (i <= j);
-		if (esq < j) ordena (esq, j);
-		if (dir > i) ordena (i, dir);
+		if (esq < j)
+			ordena(esq, j);
+		if (dir > i)
+			ordena(i, dir);
 	}
 
-	public void quicksortInv (){
-		ordenaInv (0, this.vetBanco.size()-1);
+	public void quicksortInv() {
+		ordenaInv(0, this.vetBanco.size() - 1);
 	}
 
-	private void ordenaInv (int esq, int dir){
+	private void ordenaInv(int esq, int dir) {
 		Banco pivo;
 		int i = esq, j = dir;
 		Banco temp;
 
-		pivo = this.vetBanco.get((i+j)/2);
+		pivo = this.vetBanco.get((i + j) / 2);
 		do {
-			while (this.vetBanco.get(i).compareTo(pivo)>0) 
+			while (this.vetBanco.get(i).compareTo(pivo) > 0)
 				i++;
-			while (this.vetBanco.get(j).compareTo(pivo)<0) 
+			while (this.vetBanco.get(j).compareTo(pivo) < 0)
 				j--;
 			if (i <= j) {
 				temp = this.vetBanco.get(i);
 				this.vetBanco.set(i, this.vetBanco.get(j));
 				this.vetBanco.set(j, temp);
-				i++;		
+				i++;
 				j--;
 			}
 		} while (i <= j);
-		if (esq < j) ordenaInv (esq, j);
-		if (dir > i) ordenaInv (i, dir);
+		if (esq < j)
+			ordenaInv(esq, j);
+		if (dir > i)
+			ordenaInv(i, dir);
 	}
-	
-	public void HeapSort(){
+
+	public void HeapSort() {
 		int nElem = this.vetBanco.size();
-		int dir = nElem-1;
-		int esq = (dir-1)/2;
+		int dir = nElem - 1;
+		int esq = (dir - 1) / 2;
 		Banco temp;
 
-		while (esq >= 0){
-			refazHeap (esq, nElem-1);
+		while (esq >= 0) {
+			refazHeap(esq, nElem - 1);
 			esq--;
 		}
-		while (dir > 0){
+		while (dir > 0) {
 			temp = this.vetBanco.get(0);
 			this.vetBanco.set(0, vetBanco.get(dir));
 			this.vetBanco.set(dir, temp);
@@ -187,28 +189,27 @@ public class CadBanco {
 		}
 	}
 
-	private void refazHeap (int esq, int dir){
+	private void refazHeap(int esq, int dir) {
 		int i = esq;
-		int mF = 2*i+1; // maior filho
+		int mF = 2 * i + 1; // maior filho
 		Banco raiz = this.vetBanco.get(i);
 		boolean heap = false;
 
-		while ((mF <= dir) && (!heap)){
-			if ( mF < dir)
-				if (this.vetBanco.get(mF).compareTo(this.vetBanco.get(mF+1))==-1)
-					mF ++;
-			if (raiz.compareTo(this.vetBanco.get(mF))==-1) {
+		while ((mF <= dir) && (!heap)) {
+			if (mF < dir)
+				if (this.vetBanco.get(mF).compareTo(this.vetBanco.get(mF + 1))<0)
+					mF++;
+			if (raiz.compareTo(this.vetBanco.get(mF))<0) {
 				this.vetBanco.set(i, this.vetBanco.get(mF));
 				i = mF;
-				mF = 2*i+1;
-			}
-			else
+				mF = 2 * i + 1;
+			} else
 				heap = true;
 		}
 		this.vetBanco.set(i, raiz);
 	}
 
-	public void removerRepetidos (){
+	public void removerRepetidos() {
 		this.vetBanco = new ArrayList<Banco>(new LinkedHashSet<Banco>(this.vetBanco));
 	}
 
