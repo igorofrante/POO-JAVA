@@ -1,10 +1,12 @@
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+
 import javax.swing.JOptionPane;
+
 import dados.Banco;
+
 import io.GravaArq;
 import io.LeArquivo;
 import io.LeArquivoCpf;
@@ -56,22 +58,19 @@ public class Principal {
 		long startArq = 0;
 		String[] narq = { "500", "1000", "5000", "10000", "50000" };
 		String[] ord = { "alea", "ord", "inv" };
+
 		for (int o = 0; o < ord.length; o++) {
 			System.out.println(ord[o].toUpperCase() + "\n");
 			for (int k = 0; k < narq.length; k++) {
 				startArq = System.currentTimeMillis();
-				// 2) Carregue o vetor com o arquivo de 500 elementos aleatórios.
-				// lerArquivo("1");
+
 				CadBanco contas = new CadBanco(Integer.parseInt(narq[k]));
 				LeArquivo arquivo = new LeArquivo("conta" + narq[k] + ord[o] + ".txt");
 				arquivo.leArquivoBanco(contas.getBancoLista());
 
-				// 3) Use o método HeapSort para ordenar os registros pelo CPF, se tiver mais de
-				// um CPF igual, ordenar pela agência e número da conta.
-
 				contas.HeapSort();
 
-				// 4) Gravar
+				
 				GravaArq grava = new GravaArq("Heap" + ord[o].toUpperCase() + narq[k] + ".txt", true);
 				grava.gravaArquivo(contas.toString());
 				grava.fechaArquivo();
@@ -123,13 +122,13 @@ public class Principal {
 
 				// Método Imprimir tempo em segundo
 				System.out.println(narq[k]);
-
 				System.out.println("Parcial: " + (System.currentTimeMillis() - startArq) / 1000.0 + " segundos");
 				System.out.println("Total: " + (System.currentTimeMillis() - startTime) / 1000.0 + " segundos" + "\n");
 
 			}
 			System.out.println("\n");
 		}
+
 	}
 
 	static void segundaEtapa() throws IOException {
