@@ -54,157 +54,173 @@ public class Principal {
 	}
 
 	static void primeiraEtapa() throws IOException {
-		long startTime = System.currentTimeMillis();// método de tempo
-		long startArq = 0;
+		double startTime = System.currentTimeMillis();// método de tempo
+		double startArq = 0;
 		String[] narq = { "500", "1000", "5000", "10000", "50000" };
 		String[] ord = { "alea", "ord", "inv" };
-
+		double tempo = 0;
 		for (int o = 0; o < ord.length; o++) {
 			System.out.println(ord[o].toUpperCase() + "\n");
 			for (int k = 0; k < narq.length; k++) {
-				startArq = System.currentTimeMillis();
+				tempo=0;
+				System.out.println(narq[k]);
+				for (int w = 0; w < 5; w++) {
+					startArq = System.currentTimeMillis();
+					CadBanco contas = new CadBanco(Integer.parseInt(narq[k]));
+					LeArquivo arquivo = new LeArquivo("conta" + narq[k] + ord[o] + ".txt");
+					arquivo.leArquivoBanco(contas.getBancoLista());
 
-				CadBanco contas = new CadBanco(Integer.parseInt(narq[k]));
-				LeArquivo arquivo = new LeArquivo("conta" + narq[k] + ord[o] + ".txt");
-				arquivo.leArquivoBanco(contas.getBancoLista());
+					contas.HeapSort();
 
-				contas.HeapSort();
+					// 4) Gravar
+					GravaArq grava = new GravaArq("Heap" + ord[o].toUpperCase() + narq[k] + ".txt",false);
+					grava.gravaArquivo(contas.toString());
+					grava.fechaArquivo();
 
-				
-				GravaArq grava = new GravaArq("Heap" + ord[o].toUpperCase() + narq[k] + ".txt", true);
-				grava.gravaArquivo(contas.toString());
-				grava.fechaArquivo();
+					LeArquivoCpf cpfs = new LeArquivoCpf("Conta.txt");
+					ArrayList<String> buscar = cpfs.leArquivo(400);
+					cpfs.fechaArquivo();
 
-				LeArquivoCpf cpfs = new LeArquivoCpf("Conta.txt");
-				ArrayList<String> buscar = cpfs.leArquivo(400);
-				cpfs.fechaArquivo();
-
-				ArrayList<Banco> lista = new ArrayList<Banco>();
-				String stringao = "";
-				double saldoTotal = 0.0;
-				int j = 0;
-				for (int i = 0; i < buscar.size(); i++) {
-					lista = contas.pesqBin(buscar.get(i));
-					if (lista == null) {
-						stringao += "CPF " + buscar.get(i) + ": \n" + "NÃO HÁ NENHUM REGISTRO COM O CPF "
-								+ buscar.get(i) + "\n\n";
-					} else {
-						stringao += "CPF " + lista.get(j).getCpf() + " NOME " + lista.get(j).getNome() + "\n";
-						while (j != lista.size()) {
-							if (lista.get(j).getConta().substring(0, 3).equals("001")) {
-								stringao += "Ag " + lista.get(j).getAgencia() + " Conta Comum "
-										+ lista.get(j).getConta() + " Saldo " + lista.get(j).getSaldo() + "\n";
-							} else if (lista.get(j).getConta().substring(0, 3).equals("002")) {
-								stringao += "Ag " + lista.get(j).getAgencia() + " Conta Especial "
-										+ lista.get(j).getConta() + " Saldo " + lista.get(j).getSaldo() + "\n";
-							} else {
-								stringao += "Ag " + lista.get(j).getAgencia() + " Conta Poupança "
-										+ lista.get(j).getConta() + " Saldo " + lista.get(j).getSaldo() + "\n";
-							}
-							saldoTotal += lista.get(j).getSaldo();
-							j++;
-						}
-						if (lista.size() != 1) {
-							stringao += "Saldo Total: " + saldoTotal + "\n\n";
+					ArrayList<Banco> lista = new ArrayList<Banco>();
+					String stringao = "";
+					double saldoTotal = 0.0;
+					int j = 0;
+					for (int i = 0; i < buscar.size(); i++) {
+						lista = contas.pesqBin(buscar.get(i));
+						if (lista == null) {
+							stringao += "CPF " + buscar.get(i) + ": \n" + "NÃO HÁ NENHUM REGISTRO COM O CPF "
+									+ buscar.get(i) + "\n\n";
 						} else {
-							stringao += "\n";
+							stringao += "CPF " + lista.get(j).getCpf() + " NOME " + lista.get(j).getNome() + "\n";
+							while (j != lista.size()) {
+								if (lista.get(j).getConta().substring(0, 3).equals("001")) {
+									stringao += "Ag " + lista.get(j).getAgencia() + " Conta Comum "
+											+ lista.get(j).getConta() + " Saldo " + lista.get(j).getSaldo() + "\n";
+								} else if (lista.get(j).getConta().substring(0, 3).equals("002")) {
+									stringao += "Ag " + lista.get(j).getAgencia() + " Conta Especial "
+											+ lista.get(j).getConta() + " Saldo " + lista.get(j).getSaldo() + "\n";
+								} else {
+									stringao += "Ag " + lista.get(j).getAgencia() + " Conta Poupança "
+											+ lista.get(j).getConta() + " Saldo " + lista.get(j).getSaldo() + "\n";
+								}
+								saldoTotal += lista.get(j).getSaldo();
+								j++;
+							}
+							if (lista.size() != 1) {
+								stringao += "Saldo Total: " + saldoTotal + "\n\n";
+							} else {
+								stringao += "\n";
+							}
+
+							j = 0;
+							saldoTotal = 0;
 						}
 
-						j = 0;
-						saldoTotal = 0;
 					}
 
+					GravaArq grava2 = new GravaArq("extratoHeap" + ord[o].toUpperCase() + narq[k] + ".txt",false);
+					grava2.gravaArquivo(stringao.toString());
+					grava2.fechaArquivo();
+
+					// Método Imprimir tempo em segundo
+					
+					tempo+=(System.currentTimeMillis() - startArq) / 1000.0;
+					System.out.println("Parcial: " + (System.currentTimeMillis() - startArq) / 1000.0 + " segundos");
+					
+
 				}
-
-				GravaArq grava2 = new GravaArq("extratoHeap" + ord[o].toUpperCase() + narq[k] + ".txt", true);
-				grava2.gravaArquivo(stringao.toString());
-				grava2.fechaArquivo();
-
-				// Método Imprimir tempo em segundo
-				System.out.println(narq[k]);
-				System.out.println("Parcial: " + (System.currentTimeMillis() - startArq) / 1000.0 + " segundos");
-				System.out.println("Total: " + (System.currentTimeMillis() - startTime) / 1000.0 + " segundos" + "\n");
-
+				System.out.println("Média art: " +tempo/5.0 +" segundos");
+				System.out.println("\n");
 			}
-			System.out.println("\n");
 		}
+		System.out.println(
+				"Total: " + (System.currentTimeMillis() - startTime) / 1000.0 + " segundos" + "\n");
+
 
 	}
 
 	static void segundaEtapa() throws IOException {
-		long startTime = System.currentTimeMillis();// método de tempo
-		long startArq = 0;
+		double startTime = System.currentTimeMillis();// método de tempo
+		double startArq = 0;
 		String[] narq = { "500", "1000", "5000", "10000", "50000" };
 		String[] ord = { "alea", "ord", "inv" };
+		double tempo = 0;
 		for (int o = 0; o < ord.length; o++) {
 			System.out.println(ord[o].toUpperCase() + "\n");
 			for (int k = 0; k < narq.length; k++) {
-				startArq = System.currentTimeMillis();
-				CadBanco contas = new CadBanco(Integer.parseInt(narq[k]));
-				LeArquivo arquivo = new LeArquivo("conta" + narq[k] + ord[o] + ".txt");
-				arquivo.leArquivoBanco(contas.getBancoLista());
+				tempo=0;
+				System.out.println(narq[k]);
+				for (int w = 0; w < 5; w++) {
+					startArq = System.currentTimeMillis();
+					CadBanco contas = new CadBanco(Integer.parseInt(narq[k]));
+					LeArquivo arquivo = new LeArquivo("conta" + narq[k] + ord[o] + ".txt");
+					arquivo.leArquivoBanco(contas.getBancoLista());
 
-				contas.quicksort();
+					contas.quicksort();
 
-				// 4) Gravar
-				GravaArq grava = new GravaArq("Quick" + ord[o].toUpperCase() + narq[k] + ".txt", true);
-				grava.gravaArquivo(contas.toString());
-				grava.fechaArquivo();
+					// 4) Gravar
+					GravaArq grava = new GravaArq("Quick" + ord[o].toUpperCase() + narq[k] + ".txt", false);
+					grava.gravaArquivo(contas.toString());
+					grava.fechaArquivo();
 
-				LeArquivoCpf cpfs = new LeArquivoCpf("Conta.txt");
-				ArrayList<String> buscar = cpfs.leArquivo(400);
-				cpfs.fechaArquivo();
+					LeArquivoCpf cpfs = new LeArquivoCpf("Conta.txt");
+					ArrayList<String> buscar = cpfs.leArquivo(400);
+					cpfs.fechaArquivo();
 
-				ArrayList<Banco> lista = new ArrayList<Banco>();
-				String stringao = "";
-				double saldoTotal = 0.0;
-				int j = 0;
-				for (int i = 0; i < buscar.size(); i++) {
-					lista = contas.pesqBin(buscar.get(i));
-					if (lista == null) {
-						stringao += "CPF " + buscar.get(i) + ": \n" + "NÃO HÁ NENHUM REGISTRO COM O CPF "
-								+ buscar.get(i) + "\n\n";
-					} else {
-						stringao += "CPF " + lista.get(j).getCpf() + " NOME " + lista.get(j).getNome() + "\n";
-						while (j != lista.size()) {
-							if (lista.get(j).getConta().substring(0, 3).equals("001")) {
-								stringao += "Ag " + lista.get(j).getAgencia() + " Conta Comum "
-										+ lista.get(j).getConta() + " Saldo " + lista.get(j).getSaldo() + "\n";
-							} else if (lista.get(j).getConta().substring(0, 3).equals("002")) {
-								stringao += "Ag " + lista.get(j).getAgencia() + " Conta Especial "
-										+ lista.get(j).getConta() + " Saldo " + lista.get(j).getSaldo() + "\n";
-							} else {
-								stringao += "Ag " + lista.get(j).getAgencia() + " Conta Poupança "
-										+ lista.get(j).getConta() + " Saldo " + lista.get(j).getSaldo() + "\n";
-							}
-							saldoTotal += lista.get(j).getSaldo();
-							j++;
-						}
-						if (lista.size() != 1) {
-							stringao += "Saldo Total: " + saldoTotal + "\n\n";
+					ArrayList<Banco> lista = new ArrayList<Banco>();
+					String stringao = "";
+					double saldoTotal = 0.0;
+					int j = 0;
+					for (int i = 0; i < buscar.size(); i++) {
+						lista = contas.pesqBin(buscar.get(i));
+						if (lista == null) {
+							stringao += "CPF " + buscar.get(i) + ": \n" + "NÃO HÁ NENHUM REGISTRO COM O CPF "
+									+ buscar.get(i) + "\n\n";
 						} else {
-							stringao += "\n";
+							stringao += "CPF " + lista.get(j).getCpf() + " NOME " + lista.get(j).getNome() + "\n";
+							while (j != lista.size()) {
+								if (lista.get(j).getConta().substring(0, 3).equals("001")) {
+									stringao += "Ag " + lista.get(j).getAgencia() + " Conta Comum "
+											+ lista.get(j).getConta() + " Saldo " + lista.get(j).getSaldo() + "\n";
+								} else if (lista.get(j).getConta().substring(0, 3).equals("002")) {
+									stringao += "Ag " + lista.get(j).getAgencia() + " Conta Especial "
+											+ lista.get(j).getConta() + " Saldo " + lista.get(j).getSaldo() + "\n";
+								} else {
+									stringao += "Ag " + lista.get(j).getAgencia() + " Conta Poupança "
+											+ lista.get(j).getConta() + " Saldo " + lista.get(j).getSaldo() + "\n";
+								}
+								saldoTotal += lista.get(j).getSaldo();
+								j++;
+							}
+							if (lista.size() != 1) {
+								stringao += "Saldo Total: " + saldoTotal + "\n\n";
+							} else {
+								stringao += "\n";
+							}
+
+							j = 0;
+							saldoTotal = 0;
 						}
 
-						j = 0;
-						saldoTotal = 0;
 					}
 
+					GravaArq grava2 = new GravaArq("extratoQuick" + ord[o].toUpperCase() + narq[k] + ".txt", false);
+					grava2.gravaArquivo(stringao.toString());
+					grava2.fechaArquivo();
+
+					// Método Imprimir tempo em segundo
+					
+					tempo+=(System.currentTimeMillis() - startArq) / 1000.0;
+					System.out.println("Parcial: " + (System.currentTimeMillis() - startArq) / 1000.0 + " segundos");
+					
+
 				}
-
-				GravaArq grava2 = new GravaArq("extratoQuick" + ord[o].toUpperCase() + narq[k] + ".txt", true);
-				grava2.gravaArquivo(stringao.toString());
-				grava2.fechaArquivo();
-
-				// Método Imprimir tempo em segundo
-				System.out.println(narq[k]);
-
-				System.out.println("Parcial: " + (System.currentTimeMillis() - startArq) / 1000.0 + " segundos");
-				System.out.println("Total: " + (System.currentTimeMillis() - startTime) / 1000.0 + " segundos" + "\n");
-
+				System.out.println("Média art: " +tempo/5.0 +" segundos");
+				System.out.println("\n");
 			}
-			System.out.println("\n");
 		}
+		System.out.println(
+				"Total: " + (System.currentTimeMillis() - startTime) / 1000.0 + " segundos" + "\n");
 
 	}
 
