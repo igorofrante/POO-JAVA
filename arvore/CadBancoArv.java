@@ -1,15 +1,16 @@
 package arvore;
 
 import java.util.ArrayList;
-
 import dados.Banco;
 import dados.NoArvore;
+import vetor.CadBanco;
 
-public class CadBancoArv {
+public class CadBancoArv extends CadBanco {
 	private NoArvore raiz;
-	private ArrayList<Banco> ListaBanco;
 
-	public CadBancoArv() {
+
+	public CadBancoArv(int tam) {
+		super(tam);
 		this.raiz = null;
 	}
 

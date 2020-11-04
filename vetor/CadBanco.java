@@ -5,7 +5,7 @@ import java.util.LinkedHashSet;
 import dados.Banco;
 
 public class CadBanco {
-	private ArrayList<Banco> vetBanco;
+	protected ArrayList<Banco> vetBanco;
 
 	public CadBanco(int tam) {
 		this.vetBanco = new ArrayList<Banco>(tam);
