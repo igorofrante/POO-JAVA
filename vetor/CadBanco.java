@@ -2,7 +2,6 @@ package vetor;
 
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
-
 import dados.Banco;
 
 public class CadBanco {
@@ -43,35 +42,6 @@ public class CadBanco {
 
 	public int getTam() {
 		return this.vetBanco.size();
-	}
-
-	public int pesquisaSeqCpf(String cpf) {
-		int i = 0;
-
-		while (i < this.vetBanco.size())
-			if (cpf.equalsIgnoreCase(this.vetBanco.get(i).getCpf()))
-				return i;
-			else
-				i++;
-		return -1;
-	}
-
-	/*
-	 * public int pesqSeqNome (String nome){ int i=0;
-	 * 
-	 * while (i<this.vetBanco.size()) if
-	 * (nome.equalsIgnoreCase(this.vetBanco.get(i).getEmpresa())) return i; else
-	 * i++; return -1; }
-	 */
-	public int pesquisaSeq(String ag, String conta) {
-		int i = 0;
-		String chave = ag + " " + conta;
-		while (i < this.vetBanco.size())
-			if (chave.equalsIgnoreCase(this.vetBanco.get(i).getAgencia() + this.vetBanco.get(i).getConta()))
-				return i;
-			else
-				i++;
-		return -1;
 	}
 
 	public ArrayList<Banco> pesqBin(String chave) {
@@ -197,9 +167,9 @@ public class CadBanco {
 
 		while ((mF <= dir) && (!heap)) {
 			if (mF < dir)
-				if (this.vetBanco.get(mF).compareTo(this.vetBanco.get(mF + 1))<0)
+				if (this.vetBanco.get(mF).compareTo(this.vetBanco.get(mF + 1)) < 0)
 					mF++;
-			if (raiz.compareTo(this.vetBanco.get(mF))<0) {
+			if (raiz.compareTo(this.vetBanco.get(mF)) < 0) {
 				this.vetBanco.set(i, this.vetBanco.get(mF));
 				i = mF;
 				mF = 2 * i + 1;

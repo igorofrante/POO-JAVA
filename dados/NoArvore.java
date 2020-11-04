@@ -1,10 +1,10 @@
 package dados;
 
 public class NoArvore {
-	private Item info;
+	private Banco info;
 	private NoArvore dir, esq;
 
-	public NoArvore (Item info){
+	public NoArvore (Banco info){
 		this.info = info;
 	}
 	public NoArvore getDir() {
@@ -19,10 +19,10 @@ public class NoArvore {
 	public void setEsq(NoArvore esq) {
 		this.esq = esq;
 	}
-	public Item getInfo() {
+	public Banco getInfo() {
 		return info;
 	}
-	public void setInfo(Item novo) {
+	public void setInfo(Banco novo) {
 		this.info = novo;
 	}
 }
