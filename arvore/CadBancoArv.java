@@ -12,12 +12,11 @@ public class CadBancoArv extends CadBanco {
 	private ArrayList<Banco> ordenado;
 	private NoArvore raizABB;
 
-
 	public CadBancoArv(int tam) {
 		super(tam);
 		this.raiz = null;
 		this.raizABB = null;
-		this.ordenado = new ArrayList<Banco>(super.getBancoLista().size());
+		this.ordenado = new ArrayList<Banco>(tam);
 	}
 
 	public NoArvore getRaiz() {
@@ -66,7 +65,7 @@ public class CadBancoArv extends CadBanco {
 		}
 		return temp;
 	}
-	
+
 	public void insere(Banco elem) {
 		boolean existe = this.pesquisa(elem);
 		if (!existe) {
@@ -90,14 +89,13 @@ public class CadBancoArv extends CadBanco {
 			}
 		}
 	}
-	
+
 	public void insereTudo() {
 		for (Banco banco : super.vetBanco) {
 			this.insere(banco);
 		}
 	}
 
-		
 	public boolean pesquisaABBToda(Banco conta) {
 		NoArvore temp;
 		temp = this.pesquisaABB(conta, this.raizABB);
@@ -138,7 +136,7 @@ public class CadBancoArv extends CadBanco {
 		}
 		return temp;
 	}
-	
+
 	public void insereABB(Banco elem) {
 		boolean existe = this.pesquisaABBToda(elem);
 		if (!existe) {
@@ -146,7 +144,7 @@ public class CadBancoArv extends CadBanco {
 		}
 
 	}
-	
+
 	private NoArvore insereABB(Banco elem, NoArvore no) {
 		NoArvore novo;
 		if (no == null) {
@@ -191,32 +189,22 @@ public class CadBancoArv extends CadBanco {
 		}
 	}
 
-	public String toString() {
-		String temp = "";
-		int i;
-
-		for (i = 0; i < super.vetBanco.size(); i++)
-			temp += super.vetBanco.get(i).toString() + "\n";
-		return temp;
-	}
-	
-	public ArrayList<Banco> VetorBalanceado(){
+	public ArrayList<Banco> VetorBalanceado() {
 		ArrayList<Banco> novo = new ArrayList<Banco>(ordenado.size());
 		return (this.BalancearVetor(this.ordenado, 0, this.ordenado.size() - 1, novo));
 	}
-	
-	private ArrayList<Banco> BalancearVetor(ArrayList<Banco> vet, int inic, int fim,ArrayList<Banco> novo) {
+
+	private ArrayList<Banco> BalancearVetor(ArrayList<Banco> vet, int inic, int fim, ArrayList<Banco> novo) {
 		int meio;
 		if (fim >= inic) {
 			meio = (inic + fim) / 2;
 			novo.add(vet.get(meio));
-			this.BalancearVetor(vet, inic, meio - 1,novo);
-			this.BalancearVetor(vet, meio + 1, fim,novo);
+			this.BalancearVetor(vet, inic, meio - 1, novo);
+			this.BalancearVetor(vet, meio + 1, fim, novo);
 		}
 		return novo;
 	}
-	
-	
+
 	public String toStringBalanceado() {
 		String temp = "";
 		int i;
