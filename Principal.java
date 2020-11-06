@@ -235,9 +235,9 @@ public class Principal {
 		double startArq = 0;
 		String[] narq = { "500", "1000", "5000", "10000", "50000" };
 		String[] ord = { "alea", "ord", "inv" };
-		String[] tipo = { "ABB", "AVL", "hashing" };
+		String[] tipo = { "ABB", "AVL"};
 		double tempo = 0;
-		for (int m = 0; m < 3; m++) {
+		for (int m = 0; m < 2; m++) {
 
 			System.out.println(tipo[m].toUpperCase() + "\n");
 			for (int o = 0; o < ord.length; o++) {
