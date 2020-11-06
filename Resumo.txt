@@ -1,0 +1,111 @@
+ALEA
+Parcial: 0.106 segundos
+Parcial: 0.046 segundos
+Parcial: 0.034 segundos
+Parcial: 0.027 segundos
+Parcial: 0.022 segundos
+Média art: 0.047 segundos
+
+Parcial: 0.049 segundos
+Parcial: 0.051 segundos
+Parcial: 0.049 segundos
+Parcial: 0.052 segundos
+Parcial: 0.053 segundos
+Média art: 0.0506 segundos
+
+Parcial: 0.665 segundos
+Parcial: 0.505 segundos
+Parcial: 0.561 segundos
+Parcial: 0.637 segundos
+Parcial: 0.569 segundos
+Média art: 0.5871999999999999 segundos
+
+Parcial: 2.562 segundos
+Parcial: 2.531 segundos
+Parcial: 2.489 segundos
+Parcial: 2.543 segundos
+Parcial: 2.529 segundos
+Média art: 2.5308 segundos
+
+Parcial: 65.53 segundos
+Parcial: 65.024 segundos
+Parcial: 66.926 segundos
+Parcial: 65.082 segundos
+Parcial: 65.103 segundos
+Média art: 65.533 segundos
+
+ORD
+Parcial: 0.019 segundos
+Parcial: 0.032 segundos
+Parcial: 0.017 segundos
+Parcial: 0.015 segundos
+Parcial: 0.017 segundos
+Média art: 0.02 segundos
+
+Parcial: 0.036 segundos
+Parcial: 0.035 segundos
+Parcial: 0.034 segundos
+Parcial: 0.04 segundos
+Parcial: 0.056 segundos
+Média art: 0.0402 segundos
+
+Parcial: 0.587 segundos
+Parcial: 0.669 segundos
+Parcial: 0.498 segundos
+Parcial: 0.496 segundos
+Parcial: 0.497 segundos
+Média art: 0.5494 segundos
+
+Parcial: 2.347 segundos
+Parcial: 2.527 segundos
+Parcial: 2.544 segundos
+Parcial: 2.479 segundos
+Parcial: 2.556 segundos
+Média art: 2.4904 segundos
+
+Parcial: 65.432 segundos
+Parcial: 65.484 segundos
+Parcial: 65.938 segundos
+Parcial: 65.078 segundos
+Parcial: 65.618 segundos
+Média art: 65.51 segundos
+
+INV
+Parcial: 0.017 segundos
+Parcial: 0.015 segundos
+Parcial: 0.017 segundos
+Parcial: 0.016 segundos
+Parcial: 0.024 segundos
+Média art: 0.0178 segundos
+
+Parcial: 0.043 segundos
+Parcial: 0.036 segundos
+Parcial: 0.035 segundos
+Parcial: 0.047 segundos
+Parcial: 0.038 segundos
+Média art: 0.039799999999999995 segundos
+
+Parcial: 0.621 segundos
+Parcial: 0.725 segundos
+Parcial: 0.663 segundos
+Parcial: 0.598 segundos
+Parcial: 0.648 segundos
+Média art: 0.6508 segundos
+
+Parcial: 2.379 segundos
+Parcial: 2.571 segundos
+Parcial: 2.582 segundos
+Parcial: 2.528 segundos
+Parcial: 2.574 segundos
+Média art: 2.5268 segundos
+
+Parcial: 66.383 segundos
+Parcial: 65.797 segundos
+Parcial: 65.803 segundos
+Parcial: 65.86 segundos
+Parcial: 65.774 segundos
+Média art: 65.9234 segundos
+
+Total: 1032.591 segundos
+
+
