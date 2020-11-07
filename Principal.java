@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 import javax.swing.JOptionPane;
 
+import arvore.CadBancoABB;
 import arvore.CadBancoArv;
 import dados.Banco;
 import dados.NoArvore;
@@ -94,7 +95,7 @@ public class Principal {
 					for (int i = 0; i < buscar.size(); i++) {
 						lista = contas.pesqBin(buscar.get(i));
 						if (lista == null) {
-							stringao += "CPF " + buscar.get(i) + ": \n" + "NÃO HÁ NENHUM REGISTRO COM O CPF "
+							stringao += "CPF " + buscar.get(i) + ": \n" + "NAO HA NENHUM REGISTRO COM O CPF "
 									+ buscar.get(i) + "\n\n";
 						} else {
 							stringao += "CPF " + lista.get(j).getCpf() + " NOME " + lista.get(j).getNome() + "\n";
@@ -133,8 +134,8 @@ public class Principal {
 					System.out.println("Parcial: " + (System.currentTimeMillis() - startArq) / 1000.0 + " segundos");
 					resumo += "Parcial: " + (System.currentTimeMillis() - startArq) / 1000.0 + " segundos" + "\n";
 				}
-				System.out.println("Média art: " + tempo / 5.0 + " segundos" + "\n");
-				resumo += "Média art: " + tempo / 5.0 + " segundos" + "\n\n";
+				System.out.println("Media art: " + tempo / 5.0 + " segundos" + "\n");
+				resumo += "Media art: " + tempo / 5.0 + " segundos" + "\n\n";
 			}
 		}
 		System.out.println("Total: " + (System.currentTimeMillis() - startTime) / 1000.0 + " segundos" + "\n");
@@ -181,7 +182,7 @@ public class Principal {
 					for (int i = 0; i < buscar.size(); i++) {
 						lista = contas.pesqBin(buscar.get(i));
 						if (lista == null) {
-							stringao += "CPF " + buscar.get(i) + ": \n" + "NÃO HÁ NENHUM REGISTRO COM O CPF "
+							stringao += "CPF " + buscar.get(i) + ": \n" + "NAO HA NENHUM REGISTRO COM O CPF "
 									+ buscar.get(i) + "\n\n";
 						} else {
 							stringao += "CPF " + lista.get(j).getCpf() + " NOME " + lista.get(j).getNome() + "\n";
@@ -220,8 +221,8 @@ public class Principal {
 					System.out.println("Parcial: " + (System.currentTimeMillis() - startArq) / 1000.0 + " segundos");
 					resumo += "Parcial: " + (System.currentTimeMillis() - startArq) / 1000.0 + " segundos" + "\n";
 				}
-				System.out.println("Média art: " + tempo / 5.0 + " segundos" + "\n");
-				resumo += "Média art: " + tempo / 5.0 + " segundos" + "\n\n";
+				System.out.println("Media art: " + tempo / 5.0 + " segundos" + "\n");
+				resumo += "Media art: " + tempo / 5.0 + " segundos" + "\n\n";
 			}
 		}
 		System.out.println("Total: " + (System.currentTimeMillis() - startTime) / 1000.0 + " segundos" + "\n");
@@ -247,12 +248,12 @@ public class Principal {
 					System.out.println(narq[k]);
 					for (int w = 0; w < 5; w++) {
 						startArq = System.currentTimeMillis();
-						CadBancoArv contas = new CadBancoArv(Integer.parseInt(narq[k]));
 						LeArquivo arquivo = new LeArquivo("conta" + narq[k] + ord[o] + ".txt");
+						CadBancoABB contas = new CadBancoABB(Integer.parseInt(narq[k]));						
 						arquivo.leArquivoBanco(contas.getBancoLista());
-						contas.insereTudo();
-						contas.CamCentral();
-						contas.ArvoreBalanceada();
+						
+						contas.ABB();
+						
 
 						// 4) Gravar
 						GravaArq grava = new GravaArq(tipo[m] + ord[o].toUpperCase() + narq[k] + ".txt", false);
@@ -273,7 +274,7 @@ public class Principal {
 						for (int i = 0; i < buscar.size(); i++) {
 							folha = contas.pesquisaABBToda(buscar.get(i));
 							if (folha == null) {
-								stringao += "CPF " + buscar.get(i) + ": \n" + "NÃO HÁ NENHUM REGISTRO COM O CPF "
+								stringao += "CPF " + buscar.get(i) + ": \n" + "NAO HA NENHUM REGISTRO COM O CPF "
 										+ buscar.get(i) + "\n\n";
 							} else {
 								stringao += "CPF " + folha.getInfo().getCpf() + " NOME " + folha.getInfo().getNome()
@@ -322,11 +323,10 @@ public class Principal {
 						// Método Imprimir tempo em segundo
 
 						tempo += (System.currentTimeMillis() - startArq) / 1000.0;
-						System.out
-								.println("Parcial: " + (System.currentTimeMillis() - startArq) / 1000.0 + " segundos");
+						System.out.println("Parcial: " + (System.currentTimeMillis() - startArq) / 1000.0 + " segundos");
 
 					}
-					System.out.println("Média art: " + tempo / 5.0 + " segundos");
+					System.out.println("Media art: " + tempo / 5.0 + " segundos");
 					System.out.println("\n");
 				}
 			}
