@@ -236,7 +236,7 @@ public class Principal {
 		double startArq = 0;
 		String[] narq = { "500", "1000", "5000", "10000", "50000" };
 		String[] ord = { "alea", "ord", "inv" };
-		String[] tipo = { "ABB", "AVL"};
+		String[] tipo = { "ABB", "AVL" };
 		double tempo = 0;
 		for (int m = 0; m < 2; m++) {
 
@@ -249,11 +249,10 @@ public class Principal {
 					for (int w = 0; w < 5; w++) {
 						startArq = System.currentTimeMillis();
 						LeArquivo arquivo = new LeArquivo("conta" + narq[k] + ord[o] + ".txt");
-						CadBancoABB contas = new CadBancoABB(Integer.parseInt(narq[k]));						
+						CadBancoABB contas = new CadBancoABB(Integer.parseInt(narq[k]));
 						arquivo.leArquivoBanco(contas.getBancoLista());
-						
+
 						contas.ABB();
-						
 
 						// 4) Gravar
 						GravaArq grava = new GravaArq(tipo[m] + ord[o].toUpperCase() + narq[k] + ".txt", false);
@@ -290,20 +289,22 @@ public class Principal {
 								stringao += folha.getInfo().getSaldo() + "\n";
 								saldoTotal += folha.getInfo().getSaldo();
 								saldo1 = folha.getInfo().getSaldo();
+								folha3 = folha;
+								
+								// descobrir uma forma de navegar na árvore sem pegar repetidos.
+								
+								while ((folha2 = contas.pesquisaABBSR(buscar.get(i), folha, folha3)) != null) {
+									stringao += "Ag " + folha2.getInfo().getAgencia();
+									if (folha.getInfo().getConta().substring(0, 3).equals("001")) {
+										stringao += " Conta Comum " + folha2.getInfo().getConta();
+									} else if (folha.getInfo().getConta().substring(0, 3).equals("002")) {
+										stringao += " Especial " + folha2.getInfo().getConta();
+									} else {
+										stringao += " Poupanca " + folha2.getInfo().getConta();
+									}
+									saldoTotal += folha2.getInfo().getSaldo();
 
-								/*
-								 * while ((folha2 = contas.pesquisaABB(buscar.get(i), folha.getEsq())) != null)
-								 * { if (folha2.getInfo().getConta().substring(0, 3).equals("001")) { stringao
-								 * += "Ag " + folha2.getInfo().getAgencia() + " Conta Comum " +
-								 * folha2.getInfo().getConta() + " Saldo " + folha2.getInfo().getSaldo() + "\n";
-								 * } else if (folha2.getInfo().getConta().substring(0, 3).equals("002")) {
-								 * stringao += "Ag " + folha2.getInfo().getAgencia() + " Conta Especial " +
-								 * folha2.getInfo().getConta() + " Saldo " + folha2.getInfo().getSaldo() + "\n";
-								 * } else { stringao += "Ag " + folha2.getInfo().getAgencia() +
-								 * " Conta Poupança " + folha2.getInfo().getConta() + " Saldo " +
-								 * folha2.getInfo().getSaldo() + "\n"; } saldoTotal +=
-								 * folha2.getInfo().getSaldo(); }
-								 */
+								}
 
 								if (saldoTotal != saldo1) {
 									stringao += "Saldo Total: " + saldoTotal + "\n\n";
@@ -323,7 +324,8 @@ public class Principal {
 						// Método Imprimir tempo em segundo
 
 						tempo += (System.currentTimeMillis() - startArq) / 1000.0;
-						System.out.println("Parcial: " + (System.currentTimeMillis() - startArq) / 1000.0 + " segundos");
+						System.out
+								.println("Parcial: " + (System.currentTimeMillis() - startArq) / 1000.0 + " segundos");
 
 					}
 					System.out.println("Media art: " + tempo / 5.0 + " segundos");

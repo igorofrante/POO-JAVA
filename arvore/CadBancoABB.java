@@ -48,7 +48,7 @@ public class CadBancoABB extends CadBancoArv {
 		return (this.pesquisaABB(chave, this.raizABB));
 	}
 
-	public NoArvore pesquisaABB(String chave, NoArvore no) {
+	private NoArvore pesquisaABB(String chave, NoArvore no) {
 		NoArvore temp;
 		temp = no;
 		if (temp != null) {
@@ -61,7 +61,8 @@ public class CadBancoABB extends CadBancoArv {
 		}
 		return temp;
 	}
-
+	
+	
 	public void insereABB(Banco elem) {
 		boolean existe = this.pesquisaABBToda(elem);
 		if (!existe) {
