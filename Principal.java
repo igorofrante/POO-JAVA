@@ -238,9 +238,9 @@ public class Principal {
 		String[] ord = { "alea", "ord", "inv" };
 		String[] tipo = { "ABB", "AVL" };
 		double tempo = 0;
-		for (int m = 0; m < 2; m++) {
-
-			System.out.println(tipo[m].toUpperCase() + "\n");
+		
+		//ABB
+		System.out.println(tipo[0].toUpperCase() + "\n");
 			for (int o = 0; o < ord.length; o++) {
 				System.out.println(ord[o].toUpperCase() + "\n");
 				for (int k = 0; k < narq.length; k++) {
@@ -255,8 +255,8 @@ public class Principal {
 						contas.ABB();
 
 						// 4) Gravar
-						GravaArq grava = new GravaArq(tipo[m] + ord[o].toUpperCase() + narq[k] + ".txt", false);
-						grava.gravaArquivo(contas.toStringBalanceado());
+						GravaArq grava = new GravaArq(tipo[0] + ord[o].toUpperCase() + narq[k] + ".txt", false);
+						grava.gravaArquivo(contas.toString());
 						grava.fechaArquivo();
 
 						LeArquivoCpf cpfs = new LeArquivoCpf("Conta.txt");
@@ -265,7 +265,6 @@ public class Principal {
 
 						NoArvore folha = null;
 						NoArvore folha2 = null;
-						NoArvore folha3 = null;
 						String stringao = "";
 						double saldoTotal = 0.0;
 						double saldo1 = 0.0;
@@ -286,14 +285,16 @@ public class Principal {
 								} else {
 									stringao += " Poupanca " + folha.getInfo().getConta();
 								}
-								stringao += folha.getInfo().getSaldo() + "\n";
+								stringao += " Saldo " + folha.getInfo().getSaldo() + "\n";
 								saldoTotal += folha.getInfo().getSaldo();
 								saldo1 = folha.getInfo().getSaldo();
-								folha3 = folha;
-								
+
 								// descobrir uma forma de navegar na árvore sem pegar repetidos.
-								
-								while ((folha2 = contas.pesquisaABBSR(buscar.get(i), folha, folha3)) != null) {
+								// esse método abaixo é uma solução meia boca.
+
+								folha2 = contas.pesquisaABB(buscar.get(i), folha.getEsq());
+
+								if (folha2 != null) {
 									stringao += "Ag " + folha2.getInfo().getAgencia();
 									if (folha.getInfo().getConta().substring(0, 3).equals("001")) {
 										stringao += " Conta Comum " + folha2.getInfo().getConta();
@@ -302,6 +303,22 @@ public class Principal {
 									} else {
 										stringao += " Poupanca " + folha2.getInfo().getConta();
 									}
+									stringao += " Saldo " + folha2.getInfo().getSaldo() + "\n";
+									saldoTotal += folha2.getInfo().getSaldo();
+								}
+
+								folha2 = contas.pesquisaABB(buscar.get(i), folha.getDir());
+
+								if (folha2 != null) {
+									stringao += "Ag " + folha2.getInfo().getAgencia();
+									if (folha.getInfo().getConta().substring(0, 3).equals("001")) {
+										stringao += " Conta Comum " + folha2.getInfo().getConta();
+									} else if (folha.getInfo().getConta().substring(0, 3).equals("002")) {
+										stringao += " Especial " + folha2.getInfo().getConta();
+									} else {
+										stringao += " Poupanca " + folha2.getInfo().getConta();
+									}
+									stringao += " Saldo " + folha2.getInfo().getSaldo() + "\n";
 									saldoTotal += folha2.getInfo().getSaldo();
 
 								}
@@ -316,7 +333,7 @@ public class Principal {
 
 						}
 
-						GravaArq grava2 = new GravaArq("extrato" + tipo[m] + ord[o].toUpperCase() + narq[k] + ".txt",
+						GravaArq grava2 = new GravaArq("extrato" + tipo[0] + ord[o].toUpperCase() + narq[k] + ".txt",
 								false);
 						grava2.gravaArquivo(stringao.toString());
 						grava2.fechaArquivo();
@@ -334,7 +351,7 @@ public class Principal {
 			}
 			System.out.println("Total: " + (System.currentTimeMillis() - startTime) / 1000.0 + " segundos" + "\n");
 
-		}
+		//AVL
 
 	}
 

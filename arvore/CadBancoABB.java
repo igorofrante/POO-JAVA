@@ -48,7 +48,7 @@ public class CadBancoABB extends CadBancoArv {
 		return (this.pesquisaABB(chave, this.raizABB));
 	}
 
-	private NoArvore pesquisaABB(String chave, NoArvore no) {
+	public NoArvore pesquisaABB(String chave, NoArvore no) {
 		NoArvore temp;
 		temp = no;
 		if (temp != null) {
@@ -131,7 +131,7 @@ public class CadBancoABB extends CadBancoArv {
 		return novo;
 	}
 
-	public String toStringBalanceado() {
+	public String toString() {
 		String temp = "";
 		int i;
 		ArrayList<Banco> novo = this.VetorBalanceado();

@@ -1,8 +1,5 @@
 package arvore;
 
-import java.util.ArrayList;
-import java.util.TreeSet;
-
 import dados.Banco;
 import dados.NoArvore;
 import vetor.CadBanco;
