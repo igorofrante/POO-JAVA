@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import dados.Banco;
 import dados.NoArvore;
 
-
 public class CadBancoABB extends CadBancoArv {
 	private ArrayList<Banco> ordenado;
 	private NoArvore raizABB;
@@ -14,7 +13,7 @@ public class CadBancoABB extends CadBancoArv {
 		this.ordenado = new ArrayList<Banco>(tam);
 		this.raizABB = null;
 	}
-	
+
 	public void ABB() {
 		super.insereTudo();
 		this.CamCentral();
@@ -61,8 +60,23 @@ public class CadBancoABB extends CadBancoArv {
 		}
 		return temp;
 	}
-	
-	
+
+	public ArrayList<Banco> pesquisaABBTodaLista(String chave) {
+		ArrayList<Banco> vet = new ArrayList<Banco>();
+		this.pesquisaABBLista(chave, this.raizABB, vet);
+		return vet;
+	}
+
+	public void pesquisaABBLista(String chave, NoArvore arv, ArrayList<Banco> vet) {
+		if (arv != null) {
+			this.pesquisaABBLista(chave,arv.getEsq(), vet);
+			if(chave.equals(arv.getInfo().getCpf())) {
+				vet.add(arv.getInfo());
+			}			
+			this.pesquisaABBLista(chave,arv.getDir(), vet);
+		}
+	}
+
 	public void insereABB(Banco elem) {
 		boolean existe = this.pesquisaABBToda(elem);
 		if (!existe) {

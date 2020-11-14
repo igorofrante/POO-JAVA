@@ -6,6 +6,7 @@ import java.util.Scanner;
 import javax.swing.JOptionPane;
 
 import arvore.CadBancoABB;
+import arvore.CadBancoAVL;
 import arvore.CadBancoArv;
 import dados.Banco;
 import dados.NoArvore;
@@ -254,79 +255,42 @@ public class Principal {
 
 					contas.ABB();
 
-					// 4) Gravar
-					GravaArq grava = new GravaArq(tipo[0] + ord[o] + narq[k] + ".txt", false);
-					grava.gravaArquivo(contas.toString());
-					grava.fechaArquivo();
-
 					LeArquivoCpf cpfs = new LeArquivoCpf("Conta.txt");
 					ArrayList<String> buscar = cpfs.leArquivo(400);
 					cpfs.fechaArquivo();
 
-					NoArvore folha = null;
-					NoArvore folha2 = null;
+					ArrayList<Banco> lista = new ArrayList<Banco>();
 					String stringao = "";
 					double saldoTotal = 0.0;
-					double saldo1 = 0.0;
-
+					int j = 0;
 					for (int i = 0; i < buscar.size(); i++) {
-						folha = contas.pesquisaABBToda(buscar.get(i));
-						if (folha == null) {
+						
+						lista = contas.pesquisaABBTodaLista(buscar.get(i));
+						if (lista.size()==0) {
 							stringao += "CPF " + buscar.get(i) + ": \n" + "NAO HA NENHUM REGISTRO COM O CPF "
 									+ buscar.get(i) + "\n\n";
 						} else {
-							stringao += "CPF " + folha.getInfo().getCpf() + " NOME " + folha.getInfo().getNome() + "\n";
-							stringao += "Ag " + folha.getInfo().getAgencia();
-							if (folha.getInfo().getConta().substring(0, 3).equals("001")) {
-								stringao += " Conta Comum " + folha.getInfo().getConta();
-							} else if (folha.getInfo().getConta().substring(0, 3).equals("002")) {
-								stringao += " Conta Especial " + folha.getInfo().getConta();
-							} else {
-								stringao += " Conta Poupanca " + folha.getInfo().getConta();
-							}
-							stringao += " Saldo " + folha.getInfo().getSaldo() + "\n";
-							saldoTotal += folha.getInfo().getSaldo();
-							saldo1 = folha.getInfo().getSaldo();
-
-							// descobrir uma forma de navegar na árvore sem pegar repetidos.
-							// esse método abaixo é uma solução meia boca.
-
-							folha2 = contas.pesquisaABB(buscar.get(i), folha.getEsq());
-
-							if (folha2 != null) {
-								stringao += "Ag " + folha2.getInfo().getAgencia();
-								if (folha2.getInfo().getConta().substring(0, 3).equals("001")) {
-									stringao += " Conta Comum " + folha2.getInfo().getConta();
-								} else if (folha2.getInfo().getConta().substring(0, 3).equals("002")) {
-									stringao += " Conta Especial " + folha2.getInfo().getConta();
+							stringao += "CPF " + lista.get(j).getCpf() + " NOME " + lista.get(j).getNome() + "\n";
+							while (j != lista.size()) {
+								stringao += "Ag " + lista.get(j).getAgencia();
+								if (lista.get(j).getConta().substring(0, 3).equals("001")) {
+									stringao += " Conta Comum " + lista.get(j).getConta();
+								} else if (lista.get(j).getConta().substring(0, 3).equals("002")) {
+									stringao += " Conta Especial " + lista.get(j).getConta();
 								} else {
-									stringao += " Conta Poupanca " + folha2.getInfo().getConta();
+									stringao += " Conta Poupanca " + lista.get(j).getConta();
 								}
-								stringao += " Saldo " + folha2.getInfo().getSaldo() + "\n";
-								saldoTotal += folha2.getInfo().getSaldo();
+								stringao += " Saldo " + lista.get(j).getSaldo() + "\n";
+								saldoTotal += lista.get(j).getSaldo();
+								j++;
 							}
-
-							folha2 = contas.pesquisaABB(buscar.get(i), folha.getDir());
-
-							if (folha2 != null) {
-								stringao += "Ag " + folha2.getInfo().getAgencia();
-								if (folha2.getInfo().getConta().substring(0, 3).equals("001")) {
-									stringao += " Conta Comum " + folha2.getInfo().getConta();
-								} else if (folha2.getInfo().getConta().substring(0, 3).equals("002")) {
-									stringao += " Conta Especial " + folha2.getInfo().getConta();
-								} else {
-									stringao += " Conta Poupanca " + folha2.getInfo().getConta();
-								}
-								stringao += " Saldo " + folha2.getInfo().getSaldo() + "\n";
-								saldoTotal += folha2.getInfo().getSaldo();
-
-							}
-
-							if (saldoTotal != saldo1) {
+							if (lista.size() != 1) {
 								stringao += "Saldo Total: " + saldoTotal + "\n\n";
 							} else {
 								stringao += "\n";
 							}
+
+							j = 0;
 							saldoTotal = 0;
 						}
 
@@ -353,7 +317,84 @@ public class Principal {
 	}
 
 	static void quartaEtapa() throws IOException {
+		double startTime = System.currentTimeMillis();// método de tempo
+		double startArq = 0;
+		String[] narq = { "500", "1000", "5000", "10000", "50000" };
+		String[] ord = { "Alea", "Ord", "Inv" };
+		String[] tipo = { "AVL" };
+		double tempo = 0;
 
+		// ABB
+		System.out.println(tipo[0].toUpperCase() + "\n");
+		for (int o = 0; o < ord.length; o++) {
+			System.out.println(ord[o] + "\n");
+			for (int k = 0; k < narq.length; k++) {
+				tempo = 0;
+				System.out.println(narq[k]);
+				for (int w = 0; w < 5; w++) {
+					startArq = System.currentTimeMillis();
+					LeArquivo arquivo = new LeArquivo("conta" + narq[k] + ord[o].toLowerCase() + ".txt");
+					CadBancoAVL contas = new CadBancoAVL(Integer.parseInt(narq[k]));
+					arquivo.leArquivoBanco(contas.getBancoLista());
+
+					contas.AVL();
+
+					LeArquivoCpf cpfs = new LeArquivoCpf("Conta.txt");
+					ArrayList<String> buscar = cpfs.leArquivo(400);
+					cpfs.fechaArquivo();
+
+					ArrayList<Banco> lista = new ArrayList<Banco>();
+					String stringao = "";
+					double saldoTotal = 0.0;
+					int j = 0;
+					for (int i = 0; i < buscar.size(); i++) {
+						
+						lista = contas.pesquisaAVLTodaLista(buscar.get(i));
+						if (lista.size()==0) {
+							stringao += "CPF " + buscar.get(i) + ": \n" + "NAO HA NENHUM REGISTRO COM O CPF "
+									+ buscar.get(i) + "\n\n";
+						} else {
+							stringao += "CPF " + lista.get(j).getCpf() + " NOME " + lista.get(j).getNome() + "\n";
+							while (j != lista.size()) {
+								stringao += "Ag " + lista.get(j).getAgencia();
+								if (lista.get(j).getConta().substring(0, 3).equals("001")) {
+									stringao += " Conta Comum " + lista.get(j).getConta();
+								} else if (lista.get(j).getConta().substring(0, 3).equals("002")) {
+									stringao += " Conta Especial " + lista.get(j).getConta();
+								} else {
+									stringao += " Conta Poupanca " + lista.get(j).getConta();
+								}
+								stringao += " Saldo " + lista.get(j).getSaldo() + "\n";
+								saldoTotal += lista.get(j).getSaldo();
+								j++;
+							}
+							if (lista.size() != 1) {
+								stringao += "Saldo Total: " + saldoTotal + "\n\n";
+							} else {
+								stringao += "\n";
+							}
+
+							j = 0;
+							saldoTotal = 0;
+						}
+
+					}
+
+					GravaArq grava2 = new GravaArq("extrato" + tipo[0] + ord[o] + narq[k] + ".txt", false);
+					grava2.gravaArquivo(stringao.toString());
+					grava2.fechaArquivo();
+
+					// Método Imprimir tempo em segundo
+
+					tempo += (System.currentTimeMillis() - startArq) / 1000.0;
+					System.out.println("Parcial: " + (System.currentTimeMillis() - startArq) / 1000.0 + " segundos");
+
+				}
+				System.out.println("Media art: " + tempo / 5.0 + " segundos");
+				System.out.println("\n");
+			}
+		}
+		System.out.println("Total: " + (System.currentTimeMillis() - startTime) / 1000.0 + " segundos" + "\n");
 	}
 
 }

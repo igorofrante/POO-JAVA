@@ -1,10 +1,10 @@
 package arvore;
 
+import java.util.ArrayList;
 import dados.Banco;
 import dados.NoAVL;
-import vetor.CadBanco;
 
-public class CadBancoAVL extends CadBanco {// o que achei no pdf
+public class CadBancoAVL extends CadBancoArv {// o que achei no pdf
 	private NoAVL raiz;
 	private boolean h;
 
@@ -36,6 +36,12 @@ public class CadBancoAVL extends CadBanco {// o que achei no pdf
 				no = this.balancearEsq(no);
 				return no;
 			}
+		}
+	}
+	
+	protected void insereTudo() {
+		for (Banco banco : super.vetBanco) {
+			this.insereRaiz(banco);
 		}
 	}
 
@@ -129,5 +135,26 @@ public class CadBancoAVL extends CadBanco {// o que achei no pdf
 		this.h = false;
 		return no;
 	}
+	
+	public void AVL() {
+		this.insereTudo();		
+	}
+	
+	
+	
+	public ArrayList<Banco> pesquisaAVLTodaLista(String chave) {
+		ArrayList<Banco> vet = new ArrayList<Banco>();
+		this.pesquisaAVLLista(chave, this.raiz, vet);
+		return vet;
+	}
 
+	public void pesquisaAVLLista(String chave, NoAVL arv, ArrayList<Banco> vet) {
+		if (arv != null) {
+			this.pesquisaAVLLista(chave,arv.getEsq(), vet);
+			if(chave.equals(arv.getInfo().getCpf())) {
+				vet.add(arv.getInfo());
+			}			
+			this.pesquisaAVLLista(chave,arv.getDir(), vet);
+		}
+	}
 }

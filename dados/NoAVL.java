@@ -1,12 +1,12 @@
 package dados;
 
-public class NoAVL extends NoArvore {
-
+public class NoAVL {
+	private Banco info;
 	private byte fatorBalanceamento;
 	private NoAVL dir, esq;
 
 	public NoAVL(Banco info, byte fatorBalanceamento) {
-		super(info);
+		this.info=info;
 		this.fatorBalanceamento = fatorBalanceamento;
 	}
 
@@ -32,6 +32,14 @@ public class NoAVL extends NoArvore {
 
 	public void setEsq(NoAVL esq) {
 		this.esq = esq;
+	}
+
+	public Banco getInfo() {
+		return info;
+	}
+
+	public void setInfo(Banco info) {
+		this.info = info;
 	}
 
 }
