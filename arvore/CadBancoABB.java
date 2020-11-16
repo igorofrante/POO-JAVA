@@ -19,7 +19,12 @@ public class CadBancoABB extends CadBancoArv {
 	public ArrayList<Banco> pesquisaABB(String chave) {
 		ArrayList<Banco> vet = new ArrayList<Banco>();
 		this.pesquisaABB(chave, super.raiz, vet);
-		return vet;
+		
+		if(!vet.isEmpty()) {
+			return vet;
+		}else {
+			return null;
+		}
 	}
 
 	private void pesquisaABB(String chave, NoArv arv, ArrayList<Banco> vet) {
@@ -30,6 +35,7 @@ public class CadBancoABB extends CadBancoArv {
 			}
 			this.pesquisaABB(chave, arv.getDir(), vet);
 		}
+		
 	}
 
 	public void CamCentral() {

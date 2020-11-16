@@ -1,17 +1,18 @@
 package vetor;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 
 import dados.Banco;
 
 public class CadBancoHash extends CadBanco {
-	private HashMap<Integer, LinkedList<Banco>> vetor;
+	private ArrayList<LinkedList<Banco>> vetor;
 	private int tam;
 
 	public CadBancoHash(int tam) {
 		super(tam);
-		this.vetor = new HashMap<Integer, LinkedList<Banco>>(this.defPrimo(tam));
+		this.vetor = new ArrayList<LinkedList<Banco>>(this.defPrimo(tam));
 		this.tam = this.defPrimo(tam);
 	}
 
@@ -71,12 +72,12 @@ public class CadBancoHash extends CadBanco {
 			if (vetor.get(pos) == null) {
 				v1 = new LinkedList<Banco>();
 				v1.add(banco);
-				vetor.put(pos, v1);
+				vetor.add(pos, v1);
 			} else {
 				v1 = new LinkedList<Banco>();
 				v1 = vetor.get(pos);
 				v1.add(banco);
-				vetor.put(pos, v1);
+				vetor.add(pos, v1);
 			}
 		}
 	}
