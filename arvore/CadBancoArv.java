@@ -1,27 +1,27 @@
 package arvore;
 
 import dados.Banco;
-import dados.NoArvore;
+import dados.NoArv;
 import vetor.CadBanco;
 
 public class CadBancoArv extends CadBanco {
-	protected NoArvore raiz;
+	protected NoArv raiz;
 
 	public CadBancoArv(int tam) {
 		super(tam);
 		this.raiz = null;
 	}
 
-	public NoArvore getRaiz() {
+	public NoArv getRaiz() {
 		return raiz;
 	}
 
-	public void setRaiz(NoArvore raiz) {
+	public void setRaiz(NoArv raiz) {
 		this.raiz = raiz;
 	}
 
 	public boolean pesquisa(Banco conta) {
-		NoArvore temp;
+		NoArv temp;
 		temp = this.pesquisa(conta, this.raiz);
 		if (temp != null)
 			return true;
@@ -29,8 +29,8 @@ public class CadBancoArv extends CadBanco {
 			return false;
 	}
 
-	private NoArvore pesquisa(Banco elem, NoArvore no) {
-		NoArvore temp;
+	private NoArv pesquisa(Banco elem, NoArv no) {
+		NoArv temp;
 		temp = no;
 		if (temp != null) {
 			if (elem.compareTo(no.getInfo()) < 0)
@@ -51,10 +51,10 @@ public class CadBancoArv extends CadBanco {
 
 	}
 
-	private NoArvore insere(Banco elem, NoArvore no) {
-		NoArvore novo;
+	private NoArv insere(Banco elem, NoArv no) {
+		NoArv novo;
 		if (no == null) {
-			novo = new NoArvore(elem);
+			novo = new NoArv(elem);
 			return novo;
 		} else {
 			if (elem.compareTo(no.getInfo()) < 0) { // mudar para o compareTO do banco

@@ -2,16 +2,12 @@ package arvore;
 
 import java.util.ArrayList;
 import dados.Banco;
-import dados.NoArvore;
+import dados.NoArv;
 
 public class CadBancoABB extends CadBancoArv {
-	private ArrayList<Banco> ordenado;
-	private NoArvore raizABB;
 
 	public CadBancoABB(int tam) {
 		super(tam);
-		this.ordenado = new ArrayList<Banco>(tam);
-		this.raizABB = null;
 	}
 
 	public void ABB() {
@@ -20,92 +16,28 @@ public class CadBancoABB extends CadBancoArv {
 		this.ArvoreBalanceada();
 	}
 
-	public boolean pesquisaABBToda(Banco conta) {
-		NoArvore temp;
-		temp = this.pesquisaABB(conta, this.raizABB);
-		if (temp != null)
-			return true;
-		else
-			return false;
-	}
-
-	private NoArvore pesquisaABB(Banco elem, NoArvore no) {
-		NoArvore temp;
-		temp = no;
-		if (temp != null) {
-			if (elem.compareTo(no.getInfo()) < 0)
-				temp = this.pesquisaABB(elem, temp.getEsq());
-			else {
-				if (elem.compareTo(no.getInfo()) > 0)
-					temp = this.pesquisaABB(elem, temp.getDir());
-			}
-		}
-		return temp;
-	}
-
-	public NoArvore pesquisaABBToda(String chave) {
-		return (this.pesquisaABB(chave, this.raizABB));
-	}
-
-	public NoArvore pesquisaABB(String chave, NoArvore no) {
-		NoArvore temp;
-		temp = no;
-		if (temp != null) {
-			if (chave.compareTo(no.getInfo().getCpf()) < 0)
-				temp = this.pesquisaABB(chave, temp.getEsq());
-			else {
-				if (chave.compareTo(no.getInfo().getCpf()) > 0)
-					temp = this.pesquisaABB(chave, temp.getDir());
-			}
-		}
-		return temp;
-	}
-
-	public ArrayList<Banco> pesquisaABBTodaLista(String chave) {
+	public ArrayList<Banco> pesquisaABB(String chave) {
 		ArrayList<Banco> vet = new ArrayList<Banco>();
-		this.pesquisaABBLista(chave, this.raizABB, vet);
+		this.pesquisaABB(chave, super.raiz, vet);
 		return vet;
 	}
 
-	public void pesquisaABBLista(String chave, NoArvore arv, ArrayList<Banco> vet) {
+	private void pesquisaABB(String chave, NoArv arv, ArrayList<Banco> vet) {
 		if (arv != null) {
-			this.pesquisaABBLista(chave,arv.getEsq(), vet);
-			if(chave.equals(arv.getInfo().getCpf())) {
+			this.pesquisaABB(chave, arv.getEsq(), vet);
+			if (chave.equals(arv.getInfo().getCpf())) {
 				vet.add(arv.getInfo());
-			}			
-			this.pesquisaABBLista(chave,arv.getDir(), vet);
-		}
-	}
-
-	public void insereABB(Banco elem) {
-		boolean existe = this.pesquisaABBToda(elem);
-		if (!existe) {
-			this.raizABB = this.insereABB(elem, this.raizABB);
-		}
-
-	}
-
-	private NoArvore insereABB(Banco elem, NoArvore no) {
-		NoArvore novo;
-		if (no == null) {
-			novo = new NoArvore(elem);
-			return novo;
-		} else {
-			if (elem.compareTo(no.getInfo()) < 0) { // mudar para o compareTO do banco
-				no.setEsq(this.insereABB(elem, no.getEsq()));
-				return no;
-			} else {
-				no.setDir(this.insereABB(elem, no.getDir()));
-				return no;
 			}
+			this.pesquisaABB(chave, arv.getDir(), vet);
 		}
 	}
 
 	public void CamCentral() {
-		this.FazCamCentral(super.raiz, this.ordenado);
+		super.vetBanco = new ArrayList<Banco>(super.vetBanco.size());
+		this.FazCamCentral(super.raiz, super.vetBanco);
 	}
 
-	private void FazCamCentral(NoArvore arv, ArrayList<Banco> vet) {
+	private void FazCamCentral(NoArv arv, ArrayList<Banco> vet) {
 		if (arv != null) {
 			this.FazCamCentral(arv.getEsq(), vet);
 			vet.add(arv.getInfo());
@@ -115,7 +47,8 @@ public class CadBancoABB extends CadBancoArv {
 	}
 
 	public void ArvoreBalanceada() {
-		this.Balancear(this.ordenado, 0, this.ordenado.size() - 1);
+		super.raiz = null;
+		this.Balancear(super.vetBanco, 0, super.vetBanco.size() - 1);
 
 	}
 
@@ -123,34 +56,10 @@ public class CadBancoABB extends CadBancoArv {
 		int meio;
 		if (fim >= inic) {
 			meio = (inic + fim) / 2;
-			this.insereABB(vet.get(meio));
+			super.insere(vet.get(meio));
 			this.Balancear(vet, inic, meio - 1);
 			this.Balancear(vet, meio + 1, fim);
 		}
 	}
 
-	public ArrayList<Banco> VetorBalanceado() {
-		ArrayList<Banco> novo = new ArrayList<Banco>(ordenado.size());
-		return (this.BalancearVetor(this.ordenado, 0, this.ordenado.size() - 1, novo));
-	}
-
-	private ArrayList<Banco> BalancearVetor(ArrayList<Banco> vet, int inic, int fim, ArrayList<Banco> novo) {
-		int meio;
-		if (fim >= inic) {
-			meio = (inic + fim) / 2;
-			novo.add(vet.get(meio));
-			this.BalancearVetor(vet, inic, meio - 1, novo);
-			this.BalancearVetor(vet, meio + 1, fim, novo);
-		}
-		return novo;
-	}
-
-	public String toString() {
-		String temp = "";
-		int i;
-		ArrayList<Banco> novo = this.VetorBalanceado();
-		for (i = 0; i < novo.size(); i++)
-			temp += novo.get(i).toString() + "\n";
-		return temp;
-	}
 }
