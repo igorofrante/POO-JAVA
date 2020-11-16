@@ -20,7 +20,8 @@ public class Principal {
 	static Scanner input = new Scanner(System.in);
 
 	public static void main(String[] args) throws IOException {
-
+		char[] menuvet = {'1','2','3','4','5','0'};
+		int i=0;
 		char menu;
 		// 1) Comece a contar o tempo.
 		do {
@@ -29,7 +30,7 @@ public class Principal {
 					+ "2 - Etapa QuickSort + Pesquisa Binaria \n\n" + "==Arvores==\n" + "3 - ABB \n" + "4 - AVL\n\n"
 					+ "==Hashing==\n" + "5 - HashingVetEnc\n\n" + "0 - Sair \n\n");
 			menu = scan.next().charAt(0);
-
+			//menu=menuvet[i];
 			switch (menu) {
 
 			case '1':
@@ -56,7 +57,7 @@ public class Principal {
 						JOptionPane.ERROR_MESSAGE);
 				break;
 			}
-
+			//i++;
 		} while (menu != '0');
 
 	}
@@ -67,8 +68,12 @@ public class Principal {
 		double startArq = 0;
 		String[] narq = { "500", "1000", "5000", "10000", "50000" };
 		String[] ord = { "Alea", "Ord", "Inv" };
+		String tipo = "Heap";
 		double tempo = 0;
 		String resumo = "";
+
+		System.out.println(tipo);
+		resumo += tipo+"\n";
 		for (int o = 0; o < ord.length; o++) {
 			System.out.println(ord[o] + "\n");
 			resumo += ord[o] + "\n";
@@ -83,8 +88,7 @@ public class Principal {
 
 					contas.HeapSort();
 
-					// 4) Gravar
-					GravaArq grava = new GravaArq("Heap" + ord[o] + narq[k] + ".txt", false);
+					GravaArq grava = new GravaArq(tipo + ord[o] + narq[k] + ".txt", false);
 					grava.gravaArquivo(contas.toString());
 					grava.fechaArquivo();
 
@@ -128,7 +132,7 @@ public class Principal {
 
 					}
 
-					GravaArq grava2 = new GravaArq("extratoHeap" + ord[o] + narq[k] + ".txt", false);
+					GravaArq grava2 = new GravaArq("extrato"+ tipo + ord[o] + narq[k] + ".txt", false);
 					grava2.gravaArquivo(stringao.toString());
 					grava2.fechaArquivo();
 
@@ -136,7 +140,7 @@ public class Principal {
 
 					tempo += (System.currentTimeMillis() - startArq) / 1000.0;
 					System.out.println("Parcial: " + (System.currentTimeMillis() - startArq) / 1000.0 + " segundos");
-					resumo += "Parcial: " + (System.currentTimeMillis() - startArq) / 1000.0 + " segundos" + "\n";
+
 				}
 				System.out.println("Media art: " + tempo / 5.0 + " segundos" + "\n");
 				resumo += "Media art: " + tempo / 5.0 + " segundos" + "\n\n";
@@ -154,8 +158,12 @@ public class Principal {
 		double startArq = 0;
 		String[] narq = { "500", "1000", "5000", "10000", "50000" };
 		String[] ord = { "Alea", "Ord", "Inv" };
+		String tipo = "Quick";
 		double tempo = 0;
 		String resumo = "";
+
+		System.out.println(tipo);
+		resumo += tipo+"\n";
 		for (int o = 0; o < ord.length; o++) {
 			System.out.println(ord[o] + "\n");
 			resumo += ord[o] + "\n";
@@ -171,7 +179,7 @@ public class Principal {
 					contas.quicksort();
 
 					// 4) Gravar
-					GravaArq grava = new GravaArq("Quick" + ord[o] + narq[k] + ".txt", false);
+					GravaArq grava = new GravaArq(tipo + ord[o] + narq[k] + ".txt", false);
 					grava.gravaArquivo(contas.toString());
 					grava.fechaArquivo();
 
@@ -215,7 +223,7 @@ public class Principal {
 
 					}
 
-					GravaArq grava2 = new GravaArq("extratoQuick" + ord[o] + narq[k] + ".txt", false);
+					GravaArq grava2 = new GravaArq("extrato"+ tipo + ord[o] + narq[k] + ".txt", false);
 					grava2.gravaArquivo(stringao.toString());
 					grava2.fechaArquivo();
 
@@ -223,7 +231,7 @@ public class Principal {
 
 					tempo += (System.currentTimeMillis() - startArq) / 1000.0;
 					System.out.println("Parcial: " + (System.currentTimeMillis() - startArq) / 1000.0 + " segundos");
-					resumo += "Parcial: " + (System.currentTimeMillis() - startArq) / 1000.0 + " segundos" + "\n";
+
 				}
 				System.out.println("Media art: " + tempo / 5.0 + " segundos" + "\n");
 				resumo += "Media art: " + tempo / 5.0 + " segundos" + "\n\n";
@@ -243,7 +251,7 @@ public class Principal {
 		String tipo = "ABB";
 		double tempo = 0;
 
-		System.out.println(tipo.toUpperCase() + "\n");
+		System.out.println(tipo + "\n");
 		for (int o = 0; o < ord.length; o++) {
 			System.out.println(ord[o] + "\n");
 			for (int k = 0; k < narq.length; k++) {
@@ -324,8 +332,8 @@ public class Principal {
 		String[] tipo = { "AVL" };
 		double tempo = 0;
 
-		// AVL
-		System.out.println(tipo[0].toUpperCase() + "\n");
+		
+		System.out.println(tipo + "\n");
 		for (int o = 0; o < ord.length; o++) {
 			System.out.println(ord[o] + "\n");
 			for (int k = 0; k < narq.length; k++) {
@@ -406,7 +414,7 @@ public class Principal {
 		double tempo = 0;
 
 		// Hash
-		System.out.println(tipo.toUpperCase() + "\n");
+		System.out.println(tipo + "\n");
 		for (int o = 0; o < ord.length; o++) {
 			System.out.println(ord[o] + "\n");
 			for (int k = 0; k < narq.length; k++) {
