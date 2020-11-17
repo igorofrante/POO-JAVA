@@ -3,9 +3,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Scanner;
-
 import javax.swing.JOptionPane;
-
 import arvore.CadBancoABB;
 import arvore.CadBancoAVL;
 import dados.Banco;
@@ -24,9 +22,13 @@ public class Principal {
 		char menu;
 		
 		do {
-			System.out.println("----MENU---\n" + "==Vetor==\n" + "1 - Etapa HeapSort + Pesquisa Binaria \n"
-					+ "2 - Etapa QuickSort + Pesquisa Binaria \n\n" + "==Arvores==\n" + "3 - ABB \n" + "4 - AVL\n\n"
-					+ "==Hashing==\n" + "5 - HashingVetEnc\n\n" + "0 - Sair \n\n");
+			
+			  System.out.println("----MENU---\n" + "==Vetor==\n" +
+			  "1 - Etapa HeapSort + Pesquisa Binaria \n" +
+			  "2 - Etapa QuickSort + Pesquisa Binaria \n\n" + "==Arvores==\n" +
+			  "3 - ABB \n" + "4 - AVL\n\n" + "==Hashing==\n" + "5 - HashingVetEnc\n\n" +
+			  "0 - Sair \n\n");
+			 
 			menu = scan.next().charAt(0);
 			//menu=menuvet[i];
 			switch (menu) {
@@ -55,7 +57,7 @@ public class Principal {
 						JOptionPane.ERROR_MESSAGE);
 				break;
 			}
-			//i++;
+		
 		} while (menu != '0');
 
 	}
