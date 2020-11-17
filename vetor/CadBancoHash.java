@@ -1,9 +1,8 @@
 package vetor;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Collections;
 import java.util.LinkedList;
-
 import dados.Banco;
 
 public class CadBancoHash extends CadBanco {
@@ -12,7 +11,7 @@ public class CadBancoHash extends CadBanco {
 
 	public CadBancoHash(int tam) {
 		super(tam);
-		this.vetor = new ArrayList<LinkedList<Banco>>(this.defPrimo(tam));
+		this.vetor = new ArrayList<LinkedList<Banco>>(Collections.nCopies(this.defPrimo(tam), null));
 		this.tam = this.defPrimo(tam);
 	}
 
@@ -68,41 +67,39 @@ public class CadBancoHash extends CadBanco {
 		LinkedList<Banco> v1 = new LinkedList<Banco>();
 		for (Banco banco : vetBanco) {
 			pos = this.pos(banco.getCpf());
-
-			if (vetor.get(pos) == null) {
-				v1 = new LinkedList<Banco>();
-				v1.add(banco);
-				vetor.add(pos, v1);
+			
+			if (this.vetor.get(pos) == null) {
+				v1=new LinkedList<Banco>();
+				v1.addLast(banco);
+				this.vetor.set(pos, v1);
 			} else {
-				v1 = new LinkedList<Banco>();
-				v1 = vetor.get(pos);
-				v1.add(banco);
-				vetor.add(pos, v1);
+				this.vetor.get(pos).addLast(banco);
 			}
+
 		}
 	}
 
 	public LinkedList<Banco> pesquisaHash(String chave) {
 		long pos = Long.parseLong(chave) % this.tam;
 
-		if (vetor.get((int) pos) == null) {
+		if (this.vetor.get((int) pos) == null) {
 			return null;
 		} else {
 			LinkedList<Banco> v1 = new LinkedList<Banco>();
 			LinkedList<Banco> v2 = new LinkedList<Banco>();
-			v1=vetor.get((int)pos);
+			v1 = vetor.get((int) pos);
 			for (Banco banco : v1) {
-				if(chave.equals(banco.getCpf())) {
+				if (chave.equals(banco.getCpf())) {
 					v2.add(banco);
 				}
 			}
-			
-			if(!v2.isEmpty()) {
+
+			if (!v2.isEmpty()) {
 				return v2;
-			}else {
+			} else {
 				return null;
 			}
-				
+
 		}
 	}
 
@@ -122,4 +119,3 @@ public class CadBancoHash extends CadBanco {
 //		return temp;
 //	}
 }
-
