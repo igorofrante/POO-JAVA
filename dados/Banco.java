@@ -90,6 +90,15 @@ public class Banco {
 		}
 	}
 	
+	public int compareTo2 (Banco b) {
+		long cpf1 = Long.parseLong(this.cpf);
+		long cpf2 = Long.parseLong(b.getCpf());
+		if (cpf1<cpf2)
+			return -1;
+		else
+			return 1;
+		
+	}
 	
 	
 	

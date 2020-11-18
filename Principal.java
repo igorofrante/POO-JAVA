@@ -17,36 +17,34 @@ public class Principal {
 	static Scanner scan = new Scanner(System.in);
 
 	public static void main(String[] args) throws IOException {
-		//char[] menuvet = {'1','2','3','4','5','0'};
-		//int i=0;
+		// char[] menuvet = {'1','2','3','4','5','0'};
+		// int i=0;
 		char menu;
-		
+
 		do {
-			
-			  System.out.println("----MENU---\n" + "==Vetor==\n" +
-			  "1 - Etapa HeapSort + Pesquisa Binaria \n" +
-			  "2 - Etapa QuickSort + Pesquisa Binaria \n\n" + "==Arvores==\n" +
-			  "3 - ABB \n" + "4 - AVL\n\n" + "==Hashing==\n" + "5 - HashingVetEnc\n\n" +
-			  "0 - Sair \n\n");
-			 
+
+			System.out.println("----MENU---\n" + "==Vetor==\n" + "1 - Etapa HeapSort + Pesquisa Binaria \n"
+					+ "2 - Etapa QuickSort + Pesquisa Binaria \n\n" + "==Arvores==\n" + "3 - ABB \n" + "4 - AVL\n\n"
+					+ "==Hashing==\n" + "5 - HashingVetEnc\n\n" + "0 - Sair \n\n");
+
 			menu = scan.next().charAt(0);
-			//menu=menuvet[i];
+			// menu=menuvet[i];
 			switch (menu) {
 
 			case '1':
-				primeiraEtapa(); //HeapSort
+				primeiraEtapa(); // HeapSort
 				break;
 			case '2':
-				segundaEtapa(); //QuickSort
+				segundaEtapa(); // QuickSort
 				break;
 			case '3':
-				terceiraEtapa(); //ABB
+				terceiraEtapa(); // ABB
 				break;
 			case '4':
-				quartaEtapa(); //AVL
+				quartaEtapa(); // AVL
 				break;
 			case '5':
-				quintaEtapa(); //Hashing
+				quintaEtapa(); // Hashing
 				break;
 			case '0':
 				System.out.println("Programa encerrado!\n\n" + "[AUTORES]\n" + "Igor Ofrante\n" + "Karen Alcantara\n"
@@ -57,41 +55,43 @@ public class Principal {
 						JOptionPane.ERROR_MESSAGE);
 				break;
 			}
-		
+
 		} while (menu != '0');
 
 	}
 
 	static void primeiraEtapa() throws IOException {
+		String tipo = "Heap";
+		String localDir = System.getProperty("user.dir");
+		String localDirC = localDir.replace('\\', '/') + "/contas/";
+		String localDirT = localDir.replace('\\', '/') + "/" + tipo + "/";
 		double startTime = System.currentTimeMillis();// método de tempo
 		double startArq = 0;
 		String[] narq = { "500", "1000", "5000", "10000", "50000" };
 		String[] ord = { "Alea", "Ord", "Inv" };
-		String tipo = "Heap";
 		double tempo = 0;
-		
 
 		System.out.println(tipo);
-		
+
 		for (int o = 0; o < ord.length; o++) {
 			System.out.println(ord[o] + "\n");
-			
+
 			for (int k = 0; k < narq.length; k++) {
 				tempo = 0;
 				System.out.println(narq[k]);
-				
+
 				for (int w = 0; w < 5; w++) {
 					startArq = System.currentTimeMillis();
 					CadBanco contas = new CadBanco(Integer.parseInt(narq[k]));
-					LeArquivo arquivo = new LeArquivo("conta" + narq[k] + ord[o].toLowerCase() + ".txt");
+					LeArquivo arquivo = new LeArquivo(localDirC + "conta" + narq[k] + ord[o].toLowerCase() + ".txt");
 					arquivo.leArquivoBanco(contas.getBancoLista());
 					contas.HeapSort();
 
-					GravaArq grava = new GravaArq(tipo + ord[o] + narq[k] + ".txt", false);
+					GravaArq grava = new GravaArq(localDirT + tipo + ord[o] + narq[k] + ".txt", false);
 					grava.gravaArquivo(contas.toString());
 					grava.fechaArquivo();
 
-					LeArquivoCpf cpfs = new LeArquivoCpf("Conta.txt");
+					LeArquivoCpf cpfs = new LeArquivoCpf(localDirC + "conta.txt");
 					ArrayList<String> buscar = cpfs.leArquivo(400);
 					cpfs.fechaArquivo();
 
@@ -131,7 +131,7 @@ public class Principal {
 
 					}
 
-					GravaArq grava2 = new GravaArq("extrato"+ tipo + ord[o] + narq[k] + ".txt", false);
+					GravaArq grava2 = new GravaArq(localDirT + "extrato" + tipo + ord[o] + narq[k] + ".txt", false);
 					grava2.gravaArquivo(stringao.toString());
 					grava2.fechaArquivo();
 
@@ -143,40 +143,41 @@ public class Principal {
 			}
 		}
 		System.out.println("Total: " + (System.currentTimeMillis() - startTime) / 1000.0 + " segundos" + "\n");
-		
+
 	}
 
 	static void segundaEtapa() throws IOException {
-		
+		String tipo = "Quick";
+		String localDir = System.getProperty("user.dir");
+		String localDirC = localDir.replace('\\', '/') + "/contas/";
+		String localDirT = localDir.replace('\\', '/') + "/" + tipo + "/";
 		double startTime = System.currentTimeMillis();// método de tempo
 		double startArq = 0;
 		String[] narq = { "500", "1000", "5000", "10000", "50000" };
 		String[] ord = { "Alea", "Ord", "Inv" };
-		String tipo = "Quick";
 		double tempo = 0;
-		
 
 		System.out.println(tipo);
-		
+
 		for (int o = 0; o < ord.length; o++) {
 			System.out.println(ord[o] + "\n");
-			
+
 			for (int k = 0; k < narq.length; k++) {
 				tempo = 0;
 				System.out.println(narq[k]);
-				
+
 				for (int w = 0; w < 5; w++) {
 					startArq = System.currentTimeMillis();
 					CadBanco contas = new CadBanco(Integer.parseInt(narq[k]));
-					LeArquivo arquivo = new LeArquivo("conta" + narq[k] + ord[o].toLowerCase() + ".txt");
+					LeArquivo arquivo = new LeArquivo(localDirC + "conta" + narq[k] + ord[o].toLowerCase() + ".txt");
 					arquivo.leArquivoBanco(contas.getBancoLista());
 					contas.quicksort();
 
-					GravaArq grava = new GravaArq(tipo + ord[o] + narq[k] + ".txt", false);
+					GravaArq grava = new GravaArq(localDirT + tipo + ord[o] + narq[k] + ".txt", false);
 					grava.gravaArquivo(contas.toString());
 					grava.fechaArquivo();
 
-					LeArquivoCpf cpfs = new LeArquivoCpf("Conta.txt");
+					LeArquivoCpf cpfs = new LeArquivoCpf(localDirC + "conta.txt");
 					ArrayList<String> buscar = cpfs.leArquivo(400);
 					cpfs.fechaArquivo();
 
@@ -216,28 +217,30 @@ public class Principal {
 
 					}
 
-					GravaArq grava2 = new GravaArq("extrato"+ tipo + ord[o] + narq[k] + ".txt", false);
+					GravaArq grava2 = new GravaArq(localDirT + "extrato" + tipo + ord[o] + narq[k] + ".txt", false);
 					grava2.gravaArquivo(stringao.toString());
 					grava2.fechaArquivo();
-
 
 					tempo += (System.currentTimeMillis() - startArq) / 1000.0;
 					System.out.println("Parcial: " + (System.currentTimeMillis() - startArq) / 1000.0 + " segundos");
 
 				}
 				System.out.println("Media art: " + tempo / 5.0 + " segundos" + "\n");
-				
+
 			}
 		}
 		System.out.println("Total: " + (System.currentTimeMillis() - startTime) / 1000.0 + " segundos" + "\n");
 	}
 
 	static void terceiraEtapa() throws IOException {
+		String tipo = "ABB";
+		String localDir = System.getProperty("user.dir");
+		String localDirC = localDir.replace('\\', '/') + "/contas/";
+		String localDirT = localDir.replace('\\', '/') + "/" + tipo + "/";
 		double startTime = System.currentTimeMillis();// método de tempo
 		double startArq = 0;
 		String[] narq = { "500", "1000", "5000", "10000", "50000" };
 		String[] ord = { "Alea", "Ord", "Inv" };
-		String tipo = "ABB";
 		double tempo = 0;
 
 		System.out.println(tipo + "\n");
@@ -248,12 +251,12 @@ public class Principal {
 				System.out.println(narq[k]);
 				for (int w = 0; w < 5; w++) {
 					startArq = System.currentTimeMillis();
-					LeArquivo arquivo = new LeArquivo("conta" + narq[k] + ord[o].toLowerCase() + ".txt");
+					LeArquivo arquivo = new LeArquivo(localDirC + "conta" + narq[k] + ord[o].toLowerCase() + ".txt");
 					CadBancoABB contas = new CadBancoABB(Integer.parseInt(narq[k]));
 					arquivo.leArquivoBanco(contas.getBancoLista());
 					contas.ABB();
 
-					LeArquivoCpf cpfs = new LeArquivoCpf("Conta.txt");
+					LeArquivoCpf cpfs = new LeArquivoCpf(localDirC + "conta.txt");
 					ArrayList<String> buscar = cpfs.leArquivo(400);
 					cpfs.fechaArquivo();
 
@@ -294,10 +297,9 @@ public class Principal {
 
 					}
 
-					GravaArq grava2 = new GravaArq("extrato" + tipo + ord[o] + narq[k] + ".txt", false);
+					GravaArq grava2 = new GravaArq(localDirT + "extrato" + tipo + ord[o] + narq[k] + ".txt", false);
 					grava2.gravaArquivo(stringao.toString());
 					grava2.fechaArquivo();
-
 
 					tempo += (System.currentTimeMillis() - startArq) / 1000.0;
 					System.out.println("Parcial: " + (System.currentTimeMillis() - startArq) / 1000.0 + " segundos");
@@ -312,14 +314,16 @@ public class Principal {
 	}
 
 	static void quartaEtapa() throws IOException {
+		String tipo = "AVL";
+		String localDir = System.getProperty("user.dir");
+		String localDirC = localDir.replace('\\', '/') + "/contas/";
+		String localDirT = localDir.replace('\\', '/') + "/" + tipo + "/";
 		double startTime = System.currentTimeMillis();// método de tempo
 		double startArq = 0;
 		String[] narq = { "500", "1000", "5000", "10000", "50000" };
 		String[] ord = { "Alea", "Ord", "Inv" };
-		String tipo =  "AVL" ;
 		double tempo = 0;
 
-		
 		System.out.println(tipo + "\n");
 		for (int o = 0; o < ord.length; o++) {
 			System.out.println(ord[o] + "\n");
@@ -328,12 +332,12 @@ public class Principal {
 				System.out.println(narq[k]);
 				for (int w = 0; w < 5; w++) {
 					startArq = System.currentTimeMillis();
-					LeArquivo arquivo = new LeArquivo("conta" + narq[k] + ord[o].toLowerCase() + ".txt");
+					LeArquivo arquivo = new LeArquivo(localDirC + "conta" + narq[k] + ord[o].toLowerCase() + ".txt");
 					CadBancoAVL contas = new CadBancoAVL(Integer.parseInt(narq[k]));
 					arquivo.leArquivoBanco(contas.getBancoLista());
 					contas.AVL();
 
-					LeArquivoCpf cpfs = new LeArquivoCpf("Conta.txt");
+					LeArquivoCpf cpfs = new LeArquivoCpf(localDirC + "conta.txt");
 					ArrayList<String> buscar = cpfs.leArquivo(400);
 					cpfs.fechaArquivo();
 
@@ -374,7 +378,7 @@ public class Principal {
 
 					}
 
-					GravaArq grava2 = new GravaArq("extrato" + tipo + ord[o] + narq[k] + ".txt", false);
+					GravaArq grava2 = new GravaArq(localDirT + "extrato" + tipo + ord[o] + narq[k] + ".txt", false);
 					grava2.gravaArquivo(stringao.toString());
 					grava2.fechaArquivo();
 
@@ -392,11 +396,14 @@ public class Principal {
 	}
 
 	static void quintaEtapa() throws IOException {
+		String tipo = "AVL";
+		String localDir = System.getProperty("user.dir");
+		String localDirC = localDir.replace('\\', '/') + "/contas/";
+		String localDirT = localDir.replace('\\', '/') + "/" + tipo + "/";
 		double startTime = System.currentTimeMillis();// método de tempo
 		double startArq = 0;
 		String[] narq = { "500", "1000", "5000", "10000", "50000" };
 		String[] ord = { "Alea", "Ord", "Inv" };
-		String tipo = "Hash";
 		double tempo = 0;
 
 		// Hash
@@ -408,12 +415,12 @@ public class Principal {
 				System.out.println(narq[k]);
 				for (int w = 0; w < 5; w++) {
 					startArq = System.currentTimeMillis();
-					LeArquivo arquivo = new LeArquivo("conta" + narq[k] + ord[o].toLowerCase() + ".txt");
+					LeArquivo arquivo = new LeArquivo(localDirC + "conta" + narq[k] + ord[o].toLowerCase() + ".txt");
 					CadBancoHash contas = new CadBancoHash(Integer.parseInt(narq[k]));
 					arquivo.leArquivoBanco(contas.getBancoLista());
 					contas.hashing();
 
-					LeArquivoCpf cpfs = new LeArquivoCpf("Conta.txt");
+					LeArquivoCpf cpfs = new LeArquivoCpf(localDirC + "conta.txt");
 					ArrayList<String> buscar = cpfs.leArquivo(400);
 					cpfs.fechaArquivo();
 
@@ -454,10 +461,9 @@ public class Principal {
 
 					}
 
-					GravaArq grava2 = new GravaArq("extrato" + tipo + ord[o] + narq[k] + ".txt", false);
+					GravaArq grava2 = new GravaArq(localDirT + "/extrato" + tipo + ord[o] + narq[k] + ".txt", false);
 					grava2.gravaArquivo(stringao.toString());
 					grava2.fechaArquivo();
-
 
 					tempo += (System.currentTimeMillis() - startArq) / 1000.0;
 					System.out.println("Parcial: " + (System.currentTimeMillis() - startArq) / 1000.0 + " segundos");
