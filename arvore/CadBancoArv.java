@@ -47,7 +47,7 @@ public class CadBancoArv extends CadBanco {
 	}
 
 	public void insereA(ArrayList<Banco> elem) {
-		this.raiz = this.insereA(elem,this.raiz);
+		this.raiz = this.insereA(elem, this.raiz);
 	}
 
 	private NoArv insereA(ArrayList<Banco> elem, NoArv no) {
@@ -59,18 +59,19 @@ public class CadBancoArv extends CadBanco {
 			if (elem.get(0).compareTo2(no.getInfo().get(0)) < 0) { // mudar para o compareTO do banco
 				no.setEsq(this.insereA(elem, no.getEsq()));
 				return no;
-			} else if (elem.get(0).compareTo2(no.getInfo().get(0)) > 0) {
+			} else {
 				no.setDir(this.insereA(elem, no.getDir()));
 				return no;
 			}
 		}
-		return no;
-			
+
 	}
 
 	public void insere(Banco elem) {
 		boolean existe = this.pesquisa(elem);
 		if (!existe) {
+			this.raiz = this.insere(elem, this.raiz);
+		} else {
 			this.raiz = this.insere(elem, this.raiz);
 		}
 
