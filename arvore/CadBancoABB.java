@@ -6,6 +6,7 @@ import dados.NoArv;
 
 public class CadBancoABB extends CadBancoArv {
 	private ArrayList<ArrayList<Banco>> ordenado;
+
 	public CadBancoABB(int tam) {
 		super(tam);
 	}
@@ -24,14 +25,15 @@ public class CadBancoABB extends CadBancoArv {
 		else
 			return null;
 	}
-	private NoArv pesquisaABB(String chave,NoArv no){
+
+	private NoArv pesquisaABB(String chave, NoArv no) {
 		NoArv temp;
 		temp = no;
 		if (temp != null) {
-			if (no.getInfo().get(0).getCpf().compareTo(chave) < 0)
+			if (chave.compareTo(no.getInfo().get(0).getCpf()) < 0)
 				temp = this.pesquisaABB(chave, temp.getEsq());
 			else {
-				if (no.getInfo().get(0).getCpf().compareTo(chave) > 0)
+				if (chave.compareTo(no.getInfo().get(0).getCpf()) > 0)
 					temp = this.pesquisaABB(chave, temp.getDir());
 			}
 		}

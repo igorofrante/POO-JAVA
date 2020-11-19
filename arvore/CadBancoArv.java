@@ -35,14 +35,17 @@ public class CadBancoArv extends CadBanco {
 		NoArv temp;
 		temp = no;
 		if (temp != null) {
-			if (elem.compareTo2(no.getInfo().get(0)) < 0)
-				temp = this.pesquisa(elem, temp.getEsq());
-			else {
-				if (elem.compareTo2(no.getInfo().get(0)) > 0)
-					temp = this.pesquisa(elem, temp.getDir());
+			for (Banco banco : no.getInfo()) {
+				if (temp != null) {
+					if (elem.compareTo(banco) < 0)
+						temp = this.pesquisa(elem, temp.getEsq());
+					else {
+						if (elem.compareTo(banco) > 0)
+							temp = this.pesquisa(elem, temp.getDir());
+					}
+				}
 			}
 		}
-
 		return temp;
 	}
 
@@ -70,8 +73,6 @@ public class CadBancoArv extends CadBanco {
 	public void insere(Banco elem) {
 		boolean existe = this.pesquisa(elem);
 		if (!existe) {
-			this.raiz = this.insere(elem, this.raiz);
-		} else {
 			this.raiz = this.insere(elem, this.raiz);
 		}
 
