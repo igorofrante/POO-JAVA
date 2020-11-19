@@ -1,5 +1,7 @@
 package arvore;
 
+import java.util.ArrayList;
+
 import dados.Banco;
 import dados.NoArv;
 import vetor.CadBanco;
@@ -33,14 +35,37 @@ public class CadBancoArv extends CadBanco {
 		NoArv temp;
 		temp = no;
 		if (temp != null) {
-			if (elem.compareTo(no.getInfo()) < 0)
+			if (elem.compareTo2(no.getInfo().get(0)) < 0)
 				temp = this.pesquisa(elem, temp.getEsq());
 			else {
-				if (elem.compareTo(no.getInfo()) > 0)
+				if (elem.compareTo2(no.getInfo().get(0)) > 0)
 					temp = this.pesquisa(elem, temp.getDir());
 			}
 		}
+
 		return temp;
+	}
+
+	public void insereA(ArrayList<Banco> elem) {
+		this.raiz = this.insereA(elem,this.raiz);
+	}
+
+	private NoArv insereA(ArrayList<Banco> elem, NoArv no) {
+		NoArv novo;
+		if (no == null) {
+			novo = new NoArv(elem);
+			return novo;
+		} else {
+			if (elem.get(0).compareTo2(no.getInfo().get(0)) < 0) { // mudar para o compareTO do banco
+				no.setEsq(this.insereA(elem, no.getEsq()));
+				return no;
+			} else if (elem.get(0).compareTo2(no.getInfo().get(0)) > 0) {
+				no.setDir(this.insereA(elem, no.getDir()));
+				return no;
+			}
+		}
+		return no;
+			
 	}
 
 	public void insere(Banco elem) {
@@ -54,16 +79,22 @@ public class CadBancoArv extends CadBanco {
 	private NoArv insere(Banco elem, NoArv no) {
 		NoArv novo;
 		if (no == null) {
-			novo = new NoArv(elem);
+			ArrayList<Banco> lista = new ArrayList<Banco>();
+			lista.add(elem);
+			novo = new NoArv(lista);
 			return novo;
 		} else {
-			if (elem.compareTo(no.getInfo()) < 0) { // mudar para o compareTO do banco
+			if (elem.compareTo2(no.getInfo().get(0)) < 0) { // mudar para o compareTO do banco
 				no.setEsq(this.insere(elem, no.getEsq()));
 				return no;
-			} else {
+			} else if (elem.compareTo2(no.getInfo().get(0)) > 0) {
 				no.setDir(this.insere(elem, no.getDir()));
 				return no;
+			} else {
+				no.getInfo().add(elem);
 			}
+
+			return no;
 		}
 	}
 

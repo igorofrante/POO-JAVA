@@ -5,6 +5,7 @@ public class Banco {
 	private String conta, cpf;
 	private double saldo;
 	private String nome;
+
 	/**
 	 * @param agencia
 	 * @param numero
@@ -19,7 +20,7 @@ public class Banco {
 		this.saldo = saldo;
 		this.nome = nome;
 	}
-	
+
 	public Banco() {
 		super();
 		this.agencia = 0;
@@ -28,79 +29,90 @@ public class Banco {
 		this.saldo = 0.0;
 		this.nome = "";
 	}
-	
+
 	public String getNome() {
 		return nome;
 	}
+
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+
 	public void setConta(String conta) {
 		this.conta = conta;
 	}
+
 	public int getAgencia() {
 		return agencia;
 	}
+
 	public void setAgencia(int agencia) {
 		this.agencia = agencia;
 	}
+
 	public String getConta() {
 		return conta;
 	}
+
 	public void setCOnta(String numero) {
 		this.conta = numero;
 	}
+
 	public String getCpf() {
 		return cpf;
 	}
+
 	public String getCpfConta() {
-		return cpf+conta;
+		return cpf + conta;
 	}
+
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
+
 	public double getSaldo() {
 		return saldo;
 	}
+
 	public void setSaldo(double saldo) {
 		this.saldo = saldo;
 	}
+
 	@Override
 	public String toString() {
-		return cpf+";"+nome+";"+agencia + ";" + conta + ";" + saldo;
+		return cpf + ";" + nome + ";" + agencia + ";" + conta + ";" + saldo;
 	}
-	
-	public int compareTo (Banco b) {
+
+	public int compareTo(Banco b) {
 		long cpf1 = Long.parseLong(this.cpf);
 		long cpf2 = Long.parseLong(b.getCpf());
-		if (cpf1<cpf2)
+		if (cpf1 < cpf2)
 			return -1;
-		else if (cpf1>cpf2)
+		else if (cpf1 > cpf2)
 			return 1;
 		else {
-			if (this.agencia<b.getAgencia())
+			if (this.agencia < b.getAgencia())
 				return -1;
-			else if (this.agencia>b.getAgencia())
+			else if (this.agencia > b.getAgencia())
 				return 1;
 			else {
 				int c1 = Integer.parseInt(this.conta);
 				int c2 = Integer.parseInt(b.getConta());
-				return (c1-c2);
+				return (c1 - c2);
 			}
 		}
 	}
-	
-	public int compareTo2 (Banco b) {
+
+	public int compareTo2(Banco b) {
 		long cpf1 = Long.parseLong(this.cpf);
 		long cpf2 = Long.parseLong(b.getCpf());
-		if (cpf1<cpf2)
+		if (cpf1 < cpf2) {
 			return -1;
-		else
+		} else if (cpf1 > cpf2) {
 			return 1;
-		
+		} else {
+			return 0;
+		}
 	}
-	
-	
-	
 
 }

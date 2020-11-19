@@ -1,18 +1,20 @@
 package dados;
 
+import java.util.ArrayList;
+
 public class NoArv {
-	protected Banco info;
+	protected ArrayList<Banco> info;
 	protected NoArv dir, esq;
 
-	public NoArv (Banco info){
+	public NoArv (ArrayList<Banco> info){
 		this.info = info;
 	}
 
-	public Banco getInfo() {
+	public ArrayList<Banco> getInfo() {
 		return info;
 	}
 
-	public void setInfo(Banco info) {
+	public void setInfo(ArrayList<Banco> info) {
 		this.info = info;
 	}
 

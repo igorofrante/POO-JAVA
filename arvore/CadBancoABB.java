@@ -5,7 +5,7 @@ import dados.Banco;
 import dados.NoArv;
 
 public class CadBancoABB extends CadBancoArv {
-
+	private ArrayList<ArrayList<Banco>> ordenado;
 	public CadBancoABB(int tam) {
 		super(tam);
 	}
@@ -17,33 +17,33 @@ public class CadBancoABB extends CadBancoArv {
 	}
 
 	public ArrayList<Banco> pesquisaABB(String chave) {
-		ArrayList<Banco> vet = new ArrayList<Banco>();
-		this.pesquisaABB(chave, super.raiz, vet);
-		
-		if(!vet.isEmpty()) {
-			return vet;
-		}else {
+		NoArv temp;
+		temp = this.pesquisaABB(chave, this.raiz);
+		if (temp != null)
+			return temp.getInfo();
+		else
 			return null;
-		}
 	}
-
-	private void pesquisaABB(String chave, NoArv arv, ArrayList<Banco> vet) {
-		if (arv != null) {
-			this.pesquisaABB(chave, arv.getEsq(), vet);
-			if (chave.equals(arv.getInfo().getCpf())) {
-				vet.add(arv.getInfo());
+	private NoArv pesquisaABB(String chave,NoArv no){
+		NoArv temp;
+		temp = no;
+		if (temp != null) {
+			if (no.getInfo().get(0).getCpf().compareTo(chave) < 0)
+				temp = this.pesquisaABB(chave, temp.getEsq());
+			else {
+				if (no.getInfo().get(0).getCpf().compareTo(chave) > 0)
+					temp = this.pesquisaABB(chave, temp.getDir());
 			}
-			this.pesquisaABB(chave, arv.getDir(), vet);
 		}
-		
+		return temp;
 	}
 
 	public void CamCentral() {
-		super.vetBanco = new ArrayList<Banco>(super.vetBanco.size());
-		this.FazCamCentral(super.raiz, super.vetBanco);
+		ordenado = new ArrayList<ArrayList<Banco>>(super.vetBanco.size());
+		this.FazCamCentral(super.raiz, ordenado);
 	}
 
-	private void FazCamCentral(NoArv arv, ArrayList<Banco> vet) {
+	private void FazCamCentral(NoArv arv, ArrayList<ArrayList<Banco>> vet) {
 		if (arv != null) {
 			this.FazCamCentral(arv.getEsq(), vet);
 			vet.add(arv.getInfo());
@@ -54,15 +54,15 @@ public class CadBancoABB extends CadBancoArv {
 
 	public void ArvoreBalanceada() {
 		super.raiz = null;
-		this.Balancear(super.vetBanco, 0, super.vetBanco.size() - 1);
+		this.Balancear(ordenado, 0, ordenado.size() - 1);
 
 	}
 
-	private void Balancear(ArrayList<Banco> vet, int inic, int fim) {
+	private void Balancear(ArrayList<ArrayList<Banco>> vet, int inic, int fim) {
 		int meio;
 		if (fim >= inic) {
 			meio = (inic + fim) / 2;
-			super.insere(vet.get(meio));
+			super.insereA(vet.get(meio));
 			this.Balancear(vet, inic, meio - 1);
 			this.Balancear(vet, meio + 1, fim);
 		}
