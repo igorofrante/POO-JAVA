@@ -321,7 +321,7 @@ public class Principal {
 		double startTime = System.currentTimeMillis();// método de tempo
 		double startArq = 0;
 		String[] narq = {"500","1000", "5000", "10000", "50000" };
-		String[] ord = {"Ord", "Inv" };
+		String[] ord = {"Alea","Ord", "Inv" };
 		double tempo = 0;
 
 		System.out.println(tipo + "\n");
@@ -396,7 +396,7 @@ public class Principal {
 	}
 
 	static void quintaEtapa() throws IOException {
-		String tipo = "AVL";
+		String tipo = "Hash";
 		String localDir = System.getProperty("user.dir");
 		String localDirC = localDir.replace('\\', '/') + "/contas/";
 		String localDirT = localDir.replace('\\', '/') + "/" + tipo + "/";
