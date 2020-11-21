@@ -5,7 +5,7 @@ import dados.Banco;
 import dados.NoAVL;
 import vetor.CadBanco;
 
-public class CadBancoAVL extends CadBanco{// o que achei no pdf
+public class CadBancoAVL extends CadBanco {// o que achei no pdf
 	private NoAVL raiz;
 	private boolean h;
 
@@ -14,7 +14,7 @@ public class CadBancoAVL extends CadBanco{// o que achei no pdf
 		this.raiz = null;
 		this.h = true;
 	}
-	
+
 	public boolean pesquisa(Banco conta) {
 		NoAVL temp;
 		temp = this.pesquisa(conta, this.raiz);
@@ -59,13 +59,13 @@ public class CadBancoAVL extends CadBanco{// o que achei no pdf
 				return no;
 			} else {
 				// Insere à direita e verifica se precisa balancear à esquerda
-				no.setDir(this.insere(elem,  no.getDir()));
+				no.setDir(this.insere(elem, no.getDir()));
 				no = this.balancearEsq(no);
 				return no;
 			}
 		}
 	}
-	
+
 	protected void insereTudo() {
 		for (Banco banco : super.vetBanco) {
 			this.insere(banco);
@@ -162,31 +162,29 @@ public class CadBancoAVL extends CadBanco{// o que achei no pdf
 		this.h = false;
 		return no;
 	}
-	
+
 	public void AVL() {
-		this.insereTudo();		
+		this.insereTudo();
 	}
-	
-	
-	
+
 	public ArrayList<Banco> pesquisaAVL(String chave) {
 		ArrayList<Banco> vet = new ArrayList<Banco>();
 		this.pesquisaAVL(chave, this.raiz, vet);
-		if(vet.size()!=0) {
+		if (vet.size() != 0) {
 			return vet;
-		}else {
+		} else {
 			return null;
 		}
-		
+
 	}
 
 	private void pesquisaAVL(String chave, NoAVL arv, ArrayList<Banco> vet) {
 		if (arv != null) {
-			this.pesquisaAVL(chave,(NoAVL)arv.getEsq(), vet);
-			if(chave.equals(arv.getInfo().getCpf())) {
+			this.pesquisaAVL(chave, (NoAVL) arv.getEsq(), vet);
+			if (chave.equals(arv.getInfo().getCpf())) {
 				vet.add(arv.getInfo());
-			}			
-			this.pesquisaAVL(chave,(NoAVL)arv.getDir(), vet);
+			}
+			this.pesquisaAVL(chave, (NoAVL) arv.getDir(), vet);
 		}
 	}
 }
