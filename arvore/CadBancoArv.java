@@ -78,9 +78,9 @@ public class CadBancoArv extends CadBanco {
 
 	}
 
-	private NoArv insere(Banco elem, NoArv no) {
-		NoArv novo;
+	protected NoArv insere(Banco elem, NoArv no) {
 		if (no == null) {
+			NoArv novo;
 			ArrayList<Banco> lista = new ArrayList<Banco>();
 			lista.add(elem);
 			novo = new NoArv(lista);

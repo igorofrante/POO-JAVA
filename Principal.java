@@ -320,8 +320,8 @@ public class Principal {
 		String localDirT = localDir.replace('\\', '/') + "/" + tipo + "/";
 		double startTime = System.currentTimeMillis();// método de tempo
 		double startArq = 0;
-		String[] narq = { "500", "1000", "5000", "10000", "50000" };
-		String[] ord = { "Alea", "Ord", "Inv" };
+		String[] narq = {"500","1000", "5000", "10000", "50000" };
+		String[] ord = {"Ord", "Inv" };
 		double tempo = 0;
 
 		System.out.println(tipo + "\n");
@@ -348,7 +348,7 @@ public class Principal {
 					for (int i = 0; i < buscar.size(); i++) {
 
 						lista = contas.pesquisaAVL(buscar.get(i));
-						if (lista.size() == 0) {
+						if (lista == null) {
 							stringao += "CPF " + buscar.get(i) + ": \n" + "NAO HA NENHUM REGISTRO COM O CPF "
 									+ buscar.get(i) + "\n\n";
 						} else {

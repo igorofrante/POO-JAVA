@@ -3,8 +3,8 @@ package dados;
 import java.util.ArrayList;
 
 public class NoArv {
-	protected ArrayList<Banco> info;
-	protected NoArv dir, esq;
+	private ArrayList<Banco> info;
+	private NoArv dir, esq;
 
 	public NoArv (ArrayList<Banco> info){
 		this.info = info;
