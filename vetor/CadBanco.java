@@ -40,9 +40,7 @@ public class CadBanco {
 		this.vetBanco = novoVet;
 	}
 
-	public int getTam() {
-		return this.vetBanco.size();
-	}
+	
 
 	public ArrayList<Banco> pesqBin(String chave) {
 		int nElem = vetBanco.size();
@@ -74,9 +72,6 @@ public class CadBanco {
 
 	}
 
-	public void insere(Banco dupl) {
-		this.vetBanco.add(dupl);
-	}
 
 	public void insereLista(ArrayList<Banco> lista) {
 		this.vetBanco.addAll(lista);

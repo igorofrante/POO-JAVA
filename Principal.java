@@ -17,18 +17,26 @@ public class Principal {
 	static Scanner scan = new Scanner(System.in);
 
 	public static void main(String[] args) throws IOException {
-		// char[] menuvet = {'1','2','3','4','5','0'};
-		// int i=0;
+		char[] menuvet = {'1','2','3','4','5','0'};
+		int i=0;
 		char menu;
-
+		boolean op=false;
+		System.out.println("Automatizado: true\n"
+				+ "Modularizado: false");
+							
+		op = scan.nextBoolean();
 		do {
-
-			System.out.println("----MENU---\n" + "==Vetor==\n" + "1 - Etapa HeapSort + Pesquisa Binaria \n"
-					+ "2 - Etapa QuickSort + Pesquisa Binaria \n\n" + "==Arvores==\n" + "3 - ABB \n" + "4 - AVL\n\n"
-					+ "==Hashing==\n" + "5 - HashingVetEnc\n\n" + "0 - Sair \n\n");
-
-			menu = scan.next().charAt(0);
-			// menu=menuvet[i];
+	
+			if(op) {
+				menu=menuvet[i];
+			}else {
+				System.out.println("----MENU---\n" + "==Vetor==\n" + "1 - Etapa HeapSort + Pesquisa Binaria \n"
+						+ "2 - Etapa QuickSort + Pesquisa Binaria \n\n" + "==Arvores==\n" + "3 - ABB \n" + "4 - AVL\n\n"
+						+ "==Hashing==\n" + "5 - HashingVetEnc\n\n" + "0 - Sair \n\n");
+				menu = scan.next().charAt(0);
+			}
+			
+			
 			switch (menu) {
 
 			case '1':
@@ -50,10 +58,13 @@ public class Principal {
 				System.out.println("Programa encerrado!\n\n" + "[AUTORES]\n" + "Igor Ofrante\n" + "Karen Alcantara\n"
 						+ "Lucas Sarmento\n" + "Mackweyd Gomes\n" + "Pedro Henrique Fernandes.");
 				break;
-			default:
-				JOptionPane.showMessageDialog(null, "Opcao Invalida, tente novamente!", null,
+			default: //Remover
+				JOptionPane.showMessageDialog(null, "Opcao Invalida, tente novamente!", "Mensagem de Erro" ,
 						JOptionPane.ERROR_MESSAGE);
 				break;
+			}
+			if(op) {
+				i++;
 			}
 
 		} while (menu != '0');
@@ -62,10 +73,10 @@ public class Principal {
 
 	static void primeiraEtapa() throws IOException {
 		String tipo = "Heap";
-		String localDir = System.getProperty("user.dir");
+		String localDir = System.getProperty("user.dir"); 
 		String localDirC = localDir.replace('\\', '/') + "/contas/";
 		String localDirT = localDir.replace('\\', '/') + "/" + tipo + "/";
-		double startTime = System.currentTimeMillis();// método de tempo
+		double startTime = System.currentTimeMillis();// método de tempo 20:22:00
 		double startArq = 0;
 		String[] narq = { "500", "1000", "5000", "10000", "50000" };
 		String[] ord = { "Alea", "Ord", "Inv" };
@@ -85,6 +96,7 @@ public class Principal {
 					CadBanco contas = new CadBanco(Integer.parseInt(narq[k]));
 					LeArquivo arquivo = new LeArquivo(localDirC + "conta" + narq[k] + ord[o].toLowerCase() + ".txt");
 					arquivo.leArquivoBanco(contas.getBancoLista());
+					arquivo.fechaArquivo();
 					contas.HeapSort();
 
 					GravaArq grava = new GravaArq(localDirT + tipo + ord[o] + narq[k] + ".txt", false);
@@ -171,6 +183,7 @@ public class Principal {
 					CadBanco contas = new CadBanco(Integer.parseInt(narq[k]));
 					LeArquivo arquivo = new LeArquivo(localDirC + "conta" + narq[k] + ord[o].toLowerCase() + ".txt");
 					arquivo.leArquivoBanco(contas.getBancoLista());
+					arquivo.fechaArquivo();
 					contas.quicksort();
 
 					GravaArq grava = new GravaArq(localDirT + tipo + ord[o] + narq[k] + ".txt", false);
@@ -254,7 +267,13 @@ public class Principal {
 					LeArquivo arquivo = new LeArquivo(localDirC + "conta" + narq[k] + ord[o].toLowerCase() + ".txt");
 					CadBancoABB contas = new CadBancoABB(Integer.parseInt(narq[k]));
 					arquivo.leArquivoBanco(contas.getBancoLista());
-					contas.ABB();
+					arquivo.fechaArquivo();
+					try{
+						contas.ABB();
+					}catch(StackOverflowError e) {
+						System.out.println("Erro de estouro de pilha, pulado!");
+						break;
+					}
 
 					LeArquivoCpf cpfs = new LeArquivoCpf(localDirC + "conta.txt");
 					ArrayList<String> buscar = cpfs.leArquivo(400);
@@ -335,6 +354,7 @@ public class Principal {
 					LeArquivo arquivo = new LeArquivo(localDirC + "conta" + narq[k] + ord[o].toLowerCase() + ".txt");
 					CadBancoAVL contas = new CadBancoAVL(Integer.parseInt(narq[k]));
 					arquivo.leArquivoBanco(contas.getBancoLista());
+					arquivo.fechaArquivo();
 					contas.AVL();
 
 					LeArquivoCpf cpfs = new LeArquivoCpf(localDirC + "conta.txt");
@@ -418,6 +438,7 @@ public class Principal {
 					LeArquivo arquivo = new LeArquivo(localDirC + "conta" + narq[k] + ord[o].toLowerCase() + ".txt");
 					CadBancoHash contas = new CadBancoHash(Integer.parseInt(narq[k]));
 					arquivo.leArquivoBanco(contas.getBancoLista());
+					arquivo.fechaArquivo();
 					contas.hashing();
 
 					LeArquivoCpf cpfs = new LeArquivoCpf(localDirC + "conta.txt");

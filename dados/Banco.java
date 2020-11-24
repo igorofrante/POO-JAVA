@@ -62,9 +62,6 @@ public class Banco {
 		return cpf;
 	}
 
-	public String getCpfConta() {
-		return cpf + conta;
-	}
 
 	public void setCpf(String cpf) {
 		this.cpf = cpf;

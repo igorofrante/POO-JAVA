@@ -180,11 +180,11 @@ public class CadBancoAVL extends CadBanco {// o que achei no pdf
 
 	private void pesquisaAVL(String chave, NoAVL arv, ArrayList<Banco> vet) {
 		if (arv != null) {
-			this.pesquisaAVL(chave, (NoAVL) arv.getEsq(), vet);
+			this.pesquisaAVL(chave, arv.getEsq(), vet);
 			if (chave.equals(arv.getInfo().getCpf())) {
 				vet.add(arv.getInfo());
 			}
-			this.pesquisaAVL(chave, (NoAVL) arv.getDir(), vet);
+			this.pesquisaAVL(chave, arv.getDir(), vet);
 		}
 	}
 }

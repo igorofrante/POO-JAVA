@@ -16,8 +16,9 @@ public class CadBancoHash extends CadBanco {
 
 	private int defPrimo(int tam) {
 		boolean para = false;
-		int p1 = tam--, p2 = tam++;
-
+		int p1=tam,p2=tam;
+		p1--;
+		p2++;
 		if (this.ePrimo(tam)) {
 			return tam;
 		} else {
@@ -103,19 +104,5 @@ public class CadBancoHash extends CadBanco {
 		}
 	}
 
-//	public String toString() {
-//		String temp = "";
-//		int j = 0;
-//		for (int i = 0; i < this.vetor.size(); i++) {
-//			if (this.vetor.get(i) != null) {
-//				while (j < this.vetor.get(i).size()) {
-//					temp += this.vetor.get(i).get(j).toString() + "\n";
-//					j++;
-//				}
-//			}
-//			j = 0;
-//		}
-//
-//		return temp;
-//	}
+
 }
