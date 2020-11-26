@@ -78,7 +78,7 @@ public class Principal {
 								} else if (lista.get(j).getConta().substring(0, 3).equals("002")) {
 									stringao += " Conta Especial " + lista.get(j).getConta();
 								} else {
-									stringao += " Conta Poupan�a " + lista.get(j).getConta();
+									stringao += " Conta Poupanca " + lista.get(j).getConta();
 								}
 								stringao += " Saldo " + lista.get(j).getSaldo() + "\n";
 								saldoTotal += lista.get(j).getSaldo();

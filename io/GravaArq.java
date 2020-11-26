@@ -8,12 +8,7 @@ public class GravaArq {
 	private	PrintWriter saida;
 	
 
-	/**
-	 * Construtor da classe
-	 * @param nome => nome do arquivo que ser� abero para grava��o
-	 * @throws IOException => Exce��o se houver algum problema se o 
-	 * 					 arquivo n�o puder ser aberto para grava��o
-	 */
+	
 	public GravaArq (String nome, boolean append) throws IOException{
 		try{
 			

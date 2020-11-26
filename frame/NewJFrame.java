@@ -204,7 +204,7 @@ public class NewJFrame extends javax.swing.JFrame {
         jTextArea1.setEditable(false);
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
-        jTextArea1.setText("CENTRO UNIVERSITARIO ESPIRITO SANTENSE\nUNIDADE DE ENGENHARIA E COMPUTACAO\nBACHARELADO EM SISTEMAS DE INFORMACAO\n\nPESQUISA E ORDENCAO\nLINGUAGEM DE PROGRAMACAO ORIENTADA A OBJETO\n\nPROFESSORA CINTHIA CALIARI\n\nAUTORES:\nIgor Ofrante,Karen Alcantara,Lucas Sarmento,\nMackweyd Gomes,Pedro Henrique Fernandes.");
+        jTextArea1.setText("FAESA CENTRO UNIVERSITARIO \nUNIDADE DE ENGENHARIA E COMPUTACAO\nBACHARELADO EM SISTEMAS DE INFORMACAO\n\nPESQUISA E ORDENACAO\nLINGUAGEM DE PROGRAMACAO ORIENTADA A OBJETOS\n\nPROFESSORA CINTHIA CALIARI\n\nAUTORES:\nIgor Ofrante, Karen Alcantara, Lucas Sarmento,\nMackweyd Gomes, Pedro Henrique Fernandes.");
         jScrollPane1.setViewportView(jTextArea1);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
