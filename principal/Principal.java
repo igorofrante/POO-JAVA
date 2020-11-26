@@ -1,9 +1,8 @@
-
+package principal;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Scanner;
-import javax.swing.JOptionPane;
 import arvore.CadBancoABB;
 import arvore.CadBancoAVL;
 import dados.Banco;
@@ -12,71 +11,25 @@ import io.LeArquivo;
 import io.LeArquivoCpf;
 import vetor.CadBanco;
 import vetor.CadBancoHash;
+import frame.NewJFrame;
+
+
 
 public class Principal {
 	static Scanner scan = new Scanner(System.in);
 
 	public static void main(String[] args) throws IOException {
-		char[] menuvet = {'1','2','3','4','5','0'};
-		int i=0;
-		char menu;
-		boolean op=false;
-		System.out.println("Automatizado: true\n"
-				+ "Modularizado: false");
-							
-		op = scan.nextBoolean();
-		do {
-	
-			if(op) {
-				menu=menuvet[i];
-			}else {
-				System.out.println("----MENU---\n" + "==Vetor==\n" + "1 - Etapa HeapSort + Pesquisa Binaria \n"
-						+ "2 - Etapa QuickSort + Pesquisa Binaria \n\n" + "==Arvores==\n" + "3 - ABB \n" + "4 - AVL\n\n"
-						+ "==Hashing==\n" + "5 - HashingVetEnc\n\n" + "0 - Sair \n\n");
-				menu = scan.next().charAt(0);
-			}
-			
-			
-			switch (menu) {
 
-			case '1':
-				primeiraEtapa(); // HeapSort
-				break;
-			case '2':
-				segundaEtapa(); // QuickSort
-				break;
-			case '3':
-				terceiraEtapa(); // ABB
-				break;
-			case '4':
-				quartaEtapa(); // AVL
-				break;
-			case '5':
-				quintaEtapa(); // Hashing
-				break;
-			case '0':
-				System.out.println("Programa encerrado!\n\n" + "[AUTORES]\n" + "Igor Ofrante\n" + "Karen Alcantara\n"
-						+ "Lucas Sarmento\n" + "Mackweyd Gomes\n" + "Pedro Henrique Fernandes.");
-				break;
-			default: //Remover
-				JOptionPane.showMessageDialog(null, "Opcao Invalida, tente novamente!", "Mensagem de Erro" ,
-						JOptionPane.ERROR_MESSAGE);
-				break;
-			}
-			if(op) {
-				i++;
-			}
-
-		} while (menu != '0');
+		NewJFrame.main(null);
 
 	}
 
-	static void primeiraEtapa() throws IOException {
+	public static void primeiraEtapa() throws IOException {
 		String tipo = "Heap";
-		String localDir = System.getProperty("user.dir"); 
+		String localDir = System.getProperty("user.dir");
 		String localDirC = localDir.replace('\\', '/') + "/contas/";
 		String localDirT = localDir.replace('\\', '/') + "/" + tipo + "/";
-		double startTime = System.currentTimeMillis();// método de tempo 20:22:00
+		double startTime = System.currentTimeMillis();// mï¿½todo de tempo 20:22:00
 		double startArq = 0;
 		String[] narq = { "500", "1000", "5000", "10000", "50000" };
 		String[] ord = { "Alea", "Ord", "Inv" };
@@ -125,7 +78,7 @@ public class Principal {
 								} else if (lista.get(j).getConta().substring(0, 3).equals("002")) {
 									stringao += " Conta Especial " + lista.get(j).getConta();
 								} else {
-									stringao += " Conta Poupança " + lista.get(j).getConta();
+									stringao += " Conta Poupanï¿½a " + lista.get(j).getConta();
 								}
 								stringao += " Saldo " + lista.get(j).getSaldo() + "\n";
 								saldoTotal += lista.get(j).getSaldo();
@@ -158,12 +111,12 @@ public class Principal {
 
 	}
 
-	static void segundaEtapa() throws IOException {
+	public static void segundaEtapa() throws IOException {
 		String tipo = "Quick";
 		String localDir = System.getProperty("user.dir");
 		String localDirC = localDir.replace('\\', '/') + "/contas/";
 		String localDirT = localDir.replace('\\', '/') + "/" + tipo + "/";
-		double startTime = System.currentTimeMillis();// método de tempo
+		double startTime = System.currentTimeMillis();// mï¿½todo de tempo
 		double startArq = 0;
 		String[] narq = { "500", "1000", "5000", "10000", "50000" };
 		String[] ord = { "Alea", "Ord", "Inv" };
@@ -245,12 +198,12 @@ public class Principal {
 		System.out.println("Total: " + (System.currentTimeMillis() - startTime) / 1000.0 + " segundos" + "\n");
 	}
 
-	static void terceiraEtapa() throws IOException {
+	public static void terceiraEtapa() throws IOException {
 		String tipo = "ABB";
 		String localDir = System.getProperty("user.dir");
 		String localDirC = localDir.replace('\\', '/') + "/contas/";
 		String localDirT = localDir.replace('\\', '/') + "/" + tipo + "/";
-		double startTime = System.currentTimeMillis();// método de tempo
+		double startTime = System.currentTimeMillis();// mï¿½todo de tempo
 		double startArq = 0;
 		String[] narq = { "500", "1000", "5000", "10000", "50000" };
 		String[] ord = { "Alea", "Ord", "Inv" };
@@ -268,9 +221,9 @@ public class Principal {
 					CadBancoABB contas = new CadBancoABB(Integer.parseInt(narq[k]));
 					arquivo.leArquivoBanco(contas.getBancoLista());
 					arquivo.fechaArquivo();
-					try{
+					try {
 						contas.ABB();
-					}catch(StackOverflowError e) {
+					} catch (StackOverflowError e) {
 						System.out.println("Erro de estouro de pilha, pulado!");
 						break;
 					}
@@ -332,15 +285,15 @@ public class Principal {
 
 	}
 
-	static void quartaEtapa() throws IOException {
+	public static void quartaEtapa() throws IOException {
 		String tipo = "AVL";
 		String localDir = System.getProperty("user.dir");
 		String localDirC = localDir.replace('\\', '/') + "/contas/";
 		String localDirT = localDir.replace('\\', '/') + "/" + tipo + "/";
-		double startTime = System.currentTimeMillis();// método de tempo
+		double startTime = System.currentTimeMillis();// mï¿½todo de tempo
 		double startArq = 0;
-		String[] narq = {"500","1000", "5000", "10000", "50000" };
-		String[] ord = {"Alea","Ord", "Inv" };
+		String[] narq = { "500", "1000", "5000", "10000", "50000" };
+		String[] ord = { "Alea", "Ord", "Inv" };
 		double tempo = 0;
 
 		System.out.println(tipo + "\n");
@@ -402,7 +355,7 @@ public class Principal {
 					grava2.gravaArquivo(stringao.toString());
 					grava2.fechaArquivo();
 
-					// Método Imprimir tempo em segundo
+					// Mï¿½todo Imprimir tempo em segundo
 
 					tempo += (System.currentTimeMillis() - startArq) / 1000.0;
 					System.out.println("Parcial: " + (System.currentTimeMillis() - startArq) / 1000.0 + " segundos");
@@ -415,12 +368,12 @@ public class Principal {
 		System.out.println("Total: " + (System.currentTimeMillis() - startTime) / 1000.0 + " segundos" + "\n");
 	}
 
-	static void quintaEtapa() throws IOException {
+	public static void quintaEtapa() throws IOException {
 		String tipo = "Hash";
 		String localDir = System.getProperty("user.dir");
 		String localDirC = localDir.replace('\\', '/') + "/contas/";
 		String localDirT = localDir.replace('\\', '/') + "/" + tipo + "/";
-		double startTime = System.currentTimeMillis();// método de tempo
+		double startTime = System.currentTimeMillis();// mï¿½todo de tempo
 		double startArq = 0;
 		String[] narq = { "500", "1000", "5000", "10000", "50000" };
 		String[] ord = { "Alea", "Ord", "Inv" };
