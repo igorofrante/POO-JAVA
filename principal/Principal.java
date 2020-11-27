@@ -1,4 +1,5 @@
 package principal;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -12,8 +13,6 @@ import io.LeArquivoCpf;
 import vetor.CadBanco;
 import vetor.CadBancoHash;
 import frame.NewJFrame;
-
-
 
 public class Principal {
 	static Scanner scan = new Scanner(System.in);

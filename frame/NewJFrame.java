@@ -63,6 +63,7 @@ public class NewJFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
+        setTitle("Contas Bancarias");
 
         jTabbedPane1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
@@ -252,6 +253,8 @@ public class NewJFrame extends javax.swing.JFrame {
         } else if(Hash.isSelected()) {
         	Principal.quintaEtapa();
         	JOptionPane.showMessageDialog(null, "Método Hashing foi executado com sucesso!"); 
+        }else {
+        	JOptionPane.showMessageDialog(null, "Selecione um método!"); 
         }
     }                                     
 
