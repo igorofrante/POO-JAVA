@@ -5,7 +5,7 @@ import dados.Banco;
 import dados.NoAVL;
 import vetor.CadBanco;
 
-public class CadBancoAVL extends CadBanco {// o que achei no pdf
+public class CadBancoAVL extends CadBanco {
 	private NoAVL raiz;
 	private boolean h;
 
@@ -53,12 +53,10 @@ public class CadBancoAVL extends CadBanco {// o que achei no pdf
 
 		} else {
 			if (elem.compareTo(no.getInfo()) < 0) {
-				// Insere à esquerda e verifica se precisa balancear à direita
 				no.setEsq(this.insere(elem, no.getEsq()));
 				no = this.balancearDir(no);
 				return no;
 			} else {
-				// Insere à direita e verifica se precisa balancear à esquerda
 				no.setDir(this.insere(elem, no.getDir()));
 				no = this.balancearEsq(no);
 				return no;

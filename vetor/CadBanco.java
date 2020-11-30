@@ -1,7 +1,6 @@
 package vetor;
 
 import java.util.ArrayList;
-import java.util.LinkedHashSet;
 import dados.Banco;
 
 public class CadBanco {
@@ -40,8 +39,6 @@ public class CadBanco {
 		this.vetBanco = novoVet;
 	}
 
-	
-
 	public ArrayList<Banco> pesqBin(String chave) {
 		int nElem = vetBanco.size();
 		int meio, esq, dir;
@@ -71,7 +68,6 @@ public class CadBanco {
 		return null;
 
 	}
-
 
 	public void insereLista(ArrayList<Banco> lista) {
 		this.vetBanco.addAll(lista);
@@ -104,35 +100,6 @@ public class CadBanco {
 			ordena(esq, j);
 		if (dir > i)
 			ordena(i, dir);
-	}
-
-	public void quicksortInv() {
-		ordenaInv(0, this.vetBanco.size() - 1);
-	}
-
-	private void ordenaInv(int esq, int dir) {
-		Banco pivo;
-		int i = esq, j = dir;
-		Banco temp;
-
-		pivo = this.vetBanco.get((i + j) / 2);
-		do {
-			while (this.vetBanco.get(i).compareTo(pivo) > 0)
-				i++;
-			while (this.vetBanco.get(j).compareTo(pivo) < 0)
-				j--;
-			if (i <= j) {
-				temp = this.vetBanco.get(i);
-				this.vetBanco.set(i, this.vetBanco.get(j));
-				this.vetBanco.set(j, temp);
-				i++;
-				j--;
-			}
-		} while (i <= j);
-		if (esq < j)
-			ordenaInv(esq, j);
-		if (dir > i)
-			ordenaInv(i, dir);
 	}
 
 	public void HeapSort() {
@@ -172,10 +139,6 @@ public class CadBanco {
 				heap = true;
 		}
 		this.vetBanco.set(i, raiz);
-	}
-
-	public void removerRepetidos() {
-		this.vetBanco = new ArrayList<Banco>(new LinkedHashSet<Banco>(this.vetBanco));
 	}
 
 }

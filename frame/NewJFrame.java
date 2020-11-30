@@ -72,7 +72,8 @@ public class NewJFrame extends javax.swing.JFrame {
 				try {
 					Run01ActionPerformed(evt);
 				} catch (IOException e) {
-					System.out.println("Erro no programa principal");
+					JOptionPane.showMessageDialog(null, "Erro nos arquivos", "Erro", 
+		  					  JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});
@@ -103,11 +104,12 @@ public class NewJFrame extends javax.swing.JFrame {
 
 		run02.setText("Executar");
 		run02.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			public void actionPerformed(java.awt.event.ActionEvent evt)  {
 				try {
 					run02ActionPerformed(evt);
 				} catch (IOException e) {
-					System.out.println("Erro no programa principal");
+					JOptionPane.showMessageDialog(null,"Erro nos arquivos", "Erro", 
+		  					  JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});
