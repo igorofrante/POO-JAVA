@@ -1,7 +1,6 @@
 package arvore;
 
 import java.util.ArrayList;
-
 import dados.Banco;
 import dados.NoArv;
 import vetor.CadBanco;
