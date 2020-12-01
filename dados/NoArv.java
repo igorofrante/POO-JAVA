@@ -6,7 +6,7 @@ public class NoArv {
 	private ArrayList<Banco> info;
 	private NoArv dir, esq;
 
-	public NoArv (ArrayList<Banco> info){
+	public NoArv(ArrayList<Banco> info) {
 		this.info = info;
 	}
 
@@ -33,6 +33,5 @@ public class NoArv {
 	public void setEsq(NoArv esq) {
 		this.esq = esq;
 	}
-	
-	
+
 }

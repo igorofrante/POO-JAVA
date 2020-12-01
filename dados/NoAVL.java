@@ -1,12 +1,10 @@
 package dados;
 
-
-
-public class NoAVL{
+public class NoAVL {
 	private byte fatorBalanceamento;
 	private Banco info;
 	private NoAVL dir, esq;
-	
+
 	public NoAVL(Banco info) {
 		this.info = info;
 		this.fatorBalanceamento = 0;
@@ -44,8 +42,4 @@ public class NoAVL{
 		this.esq = esq;
 	}
 
-	
-	
-	
-	
 }

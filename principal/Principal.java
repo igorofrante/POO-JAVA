@@ -4,9 +4,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Scanner;
-
-import javax.swing.JOptionPane;
-
 import arvore.CadBancoABB;
 import arvore.CadBancoAVL;
 import dados.Banco;
@@ -21,7 +18,7 @@ public class Principal {
 	static Scanner scan = new Scanner(System.in);
 
 	public static void main(String[] args) throws IOException {
-		
+
 		NewJFrame.main(null);
 
 	}
@@ -52,13 +49,13 @@ public class Principal {
 					LeArquivo arquivo = new LeArquivo(localDirC + "conta" + narq[k] + ord[o].toLowerCase() + ".txt");
 					arquivo.leArquivoBanco(contas.getBancoLista());
 					arquivo.fechaArquivo();
-					contas.HeapSort();
+					contas.heapSort();
 
 					GravaArq grava = new GravaArq(localDirT + tipo + ord[o] + narq[k] + ".txt", false);
 					grava.gravaArquivo(contas.toString());
 					grava.fechaArquivo();
 
-					LeArquivoCpf cpfs = new LeArquivoCpf(localDirC + "conta.txt");
+					LeArquivoCpf cpfs = new LeArquivoCpf(localDirC + "Conta.txt");
 					ArrayList<String> buscar = cpfs.leArquivo(400);
 					cpfs.fechaArquivo();
 
@@ -139,13 +136,13 @@ public class Principal {
 					LeArquivo arquivo = new LeArquivo(localDirC + "conta" + narq[k] + ord[o].toLowerCase() + ".txt");
 					arquivo.leArquivoBanco(contas.getBancoLista());
 					arquivo.fechaArquivo();
-					contas.quicksort();
+					contas.quickSort();
 
 					GravaArq grava = new GravaArq(localDirT + tipo + ord[o] + narq[k] + ".txt", false);
 					grava.gravaArquivo(contas.toString());
 					grava.fechaArquivo();
 
-					LeArquivoCpf cpfs = new LeArquivoCpf(localDirC + "conta.txt");
+					LeArquivoCpf cpfs = new LeArquivoCpf(localDirC + "Conta.txt");
 					ArrayList<String> buscar = cpfs.leArquivo(400);
 					cpfs.fechaArquivo();
 
@@ -224,13 +221,13 @@ public class Principal {
 					arquivo.leArquivoBanco(contas.getBancoLista());
 					arquivo.fechaArquivo();
 					try {
-						contas.ABB();
+						contas.abb();
 					} catch (StackOverflowError e) {
 						System.out.println("Erro de estouro de pilha, pulado!");
 						break;
 					}
 
-					LeArquivoCpf cpfs = new LeArquivoCpf(localDirC + "conta.txt");
+					LeArquivoCpf cpfs = new LeArquivoCpf(localDirC + "Conta.txt");
 					ArrayList<String> buscar = cpfs.leArquivo(400);
 					cpfs.fechaArquivo();
 
@@ -310,9 +307,9 @@ public class Principal {
 					CadBancoAVL contas = new CadBancoAVL(Integer.parseInt(narq[k]));
 					arquivo.leArquivoBanco(contas.getBancoLista());
 					arquivo.fechaArquivo();
-					contas.AVL();
+					contas.avl();
 
-					LeArquivoCpf cpfs = new LeArquivoCpf(localDirC + "conta.txt");
+					LeArquivoCpf cpfs = new LeArquivoCpf(localDirC + "Conta.txt");
 					ArrayList<String> buscar = cpfs.leArquivo(400);
 					cpfs.fechaArquivo();
 
@@ -396,7 +393,7 @@ public class Principal {
 					arquivo.fechaArquivo();
 					contas.hashing();
 
-					LeArquivoCpf cpfs = new LeArquivoCpf(localDirC + "conta.txt");
+					LeArquivoCpf cpfs = new LeArquivoCpf(localDirC + "Conta.txt");
 					ArrayList<String> buscar = cpfs.leArquivo(400);
 					cpfs.fechaArquivo();
 

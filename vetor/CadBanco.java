@@ -10,8 +10,12 @@ public class CadBanco {
 		this.vetBanco = new ArrayList<Banco>(tam);
 	}
 
-	public CadBanco(ArrayList<Banco> lista) {
-		this.vetBanco = lista;
+	public Banco getBanco(int pos) {
+		return this.vetBanco.get(pos);
+	}
+
+	public ArrayList<Banco> getBancoLista() {
+		return this.vetBanco;
 	}
 
 	public String toString() {
@@ -21,22 +25,6 @@ public class CadBanco {
 		for (i = 0; i < this.vetBanco.size(); i++)
 			temp += this.vetBanco.get(i).toString() + "\n";
 		return temp;
-	}
-
-	public String toString(int pos) {
-		return this.vetBanco.get(pos).toString();
-	}
-
-	public Banco getBanco(int pos) {
-		return this.vetBanco.get(pos);
-	}
-
-	public ArrayList<Banco> getBancoLista() {
-		return this.vetBanco;
-	}
-
-	public void setBancoLista(ArrayList<Banco> novoVet) {
-		this.vetBanco = novoVet;
 	}
 
 	public ArrayList<Banco> pesqBin(String chave) {
@@ -69,11 +57,7 @@ public class CadBanco {
 
 	}
 
-	public void insereLista(ArrayList<Banco> lista) {
-		this.vetBanco.addAll(lista);
-	}
-
-	public void quicksort() {
+	public void quickSort() {
 		ordena(0, this.vetBanco.size() - 1);
 	}
 
@@ -102,7 +86,7 @@ public class CadBanco {
 			ordena(i, dir);
 	}
 
-	public void HeapSort() {
+	public void heapSort() {
 		int nElem = this.vetBanco.size();
 		int dir = nElem - 1;
 		int esq = (dir - 1) / 2;
@@ -123,7 +107,7 @@ public class CadBanco {
 
 	private void refazHeap(int esq, int dir) {
 		int i = esq;
-		int mF = 2 * i + 1; // maior filho
+		int mF = 2 * i + 1;
 		Banco raiz = this.vetBanco.get(i);
 		boolean heap = false;
 

@@ -7,8 +7,6 @@ package io;
 import java.io.*;
 import java.util.*;
 
-import dados.Banco;
-
 
 public class LeArquivoCpf {
 	private Scanner entrada;

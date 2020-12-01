@@ -11,10 +11,10 @@ public class CadBancoABB extends CadBancoArv {
 		super(tam);
 	}
 
-	public void ABB() {
+	public void abb() {
 		super.insereTudo();
-		this.CamCentral();
-		this.ArvoreBalanceada();
+		this.camCentral();
+		this.arvoreBalanceada();
 	}
 
 	public ArrayList<Banco> pesquisaABB(String chave) {
@@ -40,33 +40,33 @@ public class CadBancoABB extends CadBancoArv {
 		return temp;
 	}
 
-	public void CamCentral() {
+	public void camCentral() {
 		ordenado = new ArrayList<ArrayList<Banco>>(super.vetBanco.size());
-		this.FazCamCentral(super.raiz, ordenado);
+		this.fazCamCentral(super.raiz, ordenado);
 	}
 
-	private void FazCamCentral(NoArv arv, ArrayList<ArrayList<Banco>> vet) {
+	private void fazCamCentral(NoArv arv, ArrayList<ArrayList<Banco>> vet) {
 		if (arv != null) {
-			this.FazCamCentral(arv.getEsq(), vet);
+			this.fazCamCentral(arv.getEsq(), vet);
 			vet.add(arv.getInfo());
-			this.FazCamCentral(arv.getDir(), vet);
+			this.fazCamCentral(arv.getDir(), vet);
 		}
 
 	}
 
-	public void ArvoreBalanceada() {
+	public void arvoreBalanceada() {
 		super.raiz = null;
-		this.Balancear(ordenado, 0, ordenado.size() - 1);
+		this.balancear(ordenado, 0, ordenado.size() - 1);
 
 	}
 
-	private void Balancear(ArrayList<ArrayList<Banco>> vet, int inic, int fim) {
+	private void balancear(ArrayList<ArrayList<Banco>> vet, int inic, int fim) {
 		int meio;
 		if (fim >= inic) {
 			meio = (inic + fim) / 2;
 			super.insereA(vet.get(meio));
-			this.Balancear(vet, inic, meio - 1);
-			this.Balancear(vet, meio + 1, fim);
+			this.balancear(vet, inic, meio - 1);
+			this.balancear(vet, meio + 1, fim);
 		}
 	}
 

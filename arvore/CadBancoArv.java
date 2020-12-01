@@ -49,7 +49,13 @@ public class CadBancoArv extends CadBanco {
 		return temp;
 	}
 
-	public void insereA(ArrayList<Banco> elem) {
+	protected void insereTudo() {
+		for (Banco banco : super.vetBanco) {
+			this.insere(banco);
+		}
+	}
+
+	public void insereA(ArrayList<Banco> elem) { // inserir sem pesquisar na arvore balanceada
 		this.raiz = this.insereA(elem, this.raiz);
 	}
 
@@ -59,7 +65,7 @@ public class CadBancoArv extends CadBanco {
 			novo = new NoArv(elem);
 			return novo;
 		} else {
-			if (elem.get(0).compareTo2(no.getInfo().get(0)) < 0) { // mudar para o compareTO do banco
+			if (elem.get(0).compareTo2(no.getInfo().get(0)) < 0) {
 				no.setEsq(this.insereA(elem, no.getEsq()));
 				return no;
 			} else {
@@ -97,12 +103,6 @@ public class CadBancoArv extends CadBanco {
 			}
 
 			return no;
-		}
-	}
-
-	protected void insereTudo() {
-		for (Banco banco : super.vetBanco) {
-			this.insere(banco);
 		}
 	}
 

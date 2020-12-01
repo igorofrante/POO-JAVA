@@ -6,12 +6,6 @@ public class Banco {
 	private double saldo;
 	private String nome;
 
-	/**
-	 * @param agencia
-	 * @param numero
-	 * @param cpf
-	 * @param saldo
-	 */
 	public Banco(int agencia, String numero, double saldo, String cpf, String nome) {
 		super();
 		this.agencia = agencia;
@@ -21,21 +15,16 @@ public class Banco {
 		this.nome = nome;
 	}
 
-	public Banco() {
-		super();
-		this.agencia = 0;
-		this.conta = "";
-		this.cpf = "";
-		this.saldo = 0.0;
-		this.nome = "";
-	}
-
 	public String getNome() {
 		return nome;
 	}
 
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+
+	public String getConta() {
+		return conta;
 	}
 
 	public void setConta(String conta) {
@@ -50,18 +39,9 @@ public class Banco {
 		this.agencia = agencia;
 	}
 
-	public String getConta() {
-		return conta;
-	}
-
-	public void setCOnta(String numero) {
-		this.conta = numero;
-	}
-
 	public String getCpf() {
 		return cpf;
 	}
-
 
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
@@ -80,7 +60,7 @@ public class Banco {
 		return cpf + ";" + nome + ";" + agencia + ";" + conta + ";" + saldo;
 	}
 
-	public int compareTo(Banco b) {
+	public int compareTo(Banco b) { // Compara CPF, Agencia e conta.
 		long cpf1 = Long.parseLong(this.cpf);
 		long cpf2 = Long.parseLong(b.getCpf());
 		if (cpf1 < cpf2)
@@ -100,7 +80,7 @@ public class Banco {
 		}
 	}
 
-	public int compareTo2(Banco b) {
+	public int compareTo2(Banco b) { // Compara somente o CPF.
 		long cpf1 = Long.parseLong(this.cpf);
 		long cpf2 = Long.parseLong(b.getCpf());
 		if (cpf1 < cpf2) {

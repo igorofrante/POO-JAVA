@@ -10,13 +10,13 @@ public class CadBancoHash extends CadBanco {
 
 	public CadBancoHash(int tam) {
 		super(tam);
-		tam = ((int)(1.1*tam));
+		tam = ((int) (1.1 * tam));
 		this.vetor = new ArrayList<LinkedList<Banco>>(Collections.nCopies(this.defPrimo(tam), null));
 	}
 
 	private int defPrimo(int tam) {
 		boolean para = false;
-		int p1=tam,p2=tam;
+		int p1 = tam, p2 = tam;
 		p1--;
 		p2++;
 		if (this.ePrimo(tam)) {
@@ -103,6 +103,5 @@ public class CadBancoHash extends CadBanco {
 
 		}
 	}
-
 
 }

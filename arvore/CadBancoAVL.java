@@ -161,11 +161,11 @@ public class CadBancoAVL extends CadBanco {
 		return no;
 	}
 
-	public void AVL() {
+	public void avl() {
 		this.insereTudo();
 	}
 
-	public ArrayList<Banco> pesquisaAVL(String chave) {
+	public ArrayList<Banco> pesquisaAVL(String chave) { // baseado no Caminhamento Central
 		ArrayList<Banco> vet = new ArrayList<Banco>();
 		this.pesquisaAVL(chave, this.raiz, vet);
 		if (vet.size() != 0) {
