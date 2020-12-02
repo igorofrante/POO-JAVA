@@ -21,7 +21,7 @@ public class CadBancoArv extends CadBanco {
 		this.raiz = raiz;
 	}
 
-	public boolean pesquisa(Banco conta) {
+	public boolean pesquisa(Banco conta) { //pesquisa na arvore
 		NoArv temp;
 		temp = this.pesquisa(conta, this.raiz);
 		if (temp != null)
@@ -48,7 +48,7 @@ public class CadBancoArv extends CadBanco {
 		return temp;
 	}
 
-	protected void insereTudo() {
+	protected void insereTudo() { //insere todos os elementos na arvore
 		for (Banco banco : super.vetBanco) {
 			this.insere(banco);
 		}
@@ -75,7 +75,7 @@ public class CadBancoArv extends CadBanco {
 
 	}
 
-	public void insere(Banco elem) {
+	public void insere(Banco elem) { //insere na arvore se nao houver elemento igual previamente adicionado
 		boolean existe = this.pesquisa(elem);
 		if (!existe) {
 			this.raiz = this.insere(elem, this.raiz);
@@ -91,7 +91,7 @@ public class CadBancoArv extends CadBanco {
 			novo = new NoArv(lista);
 			return novo;
 		} else {
-			if (elem.compareTo2(no.getInfo().get(0)) < 0) { // mudar para o compareTO do banco
+			if (elem.compareTo2(no.getInfo().get(0)) < 0) {
 				no.setEsq(this.insere(elem, no.getEsq()));
 				return no;
 			} else if (elem.compareTo2(no.getInfo().get(0)) > 0) {

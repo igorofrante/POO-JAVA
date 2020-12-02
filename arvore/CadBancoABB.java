@@ -11,13 +11,13 @@ public class CadBancoABB extends CadBancoArv {
 		super(tam);
 	}
 
-	public void abb() {
-		super.insereTudo();
-		this.camCentral();
-		this.arvoreBalanceada();
+	public void abb() { //metodo chamado na classe principal
+		super.insereTudo(); //insere tudo na arvore
+		this.camCentral(); //faz o caminhamento central
+		this.arvoreBalanceada(); //limpa arvore e adiciona os elementos segundo o metodo de arvore balanceada
 	}
 
-	public ArrayList<Banco> pesquisaABB(String chave) {
+	public ArrayList<Banco> pesquisaABB(String chave) { //faz pesquisa na arvore ABB
 		NoArv temp;
 		temp = this.pesquisaABB(chave, this.raiz);
 		if (temp != null)

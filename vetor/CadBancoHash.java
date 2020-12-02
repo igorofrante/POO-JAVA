@@ -9,12 +9,16 @@ public class CadBancoHash extends CadBanco {
 	private ArrayList<LinkedList<Banco>> vetor;
 
 	public CadBancoHash(int tam) {
-		super(tam);
-		tam = ((int) (1.1 * tam));
-		this.vetor = new ArrayList<LinkedList<Banco>>(Collections.nCopies(this.defPrimo(tam), null));
+		super(tam); // instancia o vetBanco na classe Cadbanco passando o tamanho
+		tam = ((int) (1.1 * tam)); // adiciona a margem de erro de 10%
+		this.vetor = new ArrayList<LinkedList<Banco>>(Collections.nCopies(this.defPrimo(tam), null)); // instancia o
+																										// vetor com
+																										// cópias de
+																										// objetos
+																										// nulos.
 	}
 
-	private int defPrimo(int tam) {
+	private int defPrimo(int tam) { // define o primo mais proximo
 		boolean para = false;
 		int p1 = tam, p2 = tam;
 		p1--;
@@ -41,7 +45,7 @@ public class CadBancoHash extends CadBanco {
 		}
 	}
 
-	private boolean ePrimo(int n) {
+	private boolean ePrimo(int n) { // testa se o numero e primo
 		if (n <= 1) {
 			return false;
 		}
@@ -54,16 +58,16 @@ public class CadBancoHash extends CadBanco {
 		return true;
 	}
 
-	public void hashing() {
+	public void hashing() { // metodo utilizado na classe principal
 		this.fazHashing();
 	}
 
-	private int pos(String chave) {
+	private int pos(String chave) { // define a posicao de insercao ou busca
 		long pos = Long.parseLong(chave) % this.vetor.size();
 		return (int) pos;
 	}
 
-	private void fazHashing() {
+	private void fazHashing() { // executa o metodo hashing
 		int pos = 0;
 		LinkedList<Banco> v1 = new LinkedList<Banco>();
 		for (Banco banco : vetBanco) {
@@ -80,7 +84,7 @@ public class CadBancoHash extends CadBanco {
 		}
 	}
 
-	public LinkedList<Banco> pesquisaHash(String chave) {
+	public LinkedList<Banco> pesquisaHash(String chave) { // pesquisa no vetor hashing
 		int pos = this.pos(chave);
 
 		if (this.vetor.get(pos) == null) {

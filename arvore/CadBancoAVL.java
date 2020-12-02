@@ -15,7 +15,7 @@ public class CadBancoAVL extends CadBanco {
 		this.h = true;
 	}
 
-	public boolean pesquisa(Banco conta) {
+	public boolean pesquisa(Banco conta) { // pesquisa se existe elemento igual previamente adicionado
 		NoAVL temp;
 		temp = this.pesquisa(conta, this.raiz);
 		if (temp != null)
@@ -38,7 +38,13 @@ public class CadBancoAVL extends CadBanco {
 		return temp;
 	}
 
-	public void insere(Banco elem) {
+	protected void insereTudo() { // insere todos os elementos na arvore
+		for (Banco banco : super.vetBanco) {
+			this.insere(banco);
+		}
+	}
+
+	public void insere(Banco elem) { // insere na arvore se nao houver elemento igual previamente adicionado
 		boolean existe = this.pesquisa(elem);
 		if (!existe) {
 			this.raiz = this.insere(elem, this.raiz);
@@ -61,12 +67,6 @@ public class CadBancoAVL extends CadBanco {
 				no = this.balancearEsq(no);
 				return no;
 			}
-		}
-	}
-
-	protected void insereTudo() {
-		for (Banco banco : super.vetBanco) {
-			this.insere(banco);
 		}
 	}
 
@@ -161,7 +161,7 @@ public class CadBancoAVL extends CadBanco {
 		return no;
 	}
 
-	public void avl() {
+	public void avl() { //metodo chamado na classe principal
 		this.insereTudo();
 	}
 

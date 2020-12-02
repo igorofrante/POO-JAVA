@@ -19,7 +19,7 @@ public class Principal {
 
 	public static void main(String[] args) throws IOException {
 
-		NewJFrame.main(null);
+		NewJFrame.main(null); //execucao da interface grafica 
 
 	}
 
@@ -28,7 +28,7 @@ public class Principal {
 		String localDir = System.getProperty("user.dir"); //obtem o caminho completo do projeto
 		String localDirC = localDir.replace('\\', '/') + "/contas/"; 
 		String localDirT = localDir.replace('\\', '/') + "/" + tipo + "/";
-		double startTime = System.currentTimeMillis();// obtem o tempo de execução do sistema em milisegundos
+		double startTime = System.currentTimeMillis();// obtem o tempo do sistema em milisegundos
 		double startArq = 0;
 		String[] narq = { "500", "1000", "5000", "10000", "50000" }; //narq representa a quantidade de registro no arquivo
 		String[] ord = { "Alea", "Ord", "Inv" }; //representa o tipo da ordenação do arquivo
@@ -44,18 +44,18 @@ public class Principal {
 				System.out.println(narq[k]);
 
 				for (int w = 0; w < 5; w++) { //executa o mesmo arquivo cinco vezes
-					startArq = System.currentTimeMillis(); //obtem o tempo do sistema durante cada execução
-					CadBanco contas = new CadBanco(Integer.parseInt(narq[k]));
+					startArq = System.currentTimeMillis(); //obtem o tempo do sistema durante cada execução em milisegundos
+					CadBanco contas = new CadBanco(Integer.parseInt(narq[k])); 
 					LeArquivo arquivo = new LeArquivo(localDirC + "conta" + narq[k] + ord[o].toLowerCase() + ".txt");
 					arquivo.leArquivoBanco(contas.getBancoLista());
 					arquivo.fechaArquivo();
-					contas.heapSort();
+					contas.heapSort(); //executa o metodo heapsort
 
-					GravaArq grava = new GravaArq(localDirT + tipo + ord[o] + narq[k] + ".txt", false);
+					GravaArq grava = new GravaArq(localDirT + tipo + ord[o] + narq[k] + ".txt", false);//grava a ordenacao dos metodos heapsort/quicksort 
 					grava.gravaArquivo(contas.toString());
 					grava.fechaArquivo();
 
-					LeArquivoCpf cpfs = new LeArquivoCpf(localDirC + "Conta.txt");
+					LeArquivoCpf cpfs = new LeArquivoCpf(localDirC + "Conta.txt"); //leitura dos cpfs selecionados
 					ArrayList<String> buscar = cpfs.leArquivo(400);
 					cpfs.fechaArquivo();
 
@@ -63,14 +63,14 @@ public class Principal {
 					String stringao = "";
 					double saldoTotal = 0.0;
 					int j = 0;
-					for (int i = 0; i < buscar.size(); i++) {
-						lista = contas.pesqBin(buscar.get(i));
-						if (lista == null) {
+					for (int i = 0; i < buscar.size(); i++) {//percorre todos os cpfs
+						lista = contas.pesqBin(buscar.get(i)); //retorna a busca das contas de um cpf
+						if (lista == null) {// caso retorne nulo
 							stringao += "CPF " + buscar.get(i) + ": \n" + "NAO HA NENHUM REGISTRO COM O CPF "
 									+ buscar.get(i) + "\n\n";
-						} else {
+						} else {// caso não retorne nulo
 							stringao += "CPF " + lista.get(j).getCpf() + " NOME " + lista.get(j).getNome() + "\n";
-							while (j != lista.size()) {
+							while (j != lista.size()) { //percorre a lista de todas contas
 								stringao += "Ag " + lista.get(j).getAgencia();
 								if (lista.get(j).getConta().substring(0, 3).equals("001")) {
 									stringao += " Conta Comum " + lista.get(j).getConta();
@@ -83,30 +83,30 @@ public class Principal {
 								saldoTotal += lista.get(j).getSaldo();
 								j++;
 							}
-							if (lista.size() != 1) {
+							if (lista.size() != 1) {//caso a lista seja maior que um adiciona o saldo totalizar no stringao
 								stringao += "Saldo Total: " + saldoTotal + "\n\n";
 							} else {
 								stringao += "\n";
 							}
 
 							j = 0;
-							saldoTotal = 0;
+							saldoTotal = 0;	//reseta as variaveis
 						}
 
 					}
 
-					GravaArq grava2 = new GravaArq(localDirT + "extrato" + tipo + ord[o] + narq[k] + ".txt", false);
+					GravaArq grava2 = new GravaArq(localDirT + "extrato" + tipo + ord[o] + narq[k] + ".txt", false); // grava o resultado (extrato) de todas as contas presentes no stringao
 					grava2.gravaArquivo(stringao.toString());
 					grava2.fechaArquivo();
 
-					tempo += (System.currentTimeMillis() - startArq) / 1000.0;
-					System.out.println("Parcial: " + (System.currentTimeMillis() - startArq) / 1000.0 + " segundos");
+					tempo += (System.currentTimeMillis() - startArq) / 1000.0; //soma os tempos parciais de cada execucao
+					System.out.println("Parcial: " + (System.currentTimeMillis() - startArq) / 1000.0 + " segundos"); //imprime o tempo parcial em segundos
 
 				}
-				System.out.println("Media art: " + tempo / 5.0 + " segundos" + "\n");
+				System.out.println("Media art: " + tempo / 5.0 + " segundos" + "\n"); // imprime a media em segundos
 			}
 		}
-		System.out.println("Total: " + (System.currentTimeMillis() - startTime) / 1000.0 + " segundos" + "\n");
+		System.out.println("Total: " + (System.currentTimeMillis() - startTime) / 1000.0 + " segundos" + "\n"); // imprime o tempo total de execucao do metodo
 
 	}
 
@@ -136,7 +136,7 @@ public class Principal {
 					LeArquivo arquivo = new LeArquivo(localDirC + "conta" + narq[k] + ord[o].toLowerCase() + ".txt");
 					arquivo.leArquivoBanco(contas.getBancoLista());
 					arquivo.fechaArquivo();
-					contas.quickSort();
+					contas.quickSort(); //executa o metodo quicksort
 
 					GravaArq grava = new GravaArq(localDirT + tipo + ord[o] + narq[k] + ".txt", false);
 					grava.gravaArquivo(contas.toString());
@@ -221,7 +221,7 @@ public class Principal {
 					arquivo.leArquivoBanco(contas.getBancoLista());
 					arquivo.fechaArquivo();
 					try {
-						contas.abb();
+						contas.abb(); //executa o metodo abb
 					} catch (StackOverflowError e) {
 						System.out.println("Erro de estouro de pilha, pulado!");
 						break;
@@ -307,7 +307,7 @@ public class Principal {
 					CadBancoAVL contas = new CadBancoAVL(Integer.parseInt(narq[k]));
 					arquivo.leArquivoBanco(contas.getBancoLista());
 					arquivo.fechaArquivo();
-					contas.avl();
+					contas.avl(); //executa o metodo avl
 
 					LeArquivoCpf cpfs = new LeArquivoCpf(localDirC + "Conta.txt");
 					ArrayList<String> buscar = cpfs.leArquivo(400);
@@ -378,7 +378,6 @@ public class Principal {
 		String[] ord = { "Alea", "Ord", "Inv" };
 		double tempo = 0;
 
-		// Hash
 		System.out.println(tipo + "\n");
 		for (int o = 0; o < ord.length; o++) {
 			System.out.println(ord[o] + "\n");
@@ -391,7 +390,7 @@ public class Principal {
 					CadBancoHash contas = new CadBancoHash(Integer.parseInt(narq[k]));
 					arquivo.leArquivoBanco(contas.getBancoLista());
 					arquivo.fechaArquivo();
-					contas.hashing();
+					contas.hashing(); //executa o metodo hashing
 
 					LeArquivoCpf cpfs = new LeArquivoCpf(localDirC + "Conta.txt");
 					ArrayList<String> buscar = cpfs.leArquivo(400);

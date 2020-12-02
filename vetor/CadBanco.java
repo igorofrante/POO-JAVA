@@ -18,7 +18,7 @@ public class CadBanco {
 		return this.vetBanco;
 	}
 
-	public String toString() {
+	public String toString() { //imprime tudo que contem no vetBanco
 		String temp = "";
 		int i;
 
@@ -27,7 +27,7 @@ public class CadBanco {
 		return temp;
 	}
 
-	public ArrayList<Banco> pesqBin(String chave) {
+	public ArrayList<Banco> pesqBin(String chave) { // metodo da pesquisa binaria
 		int nElem = vetBanco.size();
 		int meio, esq, dir;
 		esq = 0;
@@ -57,7 +57,7 @@ public class CadBanco {
 
 	}
 
-	public void quickSort() {
+	public void quickSort() { //metodo quicksort
 		ordena(0, this.vetBanco.size() - 1);
 	}
 
@@ -86,7 +86,7 @@ public class CadBanco {
 			ordena(i, dir);
 	}
 
-	public void heapSort() {
+	public void heapSort() { //metodo heapsort
 		int nElem = this.vetBanco.size();
 		int dir = nElem - 1;
 		int esq = (dir - 1) / 2;
