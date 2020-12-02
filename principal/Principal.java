@@ -25,16 +25,16 @@ public class Principal {
 
 	public static void primeiraEtapa() throws IOException {
 		String tipo = "Heap";
-		String localDir = System.getProperty("user.dir");
-		String localDirC = localDir.replace('\\', '/') + "/contas/";
+		String localDir = System.getProperty("user.dir"); //obtem o caminho completo do projeto
+		String localDirC = localDir.replace('\\', '/') + "/contas/"; 
 		String localDirT = localDir.replace('\\', '/') + "/" + tipo + "/";
-		double startTime = System.currentTimeMillis();// mï¿½todo de tempo 20:22:00
+		double startTime = System.currentTimeMillis();// obtem o tempo de execução do sistema em milisegundos
 		double startArq = 0;
-		String[] narq = { "500", "1000", "5000", "10000", "50000" };
-		String[] ord = { "Alea", "Ord", "Inv" };
+		String[] narq = { "500", "1000", "5000", "10000", "50000" }; //narq representa a quantidade de registro no arquivo
+		String[] ord = { "Alea", "Ord", "Inv" }; //representa o tipo da ordenação do arquivo
 		double tempo = 0;
 
-		System.out.println(tipo);
+		System.out.println(tipo + "\n");
 
 		for (int o = 0; o < ord.length; o++) {
 			System.out.println(ord[o] + "\n");
@@ -43,8 +43,8 @@ public class Principal {
 				tempo = 0;
 				System.out.println(narq[k]);
 
-				for (int w = 0; w < 5; w++) {
-					startArq = System.currentTimeMillis();
+				for (int w = 0; w < 5; w++) { //executa o mesmo arquivo cinco vezes
+					startArq = System.currentTimeMillis(); //obtem o tempo do sistema durante cada execução
 					CadBanco contas = new CadBanco(Integer.parseInt(narq[k]));
 					LeArquivo arquivo = new LeArquivo(localDirC + "conta" + narq[k] + ord[o].toLowerCase() + ".txt");
 					arquivo.leArquivoBanco(contas.getBancoLista());
@@ -121,7 +121,7 @@ public class Principal {
 		String[] ord = { "Alea", "Ord", "Inv" };
 		double tempo = 0;
 
-		System.out.println(tipo);
+		System.out.println(tipo + "\n");
 
 		for (int o = 0; o < ord.length; o++) {
 			System.out.println(ord[o] + "\n");
