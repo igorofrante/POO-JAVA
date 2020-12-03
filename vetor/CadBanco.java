@@ -18,7 +18,7 @@ public class CadBanco {
 		return this.vetBanco;
 	}
 
-	public String toString() { //imprime tudo que contem no vetBanco
+	public String toString() { // imprime tudo que contem no vetBanco
 		String temp = "";
 		int i;
 
@@ -41,7 +41,7 @@ public class CadBanco {
 					meio--;
 				}
 
-				while (chave.equals(this.vetBanco.get(meio).getCpf())) {
+				while (meio < nElem && chave.equals(this.vetBanco.get(meio).getCpf())) {
 					lista.add(this.vetBanco.get(meio));
 					meio++;
 				}
@@ -57,7 +57,7 @@ public class CadBanco {
 
 	}
 
-	public void quickSort() { //metodo quicksort
+	public void quickSort() { // metodo quicksort
 		ordena(0, this.vetBanco.size() - 1);
 	}
 
@@ -86,7 +86,7 @@ public class CadBanco {
 			ordena(i, dir);
 	}
 
-	public void heapSort() { //metodo heapsort
+	public void heapSort() { // metodo heapsort
 		int nElem = this.vetBanco.size();
 		int dir = nElem - 1;
 		int esq = (dir - 1) / 2;
